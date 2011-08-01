@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.project.api;
 
-import java.io.File;
+//import java.io.File;
 
 /**
  * Project controller, manage projects and workspaces states.

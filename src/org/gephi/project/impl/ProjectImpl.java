@@ -36,7 +36,12 @@ public class ProjectImpl implements Project, Lookup.Provider, Serializable {
     //private transient InstanceContent instanceContent;
     //private transient AbstractLookup lookup;
 
-    public ProjectImpl() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ProjectImpl() {
         init();
     }
 
@@ -62,6 +67,7 @@ public class ProjectImpl implements Project, Lookup.Provider, Serializable {
     }
 
     public Lookup getLookup() {
-        return lookup;
+        //return lookup;
+    	return Lookup.getDefault();
     }
 }

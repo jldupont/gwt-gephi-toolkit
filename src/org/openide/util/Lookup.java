@@ -44,6 +44,8 @@
 
 package org.openide.util;
 
+import _org.gephi.gwt.Factory;
+
 //import java.util.ArrayList;
 //import java.util.Collection;
 //import java.util.Collections;
@@ -81,7 +83,9 @@ package org.openide.util;
  * @see LookupEvent
  * @author  Jaroslav Tulach
  */
-public abstract class Lookup {
+//public abstract class Lookup {
+public class Lookup {
+	
     /** A dummy lookup that never returns any results.
      */
     public static final Lookup EMPTY = null; //new Empty();
@@ -158,8 +162,18 @@ public abstract class Lookup {
         defaultLookup = def;
         def.init(l, misl, true);
         */
+        defaultLookup=new Lookup();
         return defaultLookup;
     }
+    /**
+     * JLD
+     */
+    public <T> T lookup(Class<T> clazz) {
+    //public Object lookup(Class klass) {
+    	
+    	return Factory.get(clazz);
+    }
+    
     /*
     private static final class DefLookup extends ProxyLookup {
         public DefLookup() {
@@ -197,6 +211,7 @@ public abstract class Lookup {
     }
 	*/
     
+    
     /** Look up an object matching a given interface.
      * This is the simplest method to use.
      * If more than one object matches, the first will be returned.
@@ -207,7 +222,7 @@ public abstract class Lookup {
      * @return an object implementing the given class or <code>null</code> if no such
      *         implementation is found
      */
-    public abstract <T> T lookup(Class<T> clazz);
+    //public abstract <T> T lookup(Class<T> clazz);
 
     /** The general lookup method. Callers can get list of all instances and classes
      * that match the given <code>template</code>, request more info about
