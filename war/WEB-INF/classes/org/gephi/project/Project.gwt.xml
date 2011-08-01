@@ -1,0 +1,11 @@
+<module>
+
+	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="org.gephi.project.api.Api" />
+	<inherits name="org.gephi.project.spi.Spi" />
+	<inherits name="org.gephi.project.impl.Impl" />
+	
+	<source path="" />
+	
+</module>
