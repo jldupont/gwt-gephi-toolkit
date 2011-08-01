@@ -15,7 +15,7 @@ public class Project extends GWTTestCase {
 		
 		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
 		
-		assertTrue(true);
+		assertTrue(pc.getClass()==ProjectController.class);
 	}
 	
 	
