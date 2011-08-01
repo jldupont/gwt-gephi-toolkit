@@ -27,9 +27,10 @@ import org.gephi.project.api.ProjectMetaData;
  *
  * @author Mathieu Bastian
  */
+@SuppressWarnings("serial")
 public class ProjectMetaDataImpl implements ProjectMetaData, Serializable {
 
-    private String author;
+	private String author;
     private String title = "";
     private String keywords = "";
     private String description = "";

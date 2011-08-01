@@ -20,14 +20,14 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.workspace.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+//import java.util.ArrayList;
+//import java.util.List;
+//import javax.swing.event.ChangeEvent;
+//import javax.swing.event.ChangeListener;
 import org.gephi.project.api.Project;
 //import org.gephi.project.api.ProjectController;
 import org.gephi.project.api.WorkspaceInformation;
-import org.openide.util.Lookup;
+//import org.openide.util.Lookup;
 
 /**
  *
@@ -45,7 +45,7 @@ public class WorkspaceInformationImpl implements WorkspaceInformation {
     private Status status = Status.CLOSED;
     private String source;
     //Lookup
-    private transient List<ChangeListener> listeners = new ArrayList<ChangeListener>();
+    //private transient List<ChangeListener> listeners = new ArrayList<ChangeListener>();
 
     public WorkspaceInformationImpl(Project project) {
     /*
@@ -90,7 +90,7 @@ public class WorkspaceInformationImpl implements WorkspaceInformation {
 
     public void setName(String name) {
         this.name = name;
-        fireChangeEvent();
+        //fireChangeEvent();
     }
 
     public void setSource(String source) {
@@ -107,12 +107,12 @@ public class WorkspaceInformationImpl implements WorkspaceInformation {
 
     public void open() {
         this.status = Status.OPEN;
-        fireChangeEvent();
+        //fireChangeEvent();
     }
 
     public void close() {
         this.status = Status.CLOSED;
-        fireChangeEvent();
+        //fireChangeEvent();
     }
 
     public void invalid() {
@@ -133,7 +133,7 @@ public class WorkspaceInformationImpl implements WorkspaceInformation {
     public boolean isInvalid() {
         return status == Status.INVALID;
     }
-
+    /*
     @Override
     public void addChangeListener(ChangeListener listener) {
         listeners.add(listener);
@@ -150,4 +150,5 @@ public class WorkspaceInformationImpl implements WorkspaceInformation {
             listener.stateChanged(event);
         }
     }
-}
+    */
+}//

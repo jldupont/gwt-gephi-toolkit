@@ -30,9 +30,12 @@ import org.gephi.project.api.Projects;
  *
  * @author Mathieu Bastian
  */
+@SuppressWarnings("serial")
 public class ProjectsImpl implements Projects, Serializable {
 
-    //Project
+	//private static final long serialVersionUID = 1L;
+	
+	//Project
     private List<Project> projects = new ArrayList<Project>();
     private ProjectImpl currentProject;
 

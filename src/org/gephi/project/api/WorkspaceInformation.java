@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.project.api;
 
-import javax.swing.event.ChangeListener;
+//import javax.swing.event.ChangeListener;
 import org.gephi.project.api.Project;
 
 /**
@@ -45,7 +45,7 @@ public interface WorkspaceInformation {
 
     public Project getProject();
 
-    public void addChangeListener(ChangeListener listener);
+    //public void addChangeListener(ChangeListener listener);
 
-    public void removeChangeListener(ChangeListener listener);
+    //public void removeChangeListener(ChangeListener listener);
 }

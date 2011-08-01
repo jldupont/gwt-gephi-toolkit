@@ -20,22 +20,22 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.project.impl;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+//import java.io.File;
+//import java.util.ArrayList;
+//import java.util.List;
 import org.gephi.project.api.Project;
 import org.gephi.project.api.ProjectController;
-import org.gephi.project.api.Projects;
-import org.gephi.project.api.WorkspaceProvider;
+//import org.gephi.project.api.Projects;
+//import org.gephi.project.api.WorkspaceProvider;
 //import org.gephi.project.io.LoadTask;
 //import org.gephi.project.io.SaveTask;
 import org.gephi.project.api.Workspace;
-import org.gephi.project.api.WorkspaceInformation;
-import org.gephi.project.api.WorkspaceListener;
+//import org.gephi.project.api.WorkspaceInformation;
+//import org.gephi.project.api.WorkspaceListener;
 import org.gephi.workspace.impl.WorkspaceImpl;
 import org.gephi.workspace.impl.WorkspaceInformationImpl;
-import org.gephi.project.spi.WorkspaceDuplicateProvider;
-import org.openide.util.Lookup;
+//import org.gephi.project.spi.WorkspaceDuplicateProvider;
+//import org.openide.util.Lookup;
 //import org.openide.util.NbPreferences;
 //import org.openide.util.lookup.ServiceProvider;
 
@@ -46,10 +46,12 @@ import org.openide.util.Lookup;
 //@ServiceProvider(service = ProjectController.class)
 public class ProjectControllerImpl implements ProjectController {
 
+	/*
     private enum EventType {
 
         INITIALIZE, SELECT, UNSELECT, CLOSE, DISABLE
     };
+    */
     //Data
     private final ProjectsImpl projects = new ProjectsImpl();
     //private final List<WorkspaceListener> listeners;
@@ -63,8 +65,8 @@ public class ProjectControllerImpl implements ProjectController {
     }
 
     public void startup() {
-        final String OPEN_LAST_PROJECT_ON_STARTUP = "Open_Last_Project_On_Startup";
-        final String NEW_PROJECT_ON_STARTUP = "New_Project_On_Startup";
+        //final String OPEN_LAST_PROJECT_ON_STARTUP = "Open_Last_Project_On_Startup";
+        //final String NEW_PROJECT_ON_STARTUP = "New_Project_On_Startup";
         
         //boolean openLastProject = NbPreferences.forModule(ProjectControllerImpl.class).getBoolean(OPEN_LAST_PROJECT_ON_STARTUP, false);
         //boolean newProjectStartup = NbPreferences.forModule(ProjectControllerImpl.class).getBoolean(NEW_PROJECT_ON_STARTUP, false);
