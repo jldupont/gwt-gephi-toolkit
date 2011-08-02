@@ -21,7 +21,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.graph.dhns.core;
 
 import java.util.AbstractList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.Iterator;
 //import java.util.List;
 import org.gephi.graph.dhns.node.AbstractNode;
@@ -196,7 +196,7 @@ public class DurableTreeList extends AbstractList<AbstractNode> implements Itera
      */
     @Override
     public void add(int index, AbstractNode obj) {
-        modCount++;
+        //modCount++;
         checkInterval(index, 0, size());
         incPreConsistent();
         if (root == null) {
@@ -206,7 +206,11 @@ public class DurableTreeList extends AbstractList<AbstractNode> implements Itera
             root.parent = null;
         }
         if (obj.level >= levelsSize.length) {
-            levelsSize = Arrays.copyOf(levelsSize, levelsSize.length + 1);
+        	int[] newArray=new int[levelsSize.length + 1];
+        	for (int p=0;p<levelsSize.length;p++)
+        		newArray[p]=levelsSize[p];
+        	levelsSize =newArray;
+            //levelsSize = Arrays.copyOf(levelsSize, levelsSize.length + 1);
         }
         levelsSize[obj.level]++;
         size++;
@@ -243,7 +247,7 @@ public class DurableTreeList extends AbstractList<AbstractNode> implements Itera
      */
     @Override
     public AbstractNode remove(int index) {
-        modCount++;
+        //modCount++;
         checkInterval(index, 0, size() - 1);
         AbstractNode result = get(index);
         levelsSize[result.level]--;
@@ -313,7 +317,7 @@ public class DurableTreeList extends AbstractList<AbstractNode> implements Itera
      */
     @Override
     public void clear() {
-        modCount++;
+        //modCount++;
         root = null;
         size = 0;
         levelsSize = new int[1];

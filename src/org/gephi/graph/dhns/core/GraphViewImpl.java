@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.graph.dhns.core;
 
-import java.util.WeakHashMap;
+import java.util.HashMap;
 import org.gephi.graph.api.GraphView;
 import org.gephi.graph.dhns.graph.AbstractGraphImpl;
 
@@ -42,7 +42,7 @@ public class GraphViewImpl implements GraphView {
     private int metaEdgesCountTotal;
     private int mutualMetaEdgesTotal;
     //RefCounting
-    private final WeakHashMap<AbstractGraphImpl, Boolean> graphsMap = new WeakHashMap<AbstractGraphImpl, Boolean>();
+    private final HashMap<AbstractGraphImpl, Boolean> graphsMap = new HashMap<AbstractGraphImpl, Boolean>();
 
     public GraphViewImpl(Dhns dhns, int viewId) {
         this.dhns = dhns;

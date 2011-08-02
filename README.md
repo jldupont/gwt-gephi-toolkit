@@ -5,6 +5,8 @@
 * No multiple workspaces
 * No project/workspace change listener
 * org.openide.util.Lookup : alternative implementation
+* org.gephi.graph.dhns.core.GraphViewImpl: swapped "WeakHashMap" for "HashMap"
+* java.util.Arrays.copyOf --> use "for" loop
 
 * java.util.concurrent.atomic.AtomicInteger: alternative implementation non-thread-safe
 * removed dependency on gnu.trove
