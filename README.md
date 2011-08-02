@@ -1,3 +1,5 @@
+* Swap "HashTable" for "HashMap"
+
 * No multiple projects
 * No multiple workspaces
 * No project/workspace change listener

@@ -22,7 +22,7 @@ package org.gephi.layout.api;
 
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-import java.beans.PropertyChangeListener;
+//import java.beans.PropertyChangeListener;
 import org.gephi.project.api.Workspace;
 
 /**
@@ -74,11 +74,11 @@ public interface LayoutModel {
      * is notified when layout is selected and when running flag change.
      * @param listener a property change listener
      */
-    public void addPropertyChangeListener(PropertyChangeListener listener);
+    //public void addPropertyChangeListener(PropertyChangeListener listener);
 
     /**
      * Remove listerner.
      * @param listener a property change listener.
      */
-    public void removePropertyChangeListener(PropertyChangeListener listener);
+    //public void removePropertyChangeListener(PropertyChangeListener listener);
 }
