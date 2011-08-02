@@ -1,0 +1,10 @@
+<module>
+
+	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="org.gephi.data.attributes.Attributes" />
+	<inherits name="org.gephi.data.properties.Properties" />
+	
+	<source path="" />
+	
+</module>
