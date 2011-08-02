@@ -4,6 +4,7 @@
 	
 	<inherits name="org.gephi.graph.dhns.core.Core" />
 	<inherits name="org.gephi.graph.dhns.edge.Edge" />
+	<inherits name="org.gephi.graph.dhns.graph.Graph" />
 	<inherits name="org.gephi.graph.dhns.node.Node" />
 	<inherits name="org.gephi.graph.dhns.predicate.Predicate" />
 	<inherits name="org.gephi.graph.dhns.utils.Utils" />

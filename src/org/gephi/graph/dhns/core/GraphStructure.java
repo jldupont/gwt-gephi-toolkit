@@ -20,9 +20,10 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.graph.dhns.core;
 
-import gnu.trove.TIntObjectHashMap;
-import gnu.trove.TObjectIntHashMap;
+//import gnu.trove.TIntObjectHashMap;
+//import gnu.trove.TObjectIntHashMap;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -271,16 +272,22 @@ public class GraphStructure {
 
     private static class GraphDictionnary {
 
-        private final TObjectIntHashMap<String> nodesMap;
-        private final TIntObjectHashMap<NodeDataImpl> nodesIntMap;
-        private final TIntObjectHashMap<EdgeCounter> edgesRefCount;
-        private final TObjectIntHashMap<String> edgesMap;
+        //private final TObjectIntHashMap<String> nodesMap;
+        //private final TIntObjectHashMap<NodeDataImpl> nodesIntMap;
+        //private final TIntObjectHashMap<EdgeCounter> edgesRefCount;
+        //private final TObjectIntHashMap<String> edgesMap;
 
+
+        private final HashMap<String, Integer> nodesMap;
+        private final HashMap<Integer, NodeDataImpl> nodesIntMap;
+        private final HashMap<Integer, EdgeCounter> edgesRefCount;
+        private final HashMap<String, Integer> edgesMap;
+    	
         public GraphDictionnary() {
-            nodesMap = new TObjectIntHashMap<String>();
-            nodesIntMap = new TIntObjectHashMap<NodeDataImpl>();
-            edgesRefCount = new TIntObjectHashMap<EdgeCounter>();
-            edgesMap = new TObjectIntHashMap<String>();
+        	nodesIntMap = new HashMap<Integer, NodeDataImpl>();
+            nodesMap = new HashMap<String, Integer>();
+            edgesRefCount = new HashMap<Integer, EdgeCounter>();
+            edgesMap = new HashMap<String, Integer>();
         }
 
         public synchronized void addNode(AbstractNode node) {
