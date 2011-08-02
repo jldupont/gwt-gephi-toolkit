@@ -20,8 +20,8 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.project.api;
 
-import java.io.File;
-import javax.swing.event.ChangeListener;
+//import java.io.File;
+//import javax.swing.event.ChangeListener;
 
 /**
  * Hosts various information about a project the module is maintaining.
@@ -43,11 +43,11 @@ public interface ProjectInformation {
 
     public String getFileName();
 
-    public File getFile();
+    //public File getFile();
 
     public Project getProject();
 
-    public void addChangeListener(ChangeListener listener);
+    //public void addChangeListener(ChangeListener listener);
 
-    public void removeChangeListener(ChangeListener listener);
+    //public void removeChangeListener(ChangeListener listener);
 }

@@ -1,6 +1,9 @@
 <module>
 
 	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="_org.gephi.gwt.Gwt" />
+	
 	<source path="" />
 	
 </module>
