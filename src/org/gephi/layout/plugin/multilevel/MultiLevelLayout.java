@@ -29,8 +29,8 @@ import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutProperty;
 import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
 import org.gephi.layout.plugin.force.yifanHu.YifanHuProportional;
-import org.gephi.layout.plugin.random.RandomLayout;
-import org.openide.util.NbBundle;
+//import org.gephi.layout.plugin.random.RandomLayout;
+//import org.openide.util.NbBundle;
 
 /**
  *
@@ -137,7 +137,7 @@ public class MultiLevelLayout extends AbstractLayout implements Layout {
         setQuadTreeMaxLevel(10);
         setBarnesHutTheta(1.2f);
     }
-
+    /*
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
         final String MULTILEVEL_CATEGORY = "Multi-level";
@@ -188,7 +188,8 @@ public class MultiLevelLayout extends AbstractLayout implements Layout {
         }
         return properties.toArray(new LayoutProperty[0]);
     }
-
+	*/
+    
     /**
      * @return the minSize
      */

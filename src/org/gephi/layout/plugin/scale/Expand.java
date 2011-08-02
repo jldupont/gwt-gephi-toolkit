@@ -20,25 +20,26 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.scale;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
-import org.gephi.layout.spi.Layout;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
+//import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-import org.openide.util.NbBundle;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.NbBundle;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Helder Suzuki <heldersuzuki@gephi.org>>
  */
-@ServiceProvider(service = LayoutBuilder.class)
+//@ServiceProvider(service = LayoutBuilder.class)
 public class Expand implements LayoutBuilder {
 
     private ExpandLayoutUI ui = new ExpandLayoutUI();
 
     public String getName() {
-        return NbBundle.getMessage(Expand.class, "expand.name");
+        //return NbBundle.getMessage(Expand.class, "expand.name");
+    	return "scale.expand";
     }
 
     public ScaleLayout buildLayout() {
@@ -52,9 +53,10 @@ public class Expand implements LayoutBuilder {
     private static class ExpandLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            return NbBundle.getMessage(Expand.class, "expand.description");
+            //return NbBundle.getMessage(Expand.class, "expand.description");
+            return null;
         }
-
+        /*
         public Icon getIcon() {
             return null;
         }
@@ -62,7 +64,8 @@ public class Expand implements LayoutBuilder {
         public JPanel getSimplePanel(Layout layout) {
             return null;
         }
-
+		*/
+        
         public int getQualityRank() {
             return -1;
         }

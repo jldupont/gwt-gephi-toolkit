@@ -20,8 +20,8 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.layout;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+//import java.beans.PropertyChangeEvent;
+//import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +49,7 @@ import org.gephi.utils.longtask.api.LongTaskListener;
 public class LayoutModelImpl implements LayoutModel {
 
     //Listeners
-    private List<PropertyChangeListener> listeners;
+    //private List<PropertyChangeListener> listeners;
     //Data
     private Layout selectedLayout;
     private LayoutBuilder selectedBuilder;
@@ -58,7 +58,7 @@ public class LayoutModelImpl implements LayoutModel {
     private LongTaskExecutor executor;
 
     public LayoutModelImpl() {
-        listeners = new ArrayList<PropertyChangeListener>();
+        //listeners = new ArrayList<PropertyChangeListener>();
         savedProperties = new HashMap<LayoutPropertyKey, Object>();
 
         executor = new LongTaskExecutor(true, "layout", 5);
@@ -101,7 +101,7 @@ public class LayoutModelImpl implements LayoutModel {
         if (selectedLayout != null) {
             loadProperties(selectedLayout);
         }
-        firePropertyChangeEvent(SELECTED_LAYOUT, oldValue, selectedLayout);
+        //firePropertyChangeEvent(SELECTED_LAYOUT, oldValue, selectedLayout);
     }
 
     public boolean isRunning() {
@@ -109,9 +109,9 @@ public class LayoutModelImpl implements LayoutModel {
     }
 
     protected void setRunning(boolean running) {
-        firePropertyChangeEvent(RUNNING, !running, running);
+        //firePropertyChangeEvent(RUNNING, !running, running);
     }
-
+    /*
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         if (!listeners.contains(listener)) {
             listeners.add(listener);
@@ -135,7 +135,7 @@ public class LayoutModelImpl implements LayoutModel {
             l.propertyChange(evt);
         }
     }
-
+	*/
     public LongTaskExecutor getExecutor() {
         return executor;
     }
@@ -148,7 +148,7 @@ public class LayoutModelImpl implements LayoutModel {
                     savedProperties.put(new LayoutPropertyKey(p.getProperty().getName(), layout.getClass().getName()), value);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }
@@ -166,7 +166,7 @@ public class LayoutModelImpl implements LayoutModel {
                     try {
                         property.getProperty().setValue(savedProperties.get(l));
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        //e.printStackTrace();
                     }
                 }
             }

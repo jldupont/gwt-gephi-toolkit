@@ -8,6 +8,9 @@
 
 * java.util.GregorianCalendar : 
 
-* java.beans.PropertyEditor;
-* org.openide.nodes.Node.Property;
+* java.beans.PropertyEditor: removed
+
 * org.openide.nodes.PropertySupport;
+* org.openide.nodes.Node.Property: 
+
+* no layout spi

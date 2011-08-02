@@ -20,25 +20,26 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.labelAdjust;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
-import org.gephi.layout.spi.Layout;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
+//import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-import org.openide.util.NbBundle;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.NbBundle;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Mathieu Bastian
  */
-@ServiceProvider(service = LayoutBuilder.class)
+//@ServiceProvider(service = LayoutBuilder.class)
 public class LabelAdjustBuilder implements LayoutBuilder {
 
     private LabelAdjustLayoutUI ui = new LabelAdjustLayoutUI();
 
     public String getName() {
-        return NbBundle.getMessage(LabelAdjustBuilder.class, "name");
+        //return NbBundle.getMessage(LabelAdjustBuilder.class, "name");
+    	return "LabelAdjust";
     }
 
     public LabelAdjust buildLayout() {
@@ -52,9 +53,10 @@ public class LabelAdjustBuilder implements LayoutBuilder {
     private static class LabelAdjustLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            return NbBundle.getMessage(LabelAdjustBuilder.class, "description");
+            //return NbBundle.getMessage(LabelAdjustBuilder.class, "description");
+        	return null;
         }
-
+        	/*
         public Icon getIcon() {
             return null;
         }
@@ -62,7 +64,8 @@ public class LabelAdjustBuilder implements LayoutBuilder {
         public JPanel getSimplePanel(Layout layout) {
             return null;
         }
-
+		*/
+        
         public int getQualityRank() {
             return -1;
         }

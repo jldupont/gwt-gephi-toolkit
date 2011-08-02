@@ -74,7 +74,7 @@ public interface Layout {
      * @return              the layout properties
      * @throws NoSuchMethodException 
      */
-    public LayoutProperty[] getProperties();
+    //public LayoutProperty[] getProperties();
 
     /**
      * Resets the properties values to the default values.

@@ -20,15 +20,15 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.rotate;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.Node;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-import org.gephi.layout.spi.LayoutProperty;
-import org.openide.util.NbBundle;
+//import org.gephi.layout.spi.LayoutProperty;
+//import org.openide.util.NbBundle;
 
 /**
  * Sample layout that simply rotates the graph.
@@ -72,21 +72,25 @@ public class RotateLayout extends AbstractLayout implements Layout {
     public void resetPropertiesValues() {
     }
 
+    /*
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
         try {
             properties.add(LayoutProperty.createProperty(
                     this, Double.class, 
-                    NbBundle.getMessage(getClass(), "clockwise.angle.name"),
+                    //NbBundle.getMessage(getClass(), "clockwise.angle.name"),
                     null,
-                    NbBundle.getMessage(getClass(), "clockwise.angle.desc"),
+                    null,
+                    //NbBundle.getMessage(getClass(), "clockwise.angle.desc"),
+                    null,
                     "getAngle", "setAngle"));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return properties.toArray(new LayoutProperty[0]);
     }
-
+	*/
+    
     /**
      * @return the angle
      */

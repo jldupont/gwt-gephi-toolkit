@@ -122,7 +122,7 @@ public class AutoLayout {
                         d.getProperty().setValue(val);
                     }
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    //ex.printStackTrace();
                 }
             }
         }
@@ -262,7 +262,7 @@ public class AutoLayout {
                 }
                 return property.getValue();
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             return null;
         }

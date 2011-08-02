@@ -20,27 +20,28 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.fruchterman;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
-import org.gephi.layout.plugin.forceAtlas.ForceAtlas;
-import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
-import org.gephi.layout.spi.Layout;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
+//import org.gephi.layout.plugin.forceAtlas.ForceAtlas;
+//import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
+//import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-import org.openide.util.NbBundle;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.NbBundle;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Mathieu Bastian
  */
-@ServiceProvider(service = LayoutBuilder.class)
+//@ServiceProvider(service = LayoutBuilder.class)
 public class FruchtermanReingoldBuilder implements LayoutBuilder {
 
     private FruchtermanReingoldLayoutUI ui = new FruchtermanReingoldLayoutUI();
 
     public String getName() {
-        return NbBundle.getMessage(FruchtermanReingoldBuilder.class, "name");
+        //return NbBundle.getMessage(FruchtermanReingoldBuilder.class, "name");
+    	return "FurchtermanReingold";
     }
 
     public FruchtermanReingold buildLayout() {
@@ -54,9 +55,10 @@ public class FruchtermanReingoldBuilder implements LayoutBuilder {
     private static class FruchtermanReingoldLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            return NbBundle.getMessage(FruchtermanReingold.class, "description");
+            //return NbBundle.getMessage(FruchtermanReingold.class, "description");
+        	return null;
         }
-
+        	/*
         public Icon getIcon() {
             return null;
         }
@@ -64,7 +66,7 @@ public class FruchtermanReingoldBuilder implements LayoutBuilder {
         public JPanel getSimplePanel(Layout layout) {
             return null;
         }
-
+		*/
         public int getQualityRank() {
             return 2;
         }

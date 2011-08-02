@@ -20,10 +20,10 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.fruchterman;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import org.gephi.graph.api.Edge;
-import org.gephi.graph.api.Graph;
+//import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
 import org.gephi.graph.api.NodeData;
@@ -31,8 +31,8 @@ import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.plugin.ForceVectorNodeLayoutData;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-import org.gephi.layout.spi.LayoutProperty;
-import org.openide.util.NbBundle;
+//import org.gephi.layout.spi.LayoutProperty;
+//import org.openide.util.NbBundle;
 
 /**
  *
@@ -162,7 +162,7 @@ public class FruchtermanReingold extends AbstractLayout implements Layout {
     public boolean canAlgo() {
         return true;
     }
-
+    /*
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
         final String FRUCHTERMAN_REINGOLD = "Fruchterman Reingold";
@@ -192,7 +192,8 @@ public class FruchtermanReingold extends AbstractLayout implements Layout {
 
         return properties.toArray(new LayoutProperty[0]);
     }
-
+	*/
+    
     public Float getArea() {
         return area;
     }

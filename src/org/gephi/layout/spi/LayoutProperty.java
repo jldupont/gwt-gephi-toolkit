@@ -20,9 +20,9 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.spi;
 
-import java.beans.PropertyEditor;
+//import java.beans.PropertyEditor;
 import org.openide.nodes.Node.Property;
-import org.openide.nodes.PropertySupport;
+//import org.openide.nodes.PropertySupport;
 
 /**
  * Properties for layout algorithms that are used by the UI to fill the property
@@ -70,6 +70,7 @@ public final class LayoutProperty {
      * @return the created property
      * @throws NoSuchMethodException if the getter or setter methods cannot be found
      */
+    /*
     public static LayoutProperty createProperty(Layout layout, Class valueType, String propertyName, String propertyCategory, String propertyDescription, String getMethod, String setMethod) throws NoSuchMethodException {
         Property property = new PropertySupport.Reflection(
                 layout, valueType, getMethod, setMethod);
@@ -79,7 +80,8 @@ public final class LayoutProperty {
 
         return new LayoutProperty(property, propertyCategory);
     }
-
+	*/
+    
     /**
      * Create a property, with a particular {@link PropertyEditor}. A particular
      * editor must be specified when the property type don't have a registered
@@ -98,6 +100,7 @@ public final class LayoutProperty {
      * @return the created property
      * @throws NoSuchMethodException if the getter or setter methods cannot be found
      */
+    /*
     public static LayoutProperty createProperty(Layout layout, Class valueType, String propertyName, String propertyCategory, String propertyDescription, String getMethod, String setMethod, Class<? extends PropertyEditor> editorClass) throws NoSuchMethodException {
         PropertySupport.Reflection property = new PropertySupport.Reflection(
                 layout, valueType, getMethod, setMethod);
@@ -108,4 +111,6 @@ public final class LayoutProperty {
 
         return new LayoutProperty(property, propertyCategory);
     }
+    */
+    
 }

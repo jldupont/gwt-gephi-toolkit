@@ -20,19 +20,19 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.rotate;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-import org.openide.util.NbBundle;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.NbBundle;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Helder Suzuki <heldersuzuki@gephi.org>
  */
-@ServiceProvider(service=LayoutBuilder.class)
+//@ServiceProvider(service=LayoutBuilder.class)
 public class ClockwiseRotate implements LayoutBuilder {
 
     private ClockwiseRotateLayoutUI ui = new ClockwiseRotateLayoutUI();
@@ -42,7 +42,8 @@ public class ClockwiseRotate implements LayoutBuilder {
     }
 
     public String getName() {
-        return NbBundle.getMessage(ClockwiseRotate.class, "clockwise.name");
+        //return NbBundle.getMessage(ClockwiseRotate.class, "clockwise.name");
+    	return "rotate.clockwise";
     }
 
     public LayoutUI getUI() {
@@ -52,9 +53,10 @@ public class ClockwiseRotate implements LayoutBuilder {
     private static class ClockwiseRotateLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            return NbBundle.getMessage(ClockwiseRotate.class, "clockwise.description");
+            //return NbBundle.getMessage(ClockwiseRotate.class, "clockwise.description");
+        	return null;
         }
-
+        	/*
         public Icon getIcon() {
             return null;
         }
@@ -62,7 +64,8 @@ public class ClockwiseRotate implements LayoutBuilder {
         public JPanel getSimplePanel(Layout layout) {
             return null;
         }
-
+		*/
+        
         public int getQualityRank() {
             return -1;
         }

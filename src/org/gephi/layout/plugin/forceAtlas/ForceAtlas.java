@@ -20,25 +20,26 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.forceAtlas;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
-import org.gephi.layout.spi.Layout;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
+//import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-import org.openide.util.NbBundle;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.NbBundle;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Helder Suzuki <heldersuzuki@gephi.org>
  */
-@ServiceProvider(service=LayoutBuilder.class)
+//@ServiceProvider(service=LayoutBuilder.class)
 public class ForceAtlas implements LayoutBuilder {
 
     private ForceAtlasLayoutUI ui = new ForceAtlasLayoutUI();
 
     public String getName() {
-        return NbBundle.getMessage(ForceAtlasLayout.class, "name");
+        //return NbBundle.getMessage(ForceAtlasLayout.class, "name");
+    	return "ForceAtlas";
     }
 
     public ForceAtlasLayout buildLayout() {
@@ -52,9 +53,10 @@ public class ForceAtlas implements LayoutBuilder {
     private static class ForceAtlasLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            return NbBundle.getMessage(ForceAtlas.class, "description");
+            //return NbBundle//.getMessage(ForceAtlas.class, "description");
+        	return null;
         }
-
+        	/*
         public Icon getIcon() {
             return null;
         }
@@ -62,7 +64,7 @@ public class ForceAtlas implements LayoutBuilder {
         public JPanel getSimplePanel(Layout layout) {
             return null;
         }
-
+		*/
         public int getQualityRank() {
             return 5;
         }

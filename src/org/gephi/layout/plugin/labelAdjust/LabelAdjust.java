@@ -27,8 +27,8 @@ import org.gephi.graph.api.Node;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-import org.gephi.layout.spi.LayoutProperty;
-import org.openide.util.NbBundle;
+//import org.gephi.layout.spi.LayoutProperty;
+//import org.openide.util.NbBundle;
 
 /**
  *
@@ -237,7 +237,7 @@ public class LabelAdjust extends AbstractLayout implements Layout {
             n.getNodeData().setLayoutData(null);
         }
     }
-
+    /*
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
         final String LABELADJUST_CATEGORY = "LabelAdjust";
@@ -259,7 +259,7 @@ public class LabelAdjust extends AbstractLayout implements Layout {
         }
         return properties.toArray(new LayoutProperty[0]);
     }
-
+	*/
     public Double getSpeed() {
         return speed;
     }
@@ -352,7 +352,8 @@ public class LabelAdjust extends AbstractLayout implements Layout {
             layoutData.labelAdjustQuadNode = quads[centerY * COLUMNS + centerX].index;
         }
 
-        public List<Node> get(int row, int col) {
+        @SuppressWarnings("unused")
+		public List<Node> get(int row, int col) {
             return quads[row * ROWS + col].getNodes();
         }
 

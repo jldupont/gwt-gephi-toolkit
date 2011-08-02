@@ -20,20 +20,20 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.force.yifanHu;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
 import org.gephi.layout.plugin.force.ProportionalDisplacement;
-import org.gephi.layout.spi.Layout;
+//import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-import org.openide.util.NbBundle;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.NbBundle;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Helder Suzuki <heldersuzuki@gephi.org>
  */
-@ServiceProvider(service = LayoutBuilder.class)
+//@ServiceProvider(service = LayoutBuilder.class)
 public class YifanHuProportional implements LayoutBuilder {
 
     private YifanHuProportionalLayoutUI ui = new YifanHuProportionalLayoutUI();
@@ -44,7 +44,8 @@ public class YifanHuProportional implements LayoutBuilder {
     }
 
     public String getName() {
-        return NbBundle.getMessage(YifanHuProportional.class, "YifanHuProportional.name");
+        //return NbBundle.getMessage(YifanHuProportional.class, "YifanHuProportional.name");
+    	return "YifanHuProportional";
     }
 
     public LayoutUI getUI() {
@@ -54,9 +55,10 @@ public class YifanHuProportional implements LayoutBuilder {
     private static class YifanHuProportionalLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            return NbBundle.getMessage(YifanHuProportional.class, "YifanHuProportional.description");
+            //return NbBundle.getMessage(YifanHuProportional.class, "YifanHuProportional.description");
+        	return null;
         }
-
+        	/*
         public Icon getIcon() {
             return null;
         }
@@ -64,7 +66,7 @@ public class YifanHuProportional implements LayoutBuilder {
         public JPanel getSimplePanel(Layout layout) {
             return null;
         }
-
+	*/
         public int getQualityRank() {
             return 3;
         }

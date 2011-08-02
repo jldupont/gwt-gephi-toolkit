@@ -40,7 +40,7 @@ public interface LayoutUI {
      * The icon that represents the layout action.
      * @return  a icon for this particular layout
      */
-    public Icon getIcon();
+    //public Icon getIcon();
 
     /**
      * A <code>LayoutUI</code> can have a optional settings panel, that will be
@@ -49,7 +49,7 @@ public interface LayoutUI {
      * @return A simple settings panel for <code>layout</code> or
      * <code>null</code>
      */
-    public JPanel getSimplePanel(Layout layout);
+    //public JPanel getSimplePanel(Layout layout);
 
     /**
      * An appraisal of quality for this algorithm. The rank must be between 1 and
