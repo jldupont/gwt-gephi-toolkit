@@ -1,6 +1,7 @@
 package test.org.gephi.project;
 
 import org.gephi.project.api.ProjectController;
+import org.gephi.project.impl.ProjectControllerImpl;
 import org.openide.util.Lookup;
 
 import com.google.gwt.junit.client.GWTTestCase;
@@ -15,7 +16,7 @@ public class Project extends GWTTestCase {
 		
 		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
 		
-		assertTrue(pc.getClass()==ProjectController.class);
+		assertTrue(pc.getClass()==ProjectControllerImpl.class);
 	}
 	
 	
