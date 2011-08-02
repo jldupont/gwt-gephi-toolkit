@@ -6,6 +6,7 @@ package _org.gephi.gwt;
 import java.util.HashMap;
 
 import org.gephi.project.api.ProjectController;
+import org.gephi.project.impl.ProjectControllerImpl;
 
 import com.google.gwt.core.client.GWT;
 
@@ -45,7 +46,7 @@ public class Factory {
 		Object o=null;
 		
 		switch(c) {
-		case PROJECT_CONTROLLER:	o=GWT.create(ProjectController.class); break;
+		case PROJECT_CONTROLLER:	o=GWT.create(ProjectControllerImpl.class); break;
 		
 		}
 		
