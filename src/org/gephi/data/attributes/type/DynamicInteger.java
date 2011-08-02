@@ -21,7 +21,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.data.attributes.type;
 
 import java.math.BigInteger;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import org.gephi.data.attributes.api.Estimator;
 
@@ -145,8 +145,8 @@ public final class DynamicInteger extends DynamicType<Integer> {
 				bi = bi.add(BigInteger.valueOf(values.get(values.size() / 2)));
 				return bi.divide(BigInteger.valueOf(2)).intValue();
 			case MODE:
-				Hashtable<Integer, Integer> map =
-						new Hashtable<Integer, Integer>();
+				HashMap<Integer, Integer> map =
+						new HashMap<Integer, Integer>();
 				for (int i = 0; i < values.size(); ++i) {
 					int prev = 0;
 					if (map.containsKey(values.get(i).hashCode()))

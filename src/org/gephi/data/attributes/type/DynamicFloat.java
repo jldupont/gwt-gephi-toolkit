@@ -22,7 +22,7 @@ package org.gephi.data.attributes.type;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import org.gephi.data.attributes.api.Estimator;
 
@@ -146,8 +146,8 @@ public final class DynamicFloat extends DynamicType<Float> {
 				bd = bd.add(new BigDecimal(values.get(values.size() / 2)));
 				return bd.divide(new BigDecimal(2)).floatValue();
 			case MODE:
-				Hashtable<Integer, Integer> map =
-						new Hashtable<Integer, Integer>();
+				HashMap<Integer, Integer> map =
+						new HashMap<Integer, Integer>();
 				for (int i = 0; i < values.size(); ++i) {
 					int prev = 0;
 					if (map.containsKey(values.get(i).hashCode()))

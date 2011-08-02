@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.data.attributes.type;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 
 /**
  * Complex type that defines list of any type of items. Can be created from an array or from single
@@ -98,7 +98,8 @@ public abstract class AbstractList<T> {
     }
 
     public AbstractList(T[] array) {
-        this.list = Arrays.copyOf(array, array.length);
+        //this.list = Arrays.copyOf(array, array.length);
+    	this.list = array.clone();
     }
 
     public int size() {
