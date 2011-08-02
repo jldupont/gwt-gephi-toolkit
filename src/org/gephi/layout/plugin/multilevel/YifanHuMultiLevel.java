@@ -20,19 +20,19 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.multilevel;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-import org.openide.util.NbBundle;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.NbBundle;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Helder Suzuki <heldersuzuki@gephi.org>
  */
-@ServiceProvider(service=LayoutBuilder.class)
+//@ServiceProvider(service=LayoutBuilder.class)
 public class YifanHuMultiLevel implements LayoutBuilder {
 
     private YifanHuMultiLevelLayoutUI ui = new YifanHuMultiLevelLayoutUI();
@@ -45,7 +45,8 @@ public class YifanHuMultiLevel implements LayoutBuilder {
     }
 
     public String getName() {
-        return NbBundle.getMessage(YifanHuMultiLevel.class, "YifanHuMultiLevel.name");
+        //return NbBundle.getMessage(YifanHuMultiLevel.class, "YifanHuMultiLevel.name");
+    	return "YifanHuMultilevel";
     }
 
     public LayoutUI getUI() {
@@ -55,9 +56,10 @@ public class YifanHuMultiLevel implements LayoutBuilder {
     private static class YifanHuMultiLevelLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            return NbBundle.getMessage(YifanHuMultiLevel.class, "YifanHuMultiLevel.description");
+            //return NbBundle.getMessage(YifanHuMultiLevel.class, "YifanHuMultiLevel.description");
+        	return null;
         }
-
+        /*
         public Icon getIcon() {
             return null;
         }
@@ -65,7 +67,8 @@ public class YifanHuMultiLevel implements LayoutBuilder {
         public JPanel getSimplePanel(Layout layout) {
             return null;
         }
-
+		*/
+        
         public int getQualityRank() {
             return 3;
         }

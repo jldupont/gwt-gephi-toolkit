@@ -18,11 +18,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
-package org.gephi.layout.plugin.scale;
+package org.gephi.layout.plugin.random;
 
 //import javax.swing.Icon;
 //import javax.swing.JPanel;
-//import org.gephi.layout.spi.Layout;
+import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
 //import org.openide.util.NbBundle;
@@ -30,34 +30,32 @@ import org.gephi.layout.spi.LayoutUI;
 
 /**
  *
- * @author Helder Suzuki <heldersuzuki@gephi.org>>
+ * @author Helder Suzuki <heldersuzuki@gephi.org>
  */
-//@ServiceProvider(service = LayoutBuilder.class)
-public class Contract implements LayoutBuilder {
+//@ServiceProvider(service=LayoutBuilder.class)
+public class Random implements LayoutBuilder {
 
-    private ContractLayoutUI ui = new ContractLayoutUI();
+    private RandomLayoutUI ui = new RandomLayoutUI();
 
     public String getName() {
-        //return NbBundle.getMessage(Contract.class, "contract.name");
-    	//jld
-    	return "scale.contract";
+        //return NbBundle.getMessage(Random.class, "Random.name");
+    	return "random";
     }
 
-    public ScaleLayout buildLayout() {
-        return new ScaleLayout(this, 0.8);
+    public Layout buildLayout() {
+        return new RandomLayout(this, 50);
     }
 
     public LayoutUI getUI() {
         return ui;
     }
 
-    private static class ContractLayoutUI implements LayoutUI {
+    private static class RandomLayoutUI implements LayoutUI {
 
         public String getDescription() {
-            //return NbBundle.getMessage(Contract.class, "contract.description");
+            //return NbBundle.getMessage(Random.class, "Random.description");
         	return null;
         }
-
         /*
         public Icon getIcon() {
             return null;

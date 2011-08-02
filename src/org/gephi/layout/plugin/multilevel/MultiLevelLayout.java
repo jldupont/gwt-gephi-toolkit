@@ -20,16 +20,16 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.multilevel;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-import org.gephi.layout.spi.LayoutProperty;
+//import org.gephi.layout.spi.LayoutProperty;
 import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
 import org.gephi.layout.plugin.force.yifanHu.YifanHuProportional;
-//import org.gephi.layout.plugin.random.RandomLayout;
+import org.gephi.layout.plugin.random.RandomLayout;
 //import org.openide.util.NbBundle;
 
 /**

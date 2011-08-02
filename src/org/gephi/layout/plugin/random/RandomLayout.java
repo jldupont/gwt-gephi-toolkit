@@ -18,12 +18,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
-package org.gephi.layout.plugin.scale;
+package org.gephi.layout.plugin.random;
 
 //import java.util.ArrayList;
 //import java.util.List;
+import java.util.Random;
 import org.gephi.graph.api.Graph;
-//import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.Node;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
@@ -32,42 +32,39 @@ import org.gephi.layout.spi.LayoutBuilder;
 //import org.openide.util.NbBundle;
 
 /**
- * Sample layout that scales the graph.
+ *
  * @author Helder Suzuki <heldersuzuki@gephi.org>
  */
-public class ScaleLayout extends AbstractLayout implements Layout {
+public class RandomLayout extends AbstractLayout implements Layout {
 
-    private double scale;
+    private Random random;
     private Graph graph;
+    private boolean converged;
+    private double size;
 
-    public ScaleLayout(LayoutBuilder layoutBuilder, double scale) {
+    public RandomLayout(LayoutBuilder layoutBuilder, double size) {
         super(layoutBuilder);
-        this.scale = scale;
+        this.size = size;
+        random = new Random();
     }
 
     public void initAlgo() {
+        converged = false;
         graph = graphModel.getGraphVisible();
-        setConverged(false);
     }
 
     public void goAlgo() {
         graph = graphModel.getGraphVisible();
-        double xMean = 0, yMean = 0;
         for (Node n : graph.getNodes()) {
-            xMean += n.getNodeData().x();
-            yMean += n.getNodeData().y();
+            n.getNodeData().setX((float) (-size / 2 + size * random.nextDouble()));
+            n.getNodeData().setY((float) (-size / 2 + size * random.nextDouble()));
         }
-        xMean /= graph.getNodeCount();
-        yMean /= graph.getNodeCount();
+        converged = true;
+    }
 
-        for (Node n : graph.getNodes()) {
-            double dx = (n.getNodeData().x() - xMean) * getScale();
-            double dy = (n.getNodeData().y() - yMean) * getScale();
-
-            n.getNodeData().setX((float) (xMean + dx));
-            n.getNodeData().setY((float) (yMean + dy));
-        }
-        setConverged(true);
+    @Override
+    public boolean canAlgo() {
+        return !converged;
     }
 
     public void endAlgo() {
@@ -78,12 +75,10 @@ public class ScaleLayout extends AbstractLayout implements Layout {
         try {
             properties.add(LayoutProperty.createProperty(
                     this, Double.class, 
-                    //NbBundle.getMessage(getClass(), "ScaleLayout.scaleFactor.name"),
+                    NbBundle.getMessage(getClass(), "Random.spaceSize.name"),
                     null,
-                    null,
-                    //NbBundle.getMessage(getClass(), "ScaleLayout.scaleFactor.desc"),
-                    null,
-                    "getScale", "setScale"));
+                    NbBundle.getMessage(getClass(), "Random.spaceSize.desc"),
+                    "getSize", "setSize"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,17 +89,11 @@ public class ScaleLayout extends AbstractLayout implements Layout {
     public void resetPropertiesValues() {
     }
 
-    /**
-     * @return the scale
-     */
-    public Double getScale() {
-        return scale;
+    public void setSize(Double size) {
+        this.size = size;
     }
 
-    /**
-     * @param scale the scale to set
-     */
-    public void setScale(Double scale) {
-        this.scale = scale;
+    public Double getSize() {
+        return size;
     }
 }
