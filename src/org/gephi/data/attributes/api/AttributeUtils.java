@@ -20,9 +20,9 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.data.attributes.api;
 
-import java.util.GregorianCalendar;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
+//import java.util.GregorianCalendar;
+//import javax.xml.datatype.DatatypeConfigurationException;
+//import javax.xml.datatype.DatatypeFactory;
 //import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 
@@ -88,6 +88,8 @@ public abstract class AttributeUtils {
      * @throws IllegalArgumentException if {@code d} is infinite.
      */
     public static String getXMLDateStringFromDouble(double d) {
+    	throw new RuntimeException("AttributeUtils.getXMLDateStringFromDouble");
+    	/*
         try {
             DatatypeFactory dateFactory = DatatypeFactory.newInstance();
             if (d == Double.NEGATIVE_INFINITY) {
@@ -102,5 +104,6 @@ public abstract class AttributeUtils {
             //Exceptions.printStackTrace(ex);
             return "";
         }
+        */
     }
 }

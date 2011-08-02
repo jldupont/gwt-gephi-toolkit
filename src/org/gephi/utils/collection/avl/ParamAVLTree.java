@@ -641,7 +641,7 @@ public class ParamAVLTree<Item> implements Iterable<Item> {
     public void setAccessor(AVLItemAccessor<Item> accessor) {
         this.accessor = accessor;
     }
-
+    /*
     public Item[] toArray(Item[] array) {
         Item[] result = (Item[]) java.lang.reflect.Array.newInstance(array.getClass().getComponentType(), count);
         if(count==0)
@@ -653,4 +653,6 @@ public class ParamAVLTree<Item> implements Iterable<Item> {
         }
         return result;
     }
+    */
+    
 }
