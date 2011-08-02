@@ -2,6 +2,7 @@
 
 	<inherits name="com.google.gwt.user.User" />
 	
+	<inherits name="org.gephi.graph.Graph" />
 	<inherits name="org.gephi.project.Project" />
 	<inherits name="org.gephi.workspace.Workspace" />
 	
