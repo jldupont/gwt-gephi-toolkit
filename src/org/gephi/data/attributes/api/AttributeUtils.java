@@ -23,7 +23,7 @@ package org.gephi.data.attributes.api;
 import java.util.GregorianCalendar;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
-import org.openide.util.Exceptions;
+//import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 
 /**
@@ -100,7 +100,7 @@ public abstract class AttributeUtils {
             gc.setTimeInMillis((long) d);
             return dateFactory.newXMLGregorianCalendar(gc).toXMLFormat().substring(0, 23);
         } catch (DatatypeConfigurationException ex) {
-            Exceptions.printStackTrace(ex);
+            //Exceptions.printStackTrace(ex);
             return "";
         }
     }

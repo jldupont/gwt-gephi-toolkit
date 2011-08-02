@@ -71,7 +71,7 @@ public final class IntervalTree<T> {
 		copy(intervalTree.root.left, intervalTree.nil);
 	}
 
-	private void copy(Node x, Node nil) {
+	private void copy(IntervalTree.Node x, IntervalTree.Node nil) {
 		if (x != nil) {
 			copy(x.left, nil);
 			insert(x.i);
