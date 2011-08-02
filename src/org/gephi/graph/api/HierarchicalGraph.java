@@ -319,7 +319,7 @@ public interface HierarchicalGraph extends Graph {
      * Returns the hierarchy tree of all nodes in the form of a <code>TreeNode</code>.
      * @return a Java <code>TreeNode</code> wrapper of all nodes in the hierarchy tree
      */
-    public ImmutableTreeNode wrapToTreeNode();
+    //public ImmutableTreeNode wrapToTreeNode();
 
     /**
      * Expands the graph view from <code>node</code> to its children. The children of <code>node</code> are put in the view and

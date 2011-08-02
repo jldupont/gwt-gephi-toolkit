@@ -26,7 +26,7 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.atomic.AtomicInteger;
+//import java.util.concurrent.atomic.AtomicInteger;
 import org.gephi.utils.collection.avl.ParamAVLIterator;
 //import org.gephi.graph.api.GraphEvent.EventType;
 import org.gephi.graph.dhns.edge.AbstractEdge;
@@ -34,6 +34,8 @@ import org.gephi.graph.dhns.edge.AbstractEdge;
 import org.gephi.graph.dhns.node.AbstractNode;
 import org.gephi.graph.dhns.node.NodeDataImpl;
 import org.gephi.graph.dhns.node.iterators.TreeListIterator;
+
+import _org.gephi.gwt.AtomicInteger;
 
 /**
  *

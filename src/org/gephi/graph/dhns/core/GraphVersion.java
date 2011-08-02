@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.graph.dhns.core;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import _org.gephi.gwt.AtomicInteger;
 
 /**
  * Trace system to log node and edge modification. External modules can compare to their local integer

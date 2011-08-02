@@ -22,6 +22,8 @@ package org.gephi.graph.dhns.core;
 
 //import java.util.concurrent.atomic.AtomicInteger;
 
+import _org.gephi.gwt.AtomicInteger;
+
 /**
  * Generates incremental IDs for node and edges;
  *
@@ -29,25 +31,6 @@ package org.gephi.graph.dhns.core;
  */
 public class IDGen {
 
-	class AtomicInteger {
-		
-		int value;
-		
-		public AtomicInteger(int initialValue) {
-			this.value=initialValue;
-		}
-		public int getAndIncrement(){
-			int current=value;
-			this.value++;
-			return current;
-		}
-		public int get() {
-			return value;
-		}
-		public void set(int newValue) {
-			this.value=newValue;
-		}
-	}
 	
     private AtomicInteger nodeGen = new AtomicInteger(1);
     private AtomicInteger edgeGen = new AtomicInteger(1);

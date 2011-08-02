@@ -22,7 +22,7 @@ package org.gephi.graph.dhns.graph;
 
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
-import org.gephi.graph.api.ImmutableTreeNode;
+//import org.gephi.graph.api.ImmutableTreeNode;
 import org.gephi.graph.api.Node;
 import org.gephi.graph.api.NodeIterable;
 import org.gephi.graph.dhns.core.Dhns;
@@ -35,7 +35,7 @@ import org.gephi.graph.dhns.node.iterators.LevelIterator;
 import org.gephi.graph.dhns.node.iterators.TreeIterator;
 import org.gephi.graph.dhns.predicate.Predicate;
 import org.gephi.graph.dhns.predicate.Tautology;
-import org.gephi.graph.dhns.utils.TreeNodeWrapper;
+//import org.gephi.graph.dhns.utils.TreeNodeWrapper;
 
 /**
  *
@@ -229,7 +229,7 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         }
         dhns.getGraphStructure().setEdgeId((AbstractEdge) edge, id);
     }
-
+/*
     @SuppressWarnings("unchecked")
 	public ImmutableTreeNode wrapToTreeNode() {
         TreeNodeWrapper wrapper = new TreeNodeWrapper(structure);
@@ -239,7 +239,8 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         //readUnlock();
         return treeNode;
     }
-
+*/
+    
     @SuppressWarnings("unchecked")
 	public int getChildrenCount(Node node) {
         AbstractNode absNode = checkNode(node);
