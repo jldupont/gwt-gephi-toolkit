@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.graph.dhns.graph.iterators;
 
-import java.util.concurrent.locks.Lock;
+//import java.util.concurrent.locks.Lock;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.EdgeIterator;
 import org.gephi.graph.dhns.edge.iterators.AbstractEdgeIterator;
@@ -33,18 +33,18 @@ import org.gephi.graph.dhns.edge.iterators.AbstractEdgeIterator;
 public class EdgeIteratorImpl implements EdgeIterator {
 
     protected AbstractEdgeIterator iterator;
-    protected Lock lock;
+    //protected Lock lock;
 
-    public EdgeIteratorImpl(AbstractEdgeIterator iterator, Lock lock) {
+    public EdgeIteratorImpl(AbstractEdgeIterator iterator) {
         this.iterator = iterator;
-        this.lock = lock;
+        //this.lock = lock;
     }
 
     public boolean hasNext() {
         boolean res = iterator.hasNext();
-        if (!res && lock != null) {
-            lock.unlock();
-        }
+        //if (!res && lock != null) {
+        //    lock.unlock();
+        //}
         return res;
     }
 
@@ -59,8 +59,9 @@ public class EdgeIteratorImpl implements EdgeIterator {
     public AbstractEdgeIterator getIterator() {
         return iterator;
     }
-
+    /*
     public Lock getLock() {
         return lock;
     }
+    */
 }

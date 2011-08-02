@@ -21,7 +21,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.graph.dhns.graph.iterators;
 
 import java.util.ArrayList;
-import java.util.concurrent.locks.Lock;
+//import java.util.concurrent.locks.Lock;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.EdgeIterable;
 import org.gephi.graph.api.EdgeIterator;
@@ -41,16 +41,16 @@ public class EdgeIterableImpl implements EdgeIterable {
 
     private EdgeIteratorImpl iterator;
 
-    public EdgeIterableImpl(AbstractEdgeIterator iterator, Lock lock) {
-        this.iterator = new EdgeIteratorImpl(iterator, lock);
-    }
+    //public EdgeIterableImpl(AbstractEdgeIterator iterator, Lock lock) {
+    //    this.iterator = new EdgeIteratorImpl(iterator, lock);
+    //}
 
-    public EdgeIterableImpl(AbstractEdgeIterator iterator, Lock lock, Predicate<AbstractEdge> predicate) {
-        this.iterator = new FilteredEdgeIteratorImpl(iterator, lock, predicate);
+    public EdgeIterableImpl(AbstractEdgeIterator iterator, Predicate<AbstractEdge> predicate) {
+        this.iterator = new FilteredEdgeIteratorImpl(iterator, predicate);
     }
 
     public EdgeIterableImpl(EdgeIterableImpl iterable, Predicate<AbstractEdge> predicate) {
-        this(iterable.getIterator().getIterator(), iterable.getIterator().getLock(), predicate);
+        this(iterable.getIterator().getIterator(), predicate);
     }
 
     public EdgeIterator iterator() {
@@ -58,9 +58,9 @@ public class EdgeIterableImpl implements EdgeIterable {
     }
 
     public void doBreak() {
-        if (iterator.lock != null) {
-            iterator.lock.unlock();
-        }
+        //if (iterator.lock != null) {
+        //    iterator.lock.unlock();
+        //}
     }
 
     public Edge[] toArray() {

@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.graph.dhns.core;
 
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+//import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.gephi.data.attributes.api.AttributeController;
 import org.gephi.data.attributes.api.AttributeModel;
 import org.gephi.data.attributes.api.AttributeRowFactory;
@@ -53,7 +53,7 @@ import org.gephi.graph.dhns.predicate.Predicate;
 import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+//import org.w3c.dom.Element;
 
 /**
  * Main class of the DHNS (Durable Hierarchical Network Structure) graph structure..
@@ -76,7 +76,7 @@ public class Dhns implements GraphModel {
     private boolean undirected = false;
     private boolean mixed = false;
     //Locking
-    private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    //private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     public Dhns(DhnsGraphController controller, Workspace workspace) {
         this.controller = controller;

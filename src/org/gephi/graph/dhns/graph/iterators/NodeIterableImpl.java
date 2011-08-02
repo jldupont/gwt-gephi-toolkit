@@ -21,7 +21,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.graph.dhns.graph.iterators;
 
 import java.util.ArrayList;
-import java.util.concurrent.locks.Lock;
+//import java.util.concurrent.locks.Lock;
 import org.gephi.graph.api.Node;
 import org.gephi.graph.api.NodeIterable;
 import org.gephi.graph.api.NodeIterator;
@@ -40,16 +40,16 @@ public class NodeIterableImpl implements NodeIterable {
 
     private NodeIteratorImpl iterator;
 
-    public NodeIterableImpl(AbstractNodeIterator iterator, Lock lock) {
-        this.iterator = new NodeIteratorImpl(iterator, lock);
-    }
+    //public NodeIterableImpl(AbstractNodeIterator iterator) {
+    //    this.iterator = new NodeIteratorImpl(iterator);
+    //}
 
-    public NodeIterableImpl(AbstractNodeIterator iterator, Lock lock, Predicate<Node> predicate) {
-        this.iterator = new FilteredNodeIteratorImpl(iterator, lock, predicate);
+    public NodeIterableImpl(AbstractNodeIterator iterator, Predicate<Node> predicate) {
+        this.iterator = new FilteredNodeIteratorImpl(iterator, predicate);
     }
 
     public NodeIterableImpl(NodeIterableImpl iterable, Predicate<Node> predicate) {
-        this(iterable.getIterator().getIterator(), iterable.getIterator().getLock(), predicate);
+        this(iterable.getIterator().getIterator(), predicate);
     }
 
     public NodeIterator iterator() {
@@ -57,9 +57,9 @@ public class NodeIterableImpl implements NodeIterable {
     }
 
     public void doBreak() {
-        if (iterator.lock != null) {
-            iterator.lock.unlock();
-        }
+        //if (iterator.lock != null) {
+        //    iterator.lock.unlock();
+        //}
     }
 
     public Node[] toArray() {

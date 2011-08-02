@@ -14,3 +14,4 @@
 * org.openide.nodes.Node.Property: 
 
 * no layout spi
+* node/edge locking
