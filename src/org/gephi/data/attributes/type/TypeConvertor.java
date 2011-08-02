@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.data.attributes.type;
 
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import org.gephi.data.attributes.api.AttributeType;
@@ -63,8 +63,10 @@ public final class TypeConvertor {
         }
 
         String[] stringValues = input.split(separator);
-        T[] resultList = (T[]) Array.newInstance(finalType, stringValues.length);
-
+        //T[] resultList = (T[]) Array.newInstance(finalType, stringValues.length);
+        T[] resultList = null;
+        throw new RuntimeException("TypeConvertor.createArrayFromString");
+        /*
         for (int i = 0; i < stringValues.length; i++) {
             String stringValue = stringValues[i].trim();
             T resultValue = null;
@@ -78,6 +80,7 @@ public final class TypeConvertor {
             resultList[i] = resultValue;
         }
         return resultList;
+        */
     }
 
     /**
@@ -150,7 +153,8 @@ public final class TypeConvertor {
         if (!primitiveArray.getClass().isArray()) {
             throw new IllegalArgumentException("Given object is not of primitive array: " + primitiveArray.getClass());
         }
-
+        throw new RuntimeException("TypeConvertor.convertPrimitiveToWrapperArray");
+        /*
         Class<?> primitiveClass = primitiveArray.getClass().getComponentType();
         Class<T> wrapperClass = (Class<T>) getWrapperFromPrimitive(primitiveClass);
         int arrayLength = Array.getLength(primitiveArray);
@@ -162,6 +166,7 @@ public final class TypeConvertor {
         }
 
         return wrapperArray;
+        */
     }
 
     /**

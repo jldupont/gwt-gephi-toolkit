@@ -27,7 +27,7 @@ import org.gephi.data.attributes.api.AttributeRowFactory;
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.EdgeIterable;
 import org.gephi.graph.api.Graph;
-import org.gephi.graph.api.GraphListener;
+//import org.gephi.graph.api.GraphListener;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.GraphSettings;
 import org.gephi.graph.api.HierarchicalDirectedGraph;
@@ -67,7 +67,7 @@ public class Dhns implements GraphModel {
     private final DhnsGraphController controller;
     private GraphStructure graphStructure;
     private GraphVersion graphVersion;
-    private final EventManager eventManager;
+    //private final EventManager eventManager;
     private final SettingsManager settingsManager;
     private final GraphFactoryImpl factory;
     private final DuplicateManager duplicateManager;
@@ -82,12 +82,12 @@ public class Dhns implements GraphModel {
         this.controller = controller;
         this.workspace = workspace;
         graphVersion = new GraphVersion();
-        eventManager = new EventManager(this);
+        //eventManager = new EventManager(this);
         settingsManager = new SettingsManager(this);
         graphStructure = new GraphStructure(this);
         duplicateManager = new DuplicateManager(this);
 
-        eventManager.start();
+        //eventManager.start();
 
         //AttributeFactory
         AttributeRowFactory attributeRowFactory = null;
@@ -117,9 +117,9 @@ public class Dhns implements GraphModel {
         return graphVersion;
     }
 
-    public EventManager getEventManager() {
-        return eventManager;
-    }
+    //public EventManager getEventManager() {
+    //    return eventManager;
+    //}
 
     public IDGen getIdGen() {
         return controller.getIDGen();
@@ -262,7 +262,7 @@ public class Dhns implements GraphModel {
     public boolean isHierarchical() {
         return graphStructure.getMainView().getStructure().getTreeHeight() - 1 > 0;       //height>0
     }
-
+    /*
     public void addGraphListener(GraphListener graphListener) {
         eventManager.addGraphListener(graphListener);
     }
@@ -270,7 +270,7 @@ public class Dhns implements GraphModel {
     public void removeGraphListener(GraphListener graphListener) {
         eventManager.removeGraphListener(graphListener);
     }
-
+	*/
     public Graph getGraph() {
         if (directed) {
             return getDirectedGraph();

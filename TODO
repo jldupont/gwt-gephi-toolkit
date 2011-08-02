@@ -1,3 +1,5 @@
+org.gephi.data.attributes.type.TypeConvertor
+
 javax.xml.datatype.DatatypeFactory
 java.util.GregorianCalendar
 java.util.Hashtable

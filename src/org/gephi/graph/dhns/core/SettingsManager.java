@@ -23,12 +23,12 @@ package org.gephi.graph.dhns.core;
 import java.util.HashMap;
 import java.util.Map;
 import org.gephi.data.attributes.api.Estimator;
-import org.gephi.graph.api.GraphEvent.EventType;
+//import org.gephi.graph.api.GraphEvent.EventType;
 import org.gephi.graph.api.GraphSettings;
 import org.gephi.graph.api.GraphView;
 import org.gephi.graph.dhns.edge.AverageMetaEdgeBuilder;
 import org.gephi.graph.dhns.edge.SumMetaEdgeBuilder;
-import org.gephi.graph.dhns.event.GeneralEvent;
+//import org.gephi.graph.dhns.event.GeneralEvent;
 import org.gephi.graph.spi.MetaEdgeBuilder;
 
 /**
@@ -119,10 +119,11 @@ public class SettingsManager implements GraphSettings {
         return null;
     }
 
+    @SuppressWarnings("unused")
     private void fireUpdate() {
         dhns.getGraphVersion().incEdgeVersion();
-        for (GraphView view : dhns.getGraphStructure().getViews()) {
-            dhns.getEventManager().fireEvent(new GeneralEvent(EventType.META_EDGES_UPDATE, view));
+        for ( GraphView view : dhns.getGraphStructure().getViews()) {
+            //dhns.getEventManager().fireEvent(new GeneralEvent(EventType.META_EDGES_UPDATE, view));
         }
     }
 

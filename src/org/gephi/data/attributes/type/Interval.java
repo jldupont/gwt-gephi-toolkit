@@ -225,6 +225,7 @@ public final class Interval<T> implements Comparable<Interval> {
 		return false;
 	}
 
+	/*
     @Override
     public int hashCode() {
         int hash = 7;
@@ -234,7 +235,8 @@ public final class Interval<T> implements Comparable<Interval> {
         hash = 97 * hash + (this.ropen ? 1 : 0);
         return hash;
     }
-
+	*/
+	
 	/**
 	 * Creates a string representation of the interval with its value.
 	 *

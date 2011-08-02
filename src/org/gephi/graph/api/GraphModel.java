@@ -323,13 +323,13 @@ public interface GraphModel {
      * To pass a <code>WeakReference</code>, use Netbeans <code>WeakListeners</code> utility class.
      * @param graphListener the listener to add
      */
-    public void addGraphListener(GraphListener graphListener);
+    //public void addGraphListener(GraphListener graphListener);
 
     /**
      * Remove <code>graphListener</code> as a listener to this graph.
      * @param graphListener the listener to remove
      */
-    public void removeGraphListener(GraphListener graphListener);
+    //public void removeGraphListener(GraphListener graphListener);
 
     /**
      * Returns <code>true</code> if the graph is <b>directed</b> by default. This value is an

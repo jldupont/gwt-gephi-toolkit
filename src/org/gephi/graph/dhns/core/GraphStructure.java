@@ -28,9 +28,9 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.gephi.utils.collection.avl.ParamAVLIterator;
-import org.gephi.graph.api.GraphEvent.EventType;
+//import org.gephi.graph.api.GraphEvent.EventType;
 import org.gephi.graph.dhns.edge.AbstractEdge;
-import org.gephi.graph.dhns.event.ViewEvent;
+//import org.gephi.graph.dhns.event.ViewEvent;
 import org.gephi.graph.dhns.node.AbstractNode;
 import org.gephi.graph.dhns.node.NodeDataImpl;
 import org.gephi.graph.dhns.node.iterators.TreeListIterator;
@@ -126,7 +126,7 @@ public class GraphStructure {
 
         views.add(viewCopy);
         //dhns.writeUnlock();
-        dhns.getEventManager().fireEvent(new ViewEvent(EventType.NEW_VIEW, viewCopy));
+        //dhns.getEventManager().fireEvent(new ViewEvent(EventType.NEW_VIEW, viewCopy));
         return viewCopy;
     }
 
@@ -194,7 +194,7 @@ public class GraphStructure {
         } else {
             this.visibleView = visibleView;
         }
-        dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, this.visibleView));
+        //dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, this.visibleView));
     }
 
     private static class ViewDestructorThread extends Thread {
@@ -262,10 +262,10 @@ public class GraphStructure {
             structure.views.remove(view);
             //System.out.println("Destroy view finished");           
             //structure.dhns.writeUnlock();
-            structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.DESTROY_VIEW, view));
+            //structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.DESTROY_VIEW, view));
             if (structure.visibleView == view) {
                 structure.visibleView = structure.mainView;
-                structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, structure.mainView));
+                //structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, structure.mainView));
             }
         }
     }
