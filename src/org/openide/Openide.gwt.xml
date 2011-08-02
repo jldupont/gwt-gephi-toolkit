@@ -3,7 +3,7 @@
 	<inherits name="com.google.gwt.user.User" />
 	
 	<inherits name="org.openide.nodes.Nodes" />
-	<inherits name="org.openide.util.Utils" />
+	<inherits name="org.openide.util.Util" />
 	
 	<source path="" />
 	
