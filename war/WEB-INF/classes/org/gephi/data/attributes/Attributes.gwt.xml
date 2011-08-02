@@ -1,7 +1,9 @@
 <module>
 
 	<inherits name="com.google.gwt.user.User" />
-	
+	<inherits name="org.gephi.data.attributes.api.Api" />
+	<inherits name="org.gephi.data.attributes.spi.Spi" />
+	<inherits name="org.gephi.data.attributes.type.Type" />
 	<source path="" />
 	
 </module>
