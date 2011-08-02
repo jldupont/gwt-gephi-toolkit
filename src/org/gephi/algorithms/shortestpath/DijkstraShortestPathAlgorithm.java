@@ -53,7 +53,7 @@ public class DijkstraShortestPathAlgorithm extends AbstractShortestPathAlgorithm
 
     public void compute() {
 
-        graph.readLock();
+        //graph.readLock();
         Set<Node> nodes = new HashSet<Node>();
 
         //Initialize
@@ -97,7 +97,7 @@ public class DijkstraShortestPathAlgorithm extends AbstractShortestPathAlgorithm
             }
         }
 
-        graph.readUnlock();
+        //graph.readUnlock();
     }
 
     @Override

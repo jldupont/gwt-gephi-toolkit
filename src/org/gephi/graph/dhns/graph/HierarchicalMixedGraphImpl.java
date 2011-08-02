@@ -119,12 +119,12 @@ public class HierarchicalMixedGraphImpl extends HierarchicalGraphImpl implements
 
 
 	public EdgeIterable getDirectedEdges() {
-        readLock();
+        ////readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, Tautology.instance, Tautology.instance), directedPredicate);
     }
 
     public EdgeIterable getUndirectedEdges() {
-        readLock();
+        ////readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, Tautology.instance, Tautology.instance), undirectedPredicate);
     }
 
@@ -145,35 +145,35 @@ public class HierarchicalMixedGraphImpl extends HierarchicalGraphImpl implements
         if (node1 == null || node2 == null) {
             return null;
         }
-        readLock();
+        ////readLock();
         AbstractNode sourceNode = checkNode(node1);
         AbstractNode targetNode = checkNode(node2);
         AbstractEdge res = sourceNode.getEdgesOutTree().getItem(targetNode.getNumber());
         if (res == null) {
             res = sourceNode.getEdgesInTree().getItem(targetNode.getNumber());
         }
-        readUnlock();
+        ////readUnlock();
         return res;
     }
 
     public EdgeIterable getEdges() {
-        readLock();
+        ////readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, Tautology.instance, Tautology.instance));
     }
 
     public EdgeIterable getEdgesTree() {
-        readLock();
+        ////readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, Tautology.instance, Tautology.instance));
     }
 
     public NodeIterable getNeighbors(Node node) {
-        readLock();
+        ////readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new NeighborIterator(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, true, Tautology.instance, Tautology.instance), absNode, Tautology.instance));
     }
 
     public EdgeIterable getEdges(Node node) {
-        readLock();
+        ////readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newEdgeIterable(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, false, Tautology.instance, Tautology.instance));
     }
@@ -232,23 +232,23 @@ public class HierarchicalMixedGraphImpl extends HierarchicalGraphImpl implements
     }
 
     public EdgeIterable getMetaEdges() {
-        readLock();
+        //readLock();
         return dhns.newEdgeIterable(new MetaEdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false));
     }
 
     public EdgeIterable getEdgesAndMetaEdges() {
-        readLock();
+        //readLock();
         return dhns.newEdgeIterable(new EdgeAndMetaEdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, enabledNodePredicate, Tautology.instance));
     }
 
     public EdgeIterable getMetaEdges(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newEdgeIterable(new MetaEdgeNodeIterator(absNode.getMetaEdgesOutTree(), absNode.getMetaEdgesInTree(), MetaEdgeNodeIterator.EdgeNodeIteratorMode.BOTH, false));
     }
 
     public EdgeIterable getEdgesAndMetaEdges(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         EdgeNodeIterator std = new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, false, enabledNodePredicate, Tautology.instance);
         MetaEdgeNodeIterator meta = new MetaEdgeNodeIterator(absNode.getMetaEdgesOutTree(), absNode.getMetaEdgesInTree(), MetaEdgeNodeIterator.EdgeNodeIteratorMode.BOTH, false);
@@ -259,14 +259,14 @@ public class HierarchicalMixedGraphImpl extends HierarchicalGraphImpl implements
         if (node1 == null || node2 == null) {
             return null;
         }
-        readLock();
+        //readLock();
         AbstractNode sourceNode = checkNode(node1);
         AbstractNode targetNode = checkNode(node2);
         AbstractEdge res = sourceNode.getMetaEdgesOutTree().getItem(targetNode.getNumber());
         if (res == null) {
             res = sourceNode.getMetaEdgesInTree().getItem(targetNode.getNumber());
         }
-        readUnlock();
+        //readUnlock();
         return (MetaEdge) res;
     }
 

@@ -108,23 +108,23 @@ public class HierarchicalUndirectedGraphImpl extends HierarchicalGraphImpl imple
     }
 
     public EdgeIterable getEdges() {
-        readLock();
+        //readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), true, enabledNodePredicate, Tautology.instance));
     }
 
     public EdgeIterable getEdgesTree() {
-        readLock();
+        //readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), true, Tautology.instance, Tautology.instance));
     }
 
     public EdgeIterable getEdges(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newEdgeIterable(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, true, enabledNodePredicate, Tautology.instance));
     }
 
     public NodeIterable getNeighbors(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new NeighborIterator(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, true, enabledNodePredicate, Tautology.instance), absNode, Tautology.instance));
     }
@@ -160,7 +160,7 @@ public class HierarchicalUndirectedGraphImpl extends HierarchicalGraphImpl imple
         if (node1 == null || node2 == null) {
             return null;
         }
-        readLock();
+        //readLock();
         AbstractNode sourceNode = checkNode(node1);
         AbstractNode targetNode = checkNode(node2);
         AbstractEdge res = null;
@@ -177,18 +177,18 @@ public class HierarchicalUndirectedGraphImpl extends HierarchicalGraphImpl imple
         } else if (edge2 != null) {
             res = edge2;
         }
-        readUnlock();
+        //readUnlock();
         return res;
     }
 
     public EdgeIterable getInnerEdges(Node nodeGroup) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(nodeGroup);
         return dhns.newEdgeIterable(new RangeEdgeIterator(structure, view.getViewId(), absNode, absNode, true, true, Tautology.instance, Tautology.instance));
     }
 
     public EdgeIterable getOuterEdges(Node nodeGroup) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(nodeGroup);
         return dhns.newEdgeIterable(new RangeEdgeIterator(structure, view.getViewId(), absNode, absNode, false, true, Tautology.instance, Tautology.instance));
     }
@@ -221,23 +221,23 @@ public class HierarchicalUndirectedGraphImpl extends HierarchicalGraphImpl imple
     }
 
     public EdgeIterable getMetaEdges() {
-        readLock();
+        //readLock();
         return dhns.newEdgeIterable(new MetaEdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), true));
     }
 
     public EdgeIterable getEdgesAndMetaEdges() {
-        readLock();
+        //readLock();
         return dhns.newEdgeIterable(new EdgeAndMetaEdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), true, enabledNodePredicate, Tautology.instance));
     }
 
     public EdgeIterable getMetaEdges(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newEdgeIterable(new MetaEdgeNodeIterator(absNode.getMetaEdgesOutTree(), absNode.getMetaEdgesInTree(), MetaEdgeNodeIterator.EdgeNodeIteratorMode.BOTH, true));
     }
 
     public EdgeIterable getEdgesAndMetaEdges(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         EdgeNodeIterator std = new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, true, enabledNodePredicate, Tautology.instance);
         MetaEdgeNodeIterator meta = new MetaEdgeNodeIterator(absNode.getMetaEdgesOutTree(), absNode.getMetaEdgesInTree(), MetaEdgeNodeIterator.EdgeNodeIteratorMode.BOTH, true);
@@ -248,7 +248,7 @@ public class HierarchicalUndirectedGraphImpl extends HierarchicalGraphImpl imple
         if (node1 == null || node2 == null) {
             return null;
         }
-        readLock();
+        //readLock();
         AbstractNode sourceNode = checkNode(node1);
         AbstractNode targetNode = checkNode(node2);
         AbstractEdge res = null;
@@ -265,7 +265,7 @@ public class HierarchicalUndirectedGraphImpl extends HierarchicalGraphImpl imple
         } else if (edge2 != null) {
             res = edge2;
         }
-        readUnlock();
+        //readUnlock();
         return (MetaEdge) res;
     }
 

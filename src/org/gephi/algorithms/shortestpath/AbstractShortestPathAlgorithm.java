@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.algorithms.shortestpath;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.util.HashMap;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Node;
@@ -31,14 +31,14 @@ import org.gephi.graph.api.Node;
  */
 public abstract class AbstractShortestPathAlgorithm {
 
-    protected final HashMap<Node, Color> colors;
+    //protected final HashMap<Node, Color> colors;
     protected final HashMap<Node, Double> distances;
     protected final Node sourceNode;
     protected double maxDistance = 0;
 
     public AbstractShortestPathAlgorithm(Node sourceNode) {
         this.sourceNode = sourceNode;
-        colors = new HashMap<Node, Color>();
+        //colors = new HashMap<Node, Color>();
         distances = new HashMap<Node, Double>();
     }
 

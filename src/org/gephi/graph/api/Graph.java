@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.graph.api;
 
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+//import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Main interface for accessing the graph structure and develop algorithms.
@@ -369,20 +369,20 @@ public interface Graph {
      * locks.
      * @see ReentrantReadWriteLock
      */
-    public void readLock();
+    //public void readLock();
 
     /**
      * Releases the read lock on the graph. Must be called from the same thread that locked the graph.
      * <p>
      * Use <code>readUnlockAll()</code> if you ignore the number of times the read lock has been acquired.
      */
-    public void readUnlock();
+    //public void readUnlock();
 
     /**
      * Safe method that releases all read locks the calling thread has acquired. Use this method if you are
      * cancelling a task and you don't know how many read locks have been acquired.
      */
-    public void readUnlockAll();
+    //public void readUnlockAll();
 
     /**
      * Acquires a write lock on the graph. Calling thread will be blocked until all read locks are released.
@@ -390,12 +390,12 @@ public interface Graph {
      * @see ReentrantReadWriteLock
      * @throws IllegalMonitorStateException if the current thread is holding a read lock
      */
-    public void writeLock();
+    //public void writeLock();
 
     /**
      * Release the write lock on the graph. Must be called from the same thread that locked the graph.
      */
-    public void writeUnlock();
+    //public void writeUnlock();
 
     /**
      * Returns the graph model this graph belongs to.

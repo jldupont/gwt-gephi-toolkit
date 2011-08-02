@@ -87,7 +87,7 @@ public class GraphStructure {
     public GraphViewImpl copyView(GraphViewImpl view) {
         GraphViewImpl viewCopy = new GraphViewImpl(dhns, viewId.getAndIncrement());
         TreeStructure newStructure = viewCopy.getStructure();
-        dhns.writeLock();
+        //dhns.writeLock();
 
         for (TreeListIterator itr = new TreeListIterator(view.getStructure().getTree(), 1); itr.hasNext();) {
             AbstractNode node = itr.next();
@@ -125,7 +125,7 @@ public class GraphStructure {
         viewCopy.getStructureModifier().getEdgeProcessor().computeMetaEdges();
 
         views.add(viewCopy);
-        dhns.writeUnlock();
+        //dhns.writeUnlock();
         dhns.getEventManager().fireEvent(new ViewEvent(EventType.NEW_VIEW, viewCopy));
         return viewCopy;
     }
@@ -244,7 +244,7 @@ public class GraphStructure {
 
         private void destroyView(GraphStructure structure, GraphViewImpl view) {
             //Logger.getLogger("").log(Level.WARNING, "Destroy view {0}", view.getViewId());
-            structure.dhns.writeLock();
+            //structure.dhns.writeLock();
             ParamAVLIterator<AbstractEdge> edgeIterator = new ParamAVLIterator<AbstractEdge>();
             for (TreeListIterator itr = new TreeListIterator(structure.mainView.getStructure().getTree(), 1); itr.hasNext();) {
                 AbstractNode node = itr.next();
@@ -261,7 +261,7 @@ public class GraphStructure {
             }
             structure.views.remove(view);
             //System.out.println("Destroy view finished");           
-            structure.dhns.writeUnlock();
+            //structure.dhns.writeUnlock();
             structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.DESTROY_VIEW, view));
             if (structure.visibleView == view) {
                 structure.visibleView = structure.mainView;

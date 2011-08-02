@@ -125,13 +125,13 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
 
     @SuppressWarnings("unchecked")
 	public NodeIterable getNodes() {
-        readLock();
+        //readLock();
         return dhns.newNodeIterable(new TreeIterator(structure, true, Tautology.instance));
     }
 
     @SuppressWarnings("unchecked")
 	public NodeIterable getNodesTree() {
-        readLock();
+        //readLock();
         return dhns.newNodeIterable(new TreeIterator(structure, false, Tautology.instance));
     }
 
@@ -144,10 +144,10 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
     @SuppressWarnings("unchecked")
 	public NodeIterable getNodes(int level) {
         level += 1;     //Because we ignore the virtual root
-        readLock();
+        //readLock();
         int height = structure.getTreeHeight();
         if (level > height) {
-            readUnlock();
+            //readUnlock();
             throw new IllegalArgumentException("Level must be between 0 and the height of the tree, currently height=" + (height - 1));
         }
         return dhns.newNodeIterable(new LevelIterator(structure, level, Tautology.instance));
@@ -234,9 +234,9 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
 	public ImmutableTreeNode wrapToTreeNode() {
         TreeNodeWrapper wrapper = new TreeNodeWrapper(structure);
         ImmutableTreeNode treeNode;
-        readLock();
+        //readLock();
         treeNode = wrapper.wrap(new TreeIterator(structure, false, Tautology.instance));
-        readUnlock();
+        //readUnlock();
         return treeNode;
     }
 
@@ -268,21 +268,21 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
 
     @SuppressWarnings("unchecked")
 	public NodeIterable getChildren(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new ChildrenIterator(structure, absNode, Tautology.instance));
     }
 
     @SuppressWarnings("unchecked")
 	public NodeIterable getDescendant(Node node) {
-        readLock();
+        //readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new DescendantIterator(structure, absNode, Tautology.instance));
     }
 
     @SuppressWarnings("unchecked")
 	public NodeIterable getTopNodes() {
-        readLock();
+        //readLock();
         return dhns.newNodeIterable(new ChildrenIterator(structure, Tautology.instance));
     }
 
@@ -402,14 +402,14 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
     }
 
     public void resetViewToLevel(int level) {
-        readLock();
+        //readLock();
         level += 1;     //Because we ignore the virtual root
         int height = structure.getTreeHeight();
         if (level > height) {
-            readUnlock();
+            //readUnlock();
             throw new IllegalArgumentException("Level must be between 0 and the height of the tree, currently height=" + (height - 1));
         }
-        readUnlock();
+        //readUnlock();
         view.getStructureModifier().resetViewToLevel(level);
     }
 

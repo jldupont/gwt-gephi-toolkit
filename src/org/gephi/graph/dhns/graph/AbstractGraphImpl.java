@@ -61,6 +61,7 @@ public abstract class AbstractGraphImpl {
         return view;
     }
 
+    /*
     public void readLock() {
         dhns.readLock();
     }
@@ -80,7 +81,8 @@ public abstract class AbstractGraphImpl {
     public void writeUnlock() {
         dhns.writeUnlock();
     }
-
+	*/
+    
     public int getNodeVersion() {
         return dhns.getGraphVersion().getNodeVersion();
     }

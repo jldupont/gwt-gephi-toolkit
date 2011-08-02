@@ -51,7 +51,7 @@ public class BellmanFordShortestPathAlgorithm extends AbstractShortestPathAlgori
 
     public void compute() {
 
-        graph.readLock();
+        //graph.readLock();
 
         //Initialize
         int nodeCount = 0;
@@ -82,12 +82,12 @@ public class BellmanFordShortestPathAlgorithm extends AbstractShortestPathAlgori
         for (Edge edge : graph.getEdges()) {
 
             if (distances.get(edge.getSource()) + edgeWeight(edge) < distances.get(edge.getTarget())) {
-                graph.readUnlock();
+                //graph.readUnlock();
                 throw new RuntimeException("The Graph contains a negative-weighted cycle");
             }
         }
 
-        graph.readUnlock();
+        //graph.readUnlock();
     }
 
     @Override

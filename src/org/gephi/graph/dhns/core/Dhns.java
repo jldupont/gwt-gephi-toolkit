@@ -52,7 +52,7 @@ import org.gephi.graph.dhns.node.iterators.AbstractNodeIterator;
 import org.gephi.graph.dhns.predicate.Predicate;
 import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
-import org.w3c.dom.Document;
+//import org.w3c.dom.Document;
 //import org.w3c.dom.Element;
 
 /**
@@ -134,19 +134,19 @@ public class Dhns implements GraphModel {
     }
 
     public NodeIterable newNodeIterable(AbstractNodeIterator iterator) {
-        return new NodeIterableImpl(iterator, readWriteLock.readLock());
+        return new NodeIterableImpl(iterator);
     }
 
     public EdgeIterable newEdgeIterable(AbstractEdgeIterator iterator) {
-        return new EdgeIterableImpl(iterator, readWriteLock.readLock());
+        return new EdgeIterableImpl(iterator);
     }
 
     public NodeIterable newNodeIterable(AbstractNodeIterator iterator, Predicate<Node> predicate) {
-        return new NodeIterableImpl(iterator, readWriteLock.readLock());
+        return new NodeIterableImpl(iterator);
     }
 
     public EdgeIterable newEdgeIterable(AbstractEdgeIterator iterator, Predicate<AbstractEdge> predicate) {
-        return new EdgeIterableImpl(iterator, readWriteLock.readLock(), predicate);
+        return new EdgeIterableImpl(iterator, predicate);
     }
 
     //Locking
@@ -163,13 +163,14 @@ public class Dhns implements GraphModel {
         }*/
         //String t = Thread.currentThread().toString();
         //Logger.getLogger("").log(Level.WARNING, "{0} read lock", Thread.currentThread());
-        readWriteLock.readLock().lock();
+        //readWriteLock.readLock().lock();
     }
 
     public void readUnlock() {
-        readWriteLock.readLock().unlock();
+        //readWriteLock.readLock().unlock();
     }
 
+    /*
     public void readUnlockAll() {
         ReentrantReadWriteLock lock = readWriteLock;
         final int nReadLocks = lock.getReadHoldCount();
@@ -177,12 +178,13 @@ public class Dhns implements GraphModel {
             lock.readLock().unlock();
         }
     }
-
+*/
+    /*
     public void writeLock() {
         if (readWriteLock.getReadHoldCount() > 0) {
             throw new IllegalMonitorStateException("Impossible to acquire a write lock when currently holding a read lock. Use toArray() methods on NodeIterable and EdgeIterable to avoid holding a readLock.");
         }
-        /*if (SwingUtilities.isEventDispatchThread()) {
+        *if (SwingUtilities.isEventDispatchThread()) {
         Throwable r = new RuntimeException();
         int i = 0;
         for (i = 0; i < r.getStackTrace().length; i++) {
@@ -191,7 +193,7 @@ public class Dhns implements GraphModel {
         }
         }
         System.err.println("WARNING: writeLock() on the EDT - " + r.getStackTrace()[i].toString());
-        }*/
+        }*
         //Logger.getLogger("").log(Level.WARNING, "{0} write lock", Thread.currentThread());
         readWriteLock.writeLock().lock();
     }
@@ -204,7 +206,7 @@ public class Dhns implements GraphModel {
     public ReentrantReadWriteLock getReadWriteLock() {
         return readWriteLock;
     }
-
+*/
     //Type
     public void touchDirected() {
         if (undirected || mixed) {
@@ -448,14 +450,15 @@ public class Dhns implements GraphModel {
         graphVersion = new GraphVersion();
         graphStructure = new GraphStructure(this);
     }
-
+    /*
     public void readXML(Element element) {
     }
 
     public Element writeXML(Document document) {
         return null;
     }
-
+	*/
+    
     public GraphModel copy() {
         return null;
     }

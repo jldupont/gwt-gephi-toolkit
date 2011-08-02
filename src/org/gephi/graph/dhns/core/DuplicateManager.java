@@ -50,8 +50,8 @@ public class DuplicateManager {
 
     public void duplicate(Dhns destination, GraphViewImpl view) {
         GraphFactoryImpl factory = destination.factory();
-        dhns.readLock();
-        destination.writeLock();
+        //dhns.readLock();
+        //destination.writeLock();
         TreeStructure treeStructure = view.getStructure();
         GraphStructure newGraphStructure = destination.getGraphStructure();
         TreeStructure newStructure = newGraphStructure.getMainView().getStructure();
@@ -106,8 +106,8 @@ public class DuplicateManager {
 
         //Metaedges
         newGraphStructure.getMainView().getStructureModifier().getEdgeProcessor().computeMetaEdges();
-        destination.writeUnlock();
-        dhns.readUnlock();
+        //destination.writeUnlock();
+        //dhns.readUnlock();
     }
 
     public void duplicateNodes(Dhns destination, Node[] nodes) {
@@ -122,8 +122,8 @@ public class DuplicateManager {
         } else {
             destGraph = destination.getMixedGraph();
         }
-        dhns.readLock();
-        destination.writeLock();
+        //dhns.readLock();
+        //destination.writeLock();
 
         //Nodes
         for (Node sourceNode : nodes) {
@@ -166,8 +166,8 @@ public class DuplicateManager {
             }
         }
 
-        destination.writeUnlock();
-        dhns.readUnlock();
+        //destination.writeUnlock();
+        //dhns.readUnlock();
     }
 
     private void duplicateNodeData(NodeDataImpl source, NodeDataImpl dest) {
