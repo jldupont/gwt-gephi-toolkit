@@ -3,7 +3,6 @@
 	<inherits name="com.google.gwt.user.User" />
 	
 	<inherits name="org.gephi.graph.dhns.core.Core" />
-	<inherits name="org.gephi.graph.dhns.edge.Edge" />
 	
 	<source path="" />
 	
