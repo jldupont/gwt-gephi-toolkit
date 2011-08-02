@@ -31,6 +31,7 @@ import org.openide.util.Lookup;
  * @author Mathieu Bastian
  * @author Martin  Škurla
  */
+@SuppressWarnings("unchecked")
 public abstract class AttributeUtils {
 
     public abstract boolean isNodeColumn(AttributeColumn column);
@@ -69,10 +70,8 @@ public abstract class AttributeUtils {
 
     public abstract AttributeColumn[] getAllCollums(AttributeModel model);
 
-    @SuppressWarnings("rawtypes")
     public abstract Comparable getMin(AttributeColumn column, Comparable[] values);
 
-    @SuppressWarnings("rawtypes")
     public abstract Comparable getMax(AttributeColumn column, Comparable[] values);
 
     public static synchronized AttributeUtils getDefault() {

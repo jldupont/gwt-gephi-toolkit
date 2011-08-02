@@ -123,12 +123,14 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         return dhns.getGraphStructure().getEdgeFromDictionnary(id);
     }
 
-    public NodeIterable getNodes() {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getNodes() {
         readLock();
         return dhns.newNodeIterable(new TreeIterator(structure, true, Tautology.instance));
     }
 
-    public NodeIterable getNodesTree() {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getNodesTree() {
         readLock();
         return dhns.newNodeIterable(new TreeIterator(structure, false, Tautology.instance));
     }
@@ -139,7 +141,8 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         return count;
     }
 
-    public NodeIterable getNodes(int level) {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getNodes(int level) {
         level += 1;     //Because we ignore the virtual root
         readLock();
         int height = structure.getTreeHeight();
@@ -227,7 +230,8 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         dhns.getGraphStructure().setEdgeId((AbstractEdge) edge, id);
     }
 
-    public ImmutableTreeNode wrapToTreeNode() {
+    @SuppressWarnings("unchecked")
+	public ImmutableTreeNode wrapToTreeNode() {
         TreeNodeWrapper wrapper = new TreeNodeWrapper(structure);
         ImmutableTreeNode treeNode;
         readLock();
@@ -236,7 +240,8 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         return treeNode;
     }
 
-    public int getChildrenCount(Node node) {
+    @SuppressWarnings("unchecked")
+	public int getChildrenCount(Node node) {
         AbstractNode absNode = checkNode(node);
         int count = 0;
         ChildrenIterator itr = new ChildrenIterator(structure, absNode, Tautology.instance);
@@ -261,19 +266,22 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         return parent;
     }
 
-    public NodeIterable getChildren(Node node) {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getChildren(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new ChildrenIterator(structure, absNode, Tautology.instance));
     }
 
-    public NodeIterable getDescendant(Node node) {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getDescendant(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new DescendantIterator(structure, absNode, Tautology.instance));
     }
 
-    public NodeIterable getTopNodes() {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getTopNodes() {
         readLock();
         return dhns.newNodeIterable(new ChildrenIterator(structure, Tautology.instance));
     }

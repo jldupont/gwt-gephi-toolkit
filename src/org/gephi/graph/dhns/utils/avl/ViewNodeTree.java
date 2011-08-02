@@ -647,7 +647,8 @@ public class ViewNodeTree {
         private AbstractNodeAVLNode next;
         private AbstractNode current;
 
-        public AbstractNodeAVLIterator() {
+        @SuppressWarnings("unused")
+		public AbstractNodeAVLIterator() {
         }
 
         public AbstractNodeAVLIterator(AbstractNodeAVLNode node) {
@@ -659,7 +660,8 @@ public class ViewNodeTree {
             this(tree.root);
         }
 
-        public void setNode(ViewNodeTree tree) {
+        @SuppressWarnings("unused")
+		public void setNode(ViewNodeTree tree) {
             this.next = tree.root;
             goToDownLeft();
         }

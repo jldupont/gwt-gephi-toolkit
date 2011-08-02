@@ -50,12 +50,14 @@ public class NodeDataImpl implements NodeData, GroupData {
     protected float b = 0.6f;
     protected float alpha = 1f;
     protected float size = 1f;
-    protected Model model;
+    @SuppressWarnings("unchecked")
+	protected Model model;
     protected boolean fixed;
     protected String label;
     protected Attributes attributes;
     protected TextData textData;
-    protected Model hullModel;
+    @SuppressWarnings("unchecked")
+	protected Model hullModel;
 
     public NodeDataImpl(int ID, AbstractNode rootNode) {
         this.nodes = new ViewNodeTree();
@@ -83,7 +85,8 @@ public class NodeDataImpl implements NodeData, GroupData {
         return nodes.get(viewId);
     }
 
-    public LayoutData getLayoutData() {
+    @SuppressWarnings("unchecked")
+	public LayoutData getLayoutData() {
         return layoutData;
     }
 
@@ -194,11 +197,13 @@ public class NodeDataImpl implements NodeData, GroupData {
         this.alpha = alpha;
     }
 
-    public Model getModel() {
+    @SuppressWarnings("unchecked")
+	public Model getModel() {
         return model;
     }
 
-    public void setModel(Model obj) {
+    @SuppressWarnings("unchecked")
+	public void setModel(Model obj) {
         this.model = obj;
     }
 
@@ -242,11 +247,13 @@ public class NodeDataImpl implements NodeData, GroupData {
         this.textData = textData;
     }
 
-    public Model getHullModel() {
+    @SuppressWarnings("unchecked")
+	public Model getHullModel() {
         return hullModel;
     }
 
-    public void setHullModel(Model hullModel) {
+    @SuppressWarnings("unchecked")
+	public void setHullModel(Model hullModel) {
         this.hullModel = hullModel;
     }
 }

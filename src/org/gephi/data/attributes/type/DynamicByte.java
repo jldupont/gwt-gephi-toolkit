@@ -31,6 +31,7 @@ import org.gephi.data.attributes.api.Estimator;
  *
  * @author Cezary Bartosiak
  */
+@SuppressWarnings("unchecked")
 public final class DynamicByte extends DynamicType<Byte> {
 	/**
 	 * Constructs a new {@code DynamicType} instance with no intervals.

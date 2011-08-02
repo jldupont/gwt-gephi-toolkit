@@ -32,6 +32,7 @@ import org.gephi.data.attributes.api.Estimator;
  * 
  * @param <T> type of data
  */
+@SuppressWarnings("unchecked")
 public abstract class DynamicType<T> {
 	protected IntervalTree<T> intervalTree;
 

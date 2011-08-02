@@ -51,7 +51,8 @@ public class DataSerializer {
     private static final String ELEMENT_EDGEDATA = "edgedata";
     private static final String ELEMENT_EDGEDATA_COLOR = "color";
 
-    public void writeData(XMLStreamWriter writer, Dhns dhns) throws XMLStreamException {
+    @SuppressWarnings("unchecked")
+	public void writeData(XMLStreamWriter writer, Dhns dhns) throws XMLStreamException {
         writer.writeStartElement(ELEMENT_DATA);
 
         TreeStructure treeStructure = dhns.getGraphStructure().getMainView().getStructure();

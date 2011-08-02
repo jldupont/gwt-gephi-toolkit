@@ -32,6 +32,7 @@ import org.gephi.graph.api.Node;
  *
  * @author Cezary Bartosiak
  */
+@SuppressWarnings("unchecked")
 public interface DynamicGraph {
 	/**
 	 * Returns values of attributes of the given {@code Node} in the given

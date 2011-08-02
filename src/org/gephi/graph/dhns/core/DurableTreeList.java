@@ -23,7 +23,7 @@ package org.gephi.graph.dhns.core;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
+//import java.util.List;
 import org.gephi.graph.dhns.node.AbstractNode;
 import org.gephi.graph.dhns.node.iterators.TreeListIterator;
 

@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.graph.dhns.graph;
 
-import org.gephi.utils.collection.avl.ParamAVLIterator;
+//import org.gephi.utils.collection.avl.ParamAVLIterator;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.EdgeIterable;
 import org.gephi.graph.api.HierarchicalDirectedGraph;
@@ -41,7 +41,7 @@ import org.gephi.graph.dhns.node.AbstractNode;
 import org.gephi.graph.dhns.node.iterators.NeighborIterator;
 import org.gephi.graph.dhns.node.iterators.TreeIterator;
 import org.gephi.graph.dhns.predicate.Tautology;
-import org.gephi.graph.dhns.utils.avl.EdgeOppositeTree;
+//import org.gephi.graph.dhns.utils.avl.EdgeOppositeTree;
 
 /**
  *
@@ -92,14 +92,16 @@ public class HierarchicalDirectedGraphImpl extends HierarchicalGraphImpl impleme
     }
 
     //Directed
-    public NodeIterable getSuccessors(Node node) {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getSuccessors(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new NeighborIterator(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.OUT, false, enabledNodePredicate, Tautology.instance), absNode, Tautology.instance));
     }
 
     //Directed
-    public NodeIterable getPredecessors(Node node) {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getPredecessors(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new NeighborIterator(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.IN, false, enabledNodePredicate, Tautology.instance), absNode, Tautology.instance));
@@ -146,40 +148,46 @@ public class HierarchicalDirectedGraphImpl extends HierarchicalGraphImpl impleme
     }
 
     //Graph
-    public EdgeIterable getEdges() {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getEdges() {
         readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, enabledNodePredicate, Tautology.instance));
     }
 
     //ClusteredGraph
-    public EdgeIterable getEdgesTree() {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getEdgesTree() {
         readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, Tautology.instance, Tautology.instance));
     }
 
     //Directed
-    public EdgeIterable getInEdges(Node node) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getInEdges(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newEdgeIterable(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.IN, false, enabledNodePredicate, Tautology.instance));
     }
 
     //Directed
-    public EdgeIterable getOutEdges(Node node) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getOutEdges(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newEdgeIterable(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.OUT, false, enabledNodePredicate, Tautology.instance));
     }
 
     //Graph
-    public EdgeIterable getEdges(Node node) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getEdges(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newEdgeIterable(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, false, enabledNodePredicate, Tautology.instance));
     }
 
     //Graph
-    public NodeIterable getNeighbors(Node node) {
+    @SuppressWarnings("unchecked")
+	public NodeIterable getNeighbors(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new NeighborIterator(new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, true, enabledNodePredicate, Tautology.instance), absNode, Tautology.instance));
@@ -228,26 +236,30 @@ public class HierarchicalDirectedGraphImpl extends HierarchicalGraphImpl impleme
     }
 
     //ClusteredGraph
-    public EdgeIterable getInnerEdges(Node nodeGroup) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getInnerEdges(Node nodeGroup) {
         readLock();
         AbstractNode absNode = checkNode(nodeGroup);
         return dhns.newEdgeIterable(new RangeEdgeIterator(structure, view.getViewId(), absNode, absNode, true, false, Tautology.instance, Tautology.instance));
     }
 
     //ClusteredGraph
-    public EdgeIterable getOuterEdges(Node nodeGroup) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getOuterEdges(Node nodeGroup) {
         readLock();
         AbstractNode absNode = checkNode(nodeGroup);
         return dhns.newEdgeIterable(new RangeEdgeIterator(structure, view.getViewId(), absNode, absNode, false, false, Tautology.instance, Tautology.instance));
     }
 
     //ClusteredGraph
-    public EdgeIterable getMetaEdges() {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getMetaEdges() {
         readLock();
         return dhns.newEdgeIterable(new MetaEdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false));
     }
 
-    public EdgeIterable getEdgesAndMetaEdges() {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getEdgesAndMetaEdges() {
         readLock();
         return dhns.newEdgeIterable(new EdgeAndMetaEdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, enabledNodePredicate, Tautology.instance));
     }
@@ -259,7 +271,8 @@ public class HierarchicalDirectedGraphImpl extends HierarchicalGraphImpl impleme
         return dhns.newEdgeIterable(new MetaEdgeNodeIterator(absNode.getMetaEdgesOutTree(), absNode.getMetaEdgesInTree(), MetaEdgeNodeIterator.EdgeNodeIteratorMode.BOTH, false));
     }
 
-    public EdgeIterable getEdgesAndMetaEdges(Node node) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getEdgesAndMetaEdges(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         EdgeNodeIterator std = new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.BOTH, false, enabledNodePredicate, Tautology.instance);
@@ -279,7 +292,8 @@ public class HierarchicalDirectedGraphImpl extends HierarchicalGraphImpl impleme
         return dhns.newEdgeIterable(new MetaEdgeNodeIterator(null, absNode.getMetaEdgesInTree(), MetaEdgeNodeIterator.EdgeNodeIteratorMode.IN, false));
     }
 
-    public EdgeIterable getInEdgesAndMetaInEdges(Node node) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getInEdgesAndMetaInEdges(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         EdgeNodeIterator std = new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.IN, false, enabledNodePredicate, Tautology.instance);
@@ -294,7 +308,8 @@ public class HierarchicalDirectedGraphImpl extends HierarchicalGraphImpl impleme
         return dhns.newEdgeIterable(new MetaEdgeNodeIterator(absNode.getMetaEdgesOutTree(), null, MetaEdgeNodeIterator.EdgeNodeIteratorMode.OUT, false));
     }
 
-    public EdgeIterable getOutEdgesAndMetaOutEdges(Node node) {
+    @SuppressWarnings("unchecked")
+	public EdgeIterable getOutEdgesAndMetaOutEdges(Node node) {
         readLock();
         AbstractNode absNode = checkNode(node);
         EdgeNodeIterator std = new EdgeNodeIterator(absNode, EdgeNodeIterator.EdgeNodeIteratorMode.OUT, false, enabledNodePredicate, Tautology.instance);

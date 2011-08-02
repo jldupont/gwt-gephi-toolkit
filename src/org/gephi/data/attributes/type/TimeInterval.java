@@ -34,6 +34,7 @@ import org.gephi.data.attributes.api.Estimator;
  *
  * @author Mathieu Bastian, Cezary Bartosiak
  */
+@SuppressWarnings("unchecked")
 public final class TimeInterval extends DynamicType<Double[]> {
 	/**
 	 * Constructs a new {@code DynamicType} instance with no intervals.

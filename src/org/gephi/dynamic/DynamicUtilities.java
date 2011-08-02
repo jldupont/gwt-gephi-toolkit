@@ -54,6 +54,7 @@ import org.gephi.dynamic.api.DynamicModel;
  *
  * @author Cezary Bartosiak
  */
+@SuppressWarnings("unchecked")
 public final class DynamicUtilities {
 
     /**

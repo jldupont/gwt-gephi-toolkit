@@ -664,7 +664,8 @@ public class MonoAVLTree implements Iterable<AVLItem> {
             goToDownLeft();
         }
 
-        public MonoAVLIterator(MonoAVLTree tree) {
+        @SuppressWarnings("unused")
+		public MonoAVLIterator(MonoAVLTree tree) {
             this(tree.root);
         }
 

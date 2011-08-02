@@ -21,7 +21,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.graph.dhns.event;
 
 import org.gephi.graph.api.GraphEvent;
-import org.gephi.graph.api.GraphEvent.EventType;
+//import org.gephi.graph.api.GraphEvent.EventType;
 import org.gephi.graph.api.GraphEventData;
 import org.gephi.graph.api.GraphView;
 

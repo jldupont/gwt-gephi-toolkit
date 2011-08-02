@@ -47,22 +47,26 @@ public class EventManager implements Runnable {
     //Const
     private final static long DELAY = 1;
     //Architecture
-    private final Dhns dhns;
+    @SuppressWarnings("unused")
+	private final Dhns dhns;
     private final List<GraphListener> listeners;
     private final AtomicReference<Thread> thread = new AtomicReference<Thread>();
-    private final LinkedBlockingQueue<AbstractEvent> eventQueue;
+    @SuppressWarnings("unchecked")
+	private final LinkedBlockingQueue<AbstractEvent> eventQueue;
     private final Object lock = new Object();
     private int eventRate = 1;
     //Flag
     private boolean stop;
 
-    public EventManager(Dhns dhns) {
+    @SuppressWarnings("unchecked")
+	public EventManager(Dhns dhns) {
         this.dhns = dhns;
         this.eventQueue = new LinkedBlockingQueue<AbstractEvent>();
         this.listeners = Collections.synchronizedList(new ArrayList<GraphListener>());
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void run() {
         int rate = 0;
         while (!stop) {
@@ -117,7 +121,8 @@ public class EventManager implements Runnable {
         }
     }
 
-    private GraphEvent createEvent(AbstractEvent event, List<Object> compress) {
+    @SuppressWarnings("unchecked")
+	private GraphEvent createEvent(AbstractEvent event, List<Object> compress) {
         final GraphEventDataImpl eventData = (event instanceof GeneralEvent) ? null : new GraphEventDataImpl();
         final GraphEventImpl graphEventImpl = new GraphEventImpl(event.getView(), event.getEventType(), eventData);
         if (event instanceof NodeEvent) {
@@ -169,7 +174,8 @@ public class EventManager implements Runnable {
         this.stop = stop;
     }
 
-    public void fireEvent(AbstractEvent event) {
+    @SuppressWarnings("unchecked")
+	public void fireEvent(AbstractEvent event) {
         eventQueue.add(event);
         synchronized (lock) {
             lock.notifyAll();

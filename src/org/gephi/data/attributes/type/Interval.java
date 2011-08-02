@@ -29,6 +29,7 @@ import org.gephi.data.attributes.api.AttributeUtils;
  *
  * @param <T> type of data
  */
+@SuppressWarnings("unchecked")
 public final class Interval<T> implements Comparable<Interval> {
 	private double  low;   // the left endpoint
 	private double  high;  // the right endpoint

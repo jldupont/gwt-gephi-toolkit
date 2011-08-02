@@ -216,7 +216,8 @@ public class StructureModifier {
         dhns.getEventManager().fireEvent(new GeneralEvent(EventType.META_EDGES_UPDATE, view));
     }
 
-    public void resetViewToLeaves() {
+    @SuppressWarnings("unchecked")
+	public void resetViewToLeaves() {
         dhns.writeLock();
         edgeProcessor.clearAllMetaEdges();
         view.setNodesEnabled(0);
@@ -240,7 +241,8 @@ public class StructureModifier {
         dhns.getEventManager().fireEvent(new GeneralEvent(EventType.META_EDGES_UPDATE, view));
     }
 
-    public void resetViewToTopNodes() {
+    @SuppressWarnings("unchecked")
+	public void resetViewToTopNodes() {
         dhns.writeLock();
         edgeProcessor.clearAllMetaEdges();
         view.setNodesEnabled(0);
@@ -264,7 +266,8 @@ public class StructureModifier {
         dhns.getEventManager().fireEvent(new GeneralEvent(EventType.META_EDGES_UPDATE, view));
     }
 
-    public void resetViewToLevel(int level) {
+    @SuppressWarnings("unchecked")
+	public void resetViewToLevel(int level) {
         dhns.writeLock();
         edgeProcessor.clearAllMetaEdges();
         view.setNodesEnabled(0);
@@ -321,7 +324,8 @@ public class StructureModifier {
         }
     }
 
-    public void flatten() {
+    @SuppressWarnings("unchecked")
+	public void flatten() {
         dhns.writeLock();
         if (treeStructure.getTreeHeight() > 1) {
             TreeIterator nodesIterator = new TreeIterator(treeStructure, true, Tautology.instance);
@@ -389,7 +393,8 @@ public class StructureModifier {
     //------------------------------------------
     private class Business {
 
-        private void expand(AbstractNode absNode) {
+        @SuppressWarnings("unchecked")
+		private void expand(AbstractNode absNode) {
 
             //Disable parent
             absNode.setEnabled(false);
@@ -413,7 +418,8 @@ public class StructureModifier {
             edgeProcessor.decrementEdgesCouting(absNode, null);
         }
 
-        private void retract(AbstractNode parent) {
+        @SuppressWarnings("unchecked")
+		private void retract(AbstractNode parent) {
             //Disable children
             for (ChildrenIterator itr = new ChildrenIterator(treeStructure, parent, Tautology.instance); itr.hasNext();) {
                 AbstractNode child = itr.next();
@@ -481,7 +487,8 @@ public class StructureModifier {
             }
         }
 
-        private AbstractNode[] deleteNode(AbstractNode node, GraphViewImpl graphView) {
+        @SuppressWarnings("unchecked")
+		private AbstractNode[] deleteNode(AbstractNode node, GraphViewImpl graphView) {
             AbstractNode[] descendants = new AbstractNode[node.size + 1];
             int i = 0;
             for (DescendantAndSelfIterator itr = new DescendantAndSelfIterator(graphView.getStructure(), node, Tautology.instance); itr.hasNext();) {
@@ -602,7 +609,8 @@ public class StructureModifier {
             }
         }
 
-        private AbstractNode[] ungroup(AbstractNode nodeGroup) {
+        @SuppressWarnings("unchecked")
+		private AbstractNode[] ungroup(AbstractNode nodeGroup) {
             //TODO Better implementation. Just remove nodeGroup from the treelist and lower level of children
             int count = 0;
             for (ChildrenIterator itr = new ChildrenIterator(treeStructure, nodeGroup, Tautology.instance); itr.hasNext();) {
@@ -625,7 +633,8 @@ public class StructureModifier {
             return ungroupedNodes;
         }
 
-        private void moveToGroup(AbstractNode node, AbstractNode nodeGroup) {
+        @SuppressWarnings("unchecked")
+		private void moveToGroup(AbstractNode node, AbstractNode nodeGroup) {
 
             AbstractNode toMoveAncestor = treeStructure.getEnabledAncestor(node);
             AbstractNode destinationAncestor = treeStructure.getEnabledAncestorOrSelf(nodeGroup);

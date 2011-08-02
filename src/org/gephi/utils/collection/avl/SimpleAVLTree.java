@@ -648,7 +648,8 @@ public class SimpleAVLTree implements Iterable<AVLItem> {
         private SimpleAVLNode next;
         private AVLItem current;
 
-        public SimpleAVLIterator() {
+        @SuppressWarnings("unused")
+		public SimpleAVLIterator() {
         }
 
         public SimpleAVLIterator(SimpleAVLNode node) {
@@ -660,7 +661,8 @@ public class SimpleAVLTree implements Iterable<AVLItem> {
             this(tree.root);
         }
 
-        public void setNode(SimpleAVLTree tree) {
+        @SuppressWarnings("unused")
+		public void setNode(SimpleAVLTree tree) {
             this.next = tree.root;
             goToDownLeft();
         }

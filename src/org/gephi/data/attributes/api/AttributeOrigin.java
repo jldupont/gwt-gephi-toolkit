@@ -37,7 +37,8 @@ public enum AttributeOrigin {
     COMPUTED("AttributeOrigin_computed"),
     DELEGATE(null);  
 
-    private final String label;
+    @SuppressWarnings("unused")
+	private final String label;
 
     AttributeOrigin(String label) {
         this.label = label;

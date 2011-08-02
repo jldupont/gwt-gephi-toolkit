@@ -48,6 +48,7 @@ import java.util.List;
  *
  * @param <T> type of data
  */
+@SuppressWarnings("unchecked")
 public final class IntervalTree<T> {
 	private Node nil;  // the sentinel node
 	private Node root; // the root of this interval tree

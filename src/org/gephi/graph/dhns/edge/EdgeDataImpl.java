@@ -46,7 +46,8 @@ public class EdgeDataImpl implements EdgeData {
     protected float b = 0f;
     protected float alpha = 1f;
     private String label;
-    private Model model;
+    @SuppressWarnings("unchecked")
+	private Model model;
     protected Attributes attributes;
     protected TextData textData;
 
@@ -74,7 +75,8 @@ public class EdgeDataImpl implements EdgeData {
         }
     }
 
-    public LayoutData getLayoutData() {
+    @SuppressWarnings("unchecked")
+	public LayoutData getLayoutData() {
         return layoutData;
     }
 
@@ -164,11 +166,13 @@ public class EdgeDataImpl implements EdgeData {
         this.alpha = alpha;
     }
 
-    public Model getModel() {
+    @SuppressWarnings("unchecked")
+	public Model getModel() {
         return model;
     }
 
-    public void setModel(Model obj) {
+    @SuppressWarnings("unchecked")
+	public void setModel(Model obj) {
         this.model = obj;
     }
 

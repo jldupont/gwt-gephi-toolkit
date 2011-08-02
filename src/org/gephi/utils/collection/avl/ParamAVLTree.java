@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.utils.collection.avl;
 
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.Iterator;
 
 /**
@@ -30,6 +30,7 @@ import java.util.Iterator;
  * @author Mathieu Bastian
  * @param <Item> The type of Object in the tree
  */
+@SuppressWarnings("unchecked")
 public class ParamAVLTree<Item> implements Iterable<Item> {
 
     protected ParamAVLNode<Item> root;

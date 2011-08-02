@@ -20,8 +20,8 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.spi;
 
-import javax.swing.Icon;
-import javax.swing.JPanel;
+//import javax.swing.Icon;
+//import javax.swing.JPanel;
 
 /**
  * Various information about a layout algorithm that allows UI integration.

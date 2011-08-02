@@ -30,6 +30,7 @@ import org.gephi.data.attributes.api.Estimator;
  *
  * @author Cezary Bartosiak
  */
+@SuppressWarnings("unchecked")
 public final class DynamicCharacter extends DynamicType<Character> {
 	/**
 	 * Constructs a new {@code DynamicType} instance with no intervals.

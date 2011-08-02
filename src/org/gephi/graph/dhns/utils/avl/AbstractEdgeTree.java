@@ -647,7 +647,8 @@ public class AbstractEdgeTree {
         private AbstractEdgeAVLNode next;
         private AbstractEdge current;
 
-        public AbstractEdgeAVLIterator() {
+        @SuppressWarnings("unused")
+		public AbstractEdgeAVLIterator() {
         }
 
         public AbstractEdgeAVLIterator(AbstractEdgeAVLNode node) {
@@ -659,7 +660,8 @@ public class AbstractEdgeTree {
             this(tree.root);
         }
 
-        public void setNode(AbstractEdgeTree tree) {
+        @SuppressWarnings("unused")
+		public void setNode(AbstractEdgeTree tree) {
             this.next = tree.root;
             goToDownLeft();
         }

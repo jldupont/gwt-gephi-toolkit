@@ -20,10 +20,10 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.graph.dhns.graph;
 
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
+//import java.util.concurrent.locks.ReentrantReadWriteLock;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import javax.swing.SwingUtilities;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.GraphView;

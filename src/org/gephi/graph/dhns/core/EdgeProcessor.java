@@ -287,7 +287,8 @@ public class EdgeProcessor {
         }
     }
 
-    public void computeMetaEdges() {
+    @SuppressWarnings("unchecked")
+	public void computeMetaEdges() {
         for (TreeIterator itr = new TreeIterator(treeStructure, true, Tautology.instance); itr.hasNext();) {
             AbstractNode node = itr.next();
             computeMetaEdges(node, node);

@@ -26,9 +26,11 @@ package org.gephi.utils.collection.avl;
  * @author Mathieu Bastian
  * @param <Item> The type of Object in the tree
  */
+@SuppressWarnings("unchecked")
 public class ParamAVLNode<Item> {
 
-    ParamAVLNode parent;
+    
+	ParamAVLNode parent;
     ParamAVLNode left;
     ParamAVLNode right;
     int balance;

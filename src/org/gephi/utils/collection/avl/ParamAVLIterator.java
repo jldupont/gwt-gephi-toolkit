@@ -31,30 +31,35 @@ import org.gephi.utils.collection.avl.ResetableIterator;
  */
 public class ParamAVLIterator<Item> implements Iterator<Item>, ResetableIterator {
 
-    private ParamAVLTree tree;
+    @SuppressWarnings("unchecked")
+	private ParamAVLTree tree;
     private ParamAVLNode<Item> next;
     private Item current;
 
     public ParamAVLIterator() {
     }
 
-    public ParamAVLIterator(ParamAVLNode node) {
+    @SuppressWarnings("unchecked")
+	public ParamAVLIterator(ParamAVLNode node) {
         this.next = node;
         goToDownLeft();
     }
 
-    public ParamAVLIterator(ParamAVLTree tree) {
+    @SuppressWarnings("unchecked")
+	public ParamAVLIterator(ParamAVLTree tree) {
         this(tree.root);
         this.tree = tree;
     }
 
-    public void setNode(ParamAVLTree tree) {
+    @SuppressWarnings("unchecked")
+	public void setNode(ParamAVLTree tree) {
         this.next = tree.root;
         this.tree = tree;
         goToDownLeft();
     }
 
-    private void goToDownLeft() {
+    @SuppressWarnings("unchecked")
+	private void goToDownLeft() {
         if (next != null) {
             while (next.left != null) {
                 next = next.left;
@@ -62,7 +67,8 @@ public class ParamAVLIterator<Item> implements Iterator<Item>, ResetableIterator
         }
     }
 
-    public boolean hasNext() {
+    @SuppressWarnings("unchecked")
+	public boolean hasNext() {
         if (next == null) {
             return false;
         }
@@ -90,7 +96,8 @@ public class ParamAVLIterator<Item> implements Iterator<Item>, ResetableIterator
         return current;
     }
 
-    public void remove() {
+    @SuppressWarnings("unchecked")
+	public void remove() {
         tree.remove(current);   //TODO Optimize, remove in O(1) instead of O(ln(n))
     }
 }

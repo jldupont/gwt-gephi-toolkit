@@ -44,6 +44,7 @@ import org.gephi.data.attributes.spi.AttributeValueDelegateProvider;
  * @see AttributeRow
  * @see AttributeTable
  */
+@SuppressWarnings("unchecked")
 public interface AttributeColumn {
 
     /**

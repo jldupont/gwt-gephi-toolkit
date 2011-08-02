@@ -115,7 +115,8 @@ public class TreeNodeWrapper {
             return childrenArray == null;
         }
 
-        public Enumeration children() {
+        @SuppressWarnings("unchecked")
+		public Enumeration children() {
             return new IteratorEnumeration(childrenArray);
         }
 
@@ -140,7 +141,8 @@ public class TreeNodeWrapper {
         }
     }
 
-    private static class IteratorEnumeration implements Enumeration {
+    @SuppressWarnings("unchecked")
+	private static class IteratorEnumeration implements Enumeration {
 
         Object[] array;
         int index = 0;

@@ -36,6 +36,7 @@ import org.gephi.data.properties.PropertiesColumn;
  * @see AttributeColumn
  * @see AttributeRow
  */
+@SuppressWarnings("unchecked")
 public interface AttributeTable {
 
     /**
@@ -101,7 +102,7 @@ public interface AttributeTable {
      * @param defaultValue                   the default value of the column
      * @return                               the newly created column
      */
-    public AttributeColumn addColumn(String id, String title, AttributeType type, AttributeValueDelegateProvider attributeValueDelegateProvider, Object defaultValue);
+	public AttributeColumn addColumn(String id, String title, AttributeType type, AttributeValueDelegateProvider attributeValueDelegateProvider, Object defaultValue);
 
     /**
      * Creates and add a new properties column to this table. All needed informations are set in

@@ -41,6 +41,7 @@ import org.gephi.graph.dhns.node.iterators.TreeIterator;
 import org.gephi.graph.dhns.predicate.Predicate;
 import org.gephi.graph.dhns.predicate.Tautology;
 
+@SuppressWarnings("unchecked")
 public class HierarchicalMixedGraphImpl extends HierarchicalGraphImpl implements HierarchicalMixedGraph {
 
     private Predicate<AbstractEdge> undirectedPredicate;
@@ -116,7 +117,8 @@ public class HierarchicalMixedGraphImpl extends HierarchicalGraphImpl implements
         return view.getStructureModifier().deleteEdge(undirected);
     }
 
-    public EdgeIterable getDirectedEdges() {
+
+	public EdgeIterable getDirectedEdges() {
         readLock();
         return dhns.newEdgeIterable(new EdgeIterator(structure, new TreeIterator(structure, true, Tautology.instance), false, Tautology.instance, Tautology.instance), directedPredicate);
     }

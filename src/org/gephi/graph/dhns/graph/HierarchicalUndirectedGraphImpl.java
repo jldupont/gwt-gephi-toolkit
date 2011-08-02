@@ -46,6 +46,7 @@ import org.gephi.graph.dhns.predicate.Tautology;
  *
  * @author Mathieu Bastian
  */
+@SuppressWarnings("unchecked")
 public class HierarchicalUndirectedGraphImpl extends HierarchicalGraphImpl implements HierarchicalUndirectedGraph {
 
     public HierarchicalUndirectedGraphImpl(Dhns dhns, GraphViewImpl view) {
