@@ -4,6 +4,7 @@
 	
 	<inherits name="org.gephi.graph.api.Api" />
 	<inherits name="org.gephi.graph.spi.Spi" />
+	<inherits name="org.gephi.graph.dhns.Dhns" />
 	
 	<source path="" />
 	
