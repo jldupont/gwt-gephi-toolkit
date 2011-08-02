@@ -12,6 +12,8 @@ import com.google.gwt.core.client.GWT;
 
 public class Factory {
 
+	static boolean initDone=false;
+	
 	static enum Classe {
 		PROJECT_CONTROLLER,
 	}
@@ -22,15 +24,19 @@ public class Factory {
 	@SuppressWarnings("unchecked")
 	static HashMap<Class, Classe> cmap=new HashMap<Class, Classe>();
 	
-	void init() {
+	static void init() {
 		
 		map.put(ProjectController.class, null);
 		cmap.put(ProjectController.class, Classe.PROJECT_CONTROLLER);
 		
+		initDone=true;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T> T get(Class<T> klass){
+		
+		if (!initDone)
+			init();
 		
 		if (map.containsKey(klass)) {
 			Object k=map.get(klass);
