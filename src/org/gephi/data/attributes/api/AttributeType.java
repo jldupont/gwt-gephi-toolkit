@@ -24,7 +24,7 @@ import java.math.BigInteger;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
+//import java.util.regex.Pattern;
 import org.gephi.data.attributes.type.DynamicByte;
 import org.gephi.data.attributes.type.DynamicShort;
 import org.gephi.data.attributes.type.DynamicInteger;
@@ -103,7 +103,8 @@ public enum AttributeType {
 
     @Override
     public String toString() {
-        return type.getSimpleName();
+    	// return type.getSimpleName(); //JLD
+        return type.getName();
     }
 
     /**
@@ -533,8 +534,9 @@ public enum AttributeType {
      * @return String without dot and decimal digits.
      */
     private String removeDecimalDigitsFromString(String s){
-        return removeDecimalDigitsFromStringPattern.matcher(s).replaceAll("");
+        //return removeDecimalDigitsFromStringPattern.matcher(s).replaceAll("");
+    	return s.split("\\.")[0];
     }
 
-    private static final Pattern removeDecimalDigitsFromStringPattern=Pattern.compile("\\.[0-9]*");
+    //private static final Pattern removeDecimalDigitsFromStringPattern=Pattern.compile("\\.[0-9]*");
 }

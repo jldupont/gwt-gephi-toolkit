@@ -22,10 +22,11 @@ package org.gephi.graph.dhns.core;
 
 //import gnu.trove.TIntObjectHashMap;
 //import gnu.trove.TObjectIntHashMap;
-import java.lang.ref.WeakReference;
+//import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+//import java.util.concurrent.ConcurrentLinkedQueue;
 //import java.util.concurrent.atomic.AtomicInteger;
 import org.gephi.utils.collection.avl.ParamAVLIterator;
 //import org.gephi.graph.api.GraphEvent.EventType;
@@ -50,12 +51,13 @@ public class GraphStructure {
     private final GraphDictionnary dictionnary;
     private GraphViewImpl visibleView;
     //Destroy
-    private final Object lock = new Object();
-    private final ConcurrentLinkedQueue<GraphViewImpl> destroyQueue;
+    //private final Object lock = new Object();
+    private final PriorityQueue<GraphViewImpl> destroyQueue;
 
     public GraphStructure(Dhns dhns) {
         this.dhns = dhns;
-        views = new ConcurrentLinkedQueue<GraphViewImpl>();
+        //views = new ConcurrentLinkedQueue<GraphViewImpl>();
+        views = new PriorityQueue<GraphViewImpl>();
         dictionnary = new GraphDictionnary();
 
         //Main view
@@ -64,9 +66,9 @@ public class GraphStructure {
         visibleView = mainView;
 
         //Destructor
-        destroyQueue = new ConcurrentLinkedQueue<GraphViewImpl>();
-        ViewDestructorThread viewDestructorThread = new ViewDestructorThread(this);
-        viewDestructorThread.start();
+        destroyQueue = new PriorityQueue<GraphViewImpl>();
+        //ViewDestructorThread viewDestructorThread = new ViewDestructorThread(this);
+        //viewDestructorThread.start();
     }
 
     public GraphViewImpl[] getViews() {
@@ -135,9 +137,9 @@ public class GraphStructure {
     public void destroyView(final GraphViewImpl view) {
         if (views.contains(view)) {
             destroyQueue.add(view);
-            synchronized (this.lock) {
-                lock.notify();
-            }
+            //synchronized (this.lock) {
+            //    lock.notify();
+            //}
         }
     }
 
@@ -198,7 +200,7 @@ public class GraphStructure {
         }
         //dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, this.visibleView));
     }
-
+    /*
     private static class ViewDestructorThread extends Thread {
 
         private final WeakReference<GraphStructure> structureReference;
@@ -271,7 +273,8 @@ public class GraphStructure {
             }
         }
     }
-
+	*/
+    
     private static class GraphDictionnary {
 
         //private final TObjectIntHashMap<String> nodesMap;

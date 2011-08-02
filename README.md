@@ -1,5 +1,6 @@
 * Swap "HashTable" for "HashMap"
-
+* Swap "ConcurrentLinkedQueue" with "PriorityQueue"
+* Removed "ViewDestructorThread" in "org.gephi.graph.dhns.core.GraphStructure"
 * No multiple projects
 * No multiple workspaces
 * No project/workspace change listener
