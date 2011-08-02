@@ -24,12 +24,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import org.gephi.data.attributes.type.TimeInterval;
-import org.gephi.dynamic.DynamicUtilities;
-import org.gephi.dynamic.api.DynamicController;
+//import org.gephi.dynamic.DynamicUtilities;
+//import org.gephi.dynamic.api.DynamicController;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.Node;
-import org.openide.util.Lookup;
+//import org.openide.util.Lookup;
 
 /**
  *
@@ -39,16 +39,16 @@ public class DijkstraShortestPathAlgorithm extends AbstractShortestPathAlgorithm
 
     protected final Graph graph;
     protected final HashMap<Node, Edge> predecessors;
-    protected TimeInterval timeInterval;
+    protected TimeInterval timeInterval=null;
 
     public DijkstraShortestPathAlgorithm(Graph graph, Node sourceNode) {
         super(sourceNode);
         this.graph = graph;
         predecessors = new HashMap<Node, Edge>();
-        DynamicController dynamicController = Lookup.getDefault().lookup(DynamicController.class);
-        if (dynamicController != null) {
-            timeInterval = DynamicUtilities.getVisibleInterval(dynamicController.getModel(graph.getGraphModel().getWorkspace()));
-        }
+        //DynamicController dynamicController = Lookup.getDefault().lookup(DynamicController.class);
+        //if (dynamicController != null) {
+        //    timeInterval = DynamicUtilities.getVisibleInterval(dynamicController.getModel(graph.getGraphModel().getWorkspace()));
+        //}
     }
 
     public void compute() {

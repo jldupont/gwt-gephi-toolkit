@@ -4,7 +4,6 @@
 	
 	<inherits name="org.gephi.algorithms.Algorithms" />
 	<inherits name="org.gephi.data.Data" />
-	<inherits name="org.gephi.dynamic.Dynamic" />
 	<inherits name="org.gephi.graph.Graph" />
 	<inherits name="org.gephi.layout.Layout" />
 	<inherits name="org.gephi.project.Project" />

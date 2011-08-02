@@ -23,7 +23,7 @@ package org.gephi.layout.plugin.forceAtlas;
 //import java.util.ArrayList;
 //import java.util.List;
 import org.gephi.data.attributes.type.TimeInterval;
-import org.gephi.dynamic.DynamicUtilities;
+//import org.gephi.dynamic.DynamicUtilities;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
@@ -59,7 +59,7 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
     private boolean outboundAttractionDistribution;
     private boolean adjustSizes;
     //Dynamic Weight
-    private TimeInterval timeInterval;
+    private TimeInterval timeInterval=null;
 
     public ForceAtlasLayout(LayoutBuilder layoutBuilder) {
         super(layoutBuilder);
@@ -86,7 +86,7 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
 
     public void goAlgo() {
         this.graph = graphModel.getHierarchicalGraphVisible();
-        this.timeInterval = DynamicUtilities.getVisibleInterval(dynamicModel);
+        //this.timeInterval = DynamicUtilities.getVisibleInterval(dynamicModel);
         graph.readLock();
         Node[] nodes = graph.getNodes().toArray();
         Edge[] edges = graph.getEdgesAndMetaEdges().toArray();
