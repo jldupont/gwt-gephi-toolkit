@@ -30,16 +30,16 @@ import org.gephi.project.api.ProjectMetaData;
 @SuppressWarnings("serial")
 public class ProjectMetaDataImpl implements ProjectMetaData, Serializable {
 
-	private String author;
+	private String author=null; //jld
     private String title = "";
     private String keywords = "";
     private String description = "";
 
     public ProjectMetaDataImpl() {
-        String username = System.getProperty("user.name");
-        if (username != null) {
-            author = username;
-        }
+        //String username = System.getProperty("user.name");
+        //if (username != null) {
+        //    author = username;
+        //}
     }
 
     public String getAuthor() {
