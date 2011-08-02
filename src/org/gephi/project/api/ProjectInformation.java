@@ -39,9 +39,9 @@ public interface ProjectInformation {
 
     public String getName();
 
-    public boolean hasFile();
+    //public boolean hasFile();
 
-    public String getFileName();
+    //public String getFileName();
 
     //public File getFile();
 

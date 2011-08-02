@@ -20,11 +20,11 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.project.impl;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+//import java.io.File;
+//import java.util.ArrayList;
+//import java.util.List;
+//import javax.swing.event.ChangeEvent;
+//import javax.swing.event.ChangeListener;
 import org.gephi.project.api.Project;
 import org.gephi.project.api.ProjectInformation;
 
@@ -42,10 +42,10 @@ public class ProjectInformationImpl implements ProjectInformation {
     //Data
     private String name;
     private Status status = Status.CLOSED;
-    private File file;
+    //private File file;
     private Project project;
     //Event
-    private transient List<ChangeListener> listeners;
+    //private transient List<ChangeListener> listeners;
 
     public ProjectInformationImpl(Project project) {
         this.project = project;
@@ -54,21 +54,21 @@ public class ProjectInformationImpl implements ProjectInformation {
     }
 
     public void init() {
-        listeners = new ArrayList<ChangeListener>();
+        //listeners = new ArrayList<ChangeListener>();
         status = Status.CLOSED;
-        if (file != null) {
+        //if (file != null) {
             // this.status = Status.INVALID;  if not valid
-        }
+        //}
     }
 
     public void open() {
         this.status = Status.OPEN;
-        fireChangeEvent();
+        //fireChangeEvent();
     }
 
     public void close() {
         this.status = Status.CLOSED;
-        fireChangeEvent();
+        //fireChangeEvent();
     }
 
     public Project getProject() {
@@ -91,12 +91,13 @@ public class ProjectInformationImpl implements ProjectInformation {
         return status == Status.INVALID;
     }
 
-    @Override
+    /*
     public boolean hasFile() {
         return file != null;
     }
-
-    @Override
+	*/
+    
+    /*
     public String getFileName() {
         if (file == null) {
             return "";
@@ -104,21 +105,24 @@ public class ProjectInformationImpl implements ProjectInformation {
             return file.getName();
         }
     }
-
+	*/
+    
     public void setName(String name) {
         this.name = name;
-        fireChangeEvent();
+        //fireChangeEvent();
     }
 
     @Override
     public String getName() {
         return name;
     }
-
+    /*
     public File getFile() {
         return file;
     }
-
+	*/
+    
+    /*
     public void setFile(File file) {
         this.file = file;
         fireChangeEvent();
@@ -139,4 +143,6 @@ public class ProjectInformationImpl implements ProjectInformation {
             listener.stateChanged(event);
         }
     }
+    */
+    
 }
