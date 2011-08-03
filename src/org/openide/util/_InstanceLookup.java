@@ -6,14 +6,14 @@ public class _InstanceLookup extends Lookup {
 
 	static _InstanceLookup i=null;
 	
-	public _InstanceLookup create() {
+	public static _InstanceLookup create() {
 		if (i==null)
 			i=new _InstanceLookup();
 		return i;
 	}
 	
 	public static _InstanceLookup getSingleton() {
-		return i;
+		return create();
 	}
 	
 	public <T> T lookup(Class<T> clazz) { 
