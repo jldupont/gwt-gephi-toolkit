@@ -108,6 +108,8 @@ public final class TypeConvertor {
             throw new NullPointerException();
         }
 
+        throw new RuntimeException("createInstanceFromString");
+        /*
         T resultValue = null;
 
         try {
@@ -130,6 +132,7 @@ public final class TypeConvertor {
         } catch (Exception e) {
         }
         return resultValue;
+        */
     }
 
     /**
