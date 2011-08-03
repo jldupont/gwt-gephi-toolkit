@@ -55,7 +55,7 @@ public class ProjectControllerImpl implements ProjectController {
     //Data
     private final ProjectsImpl projects = new ProjectsImpl();
     //private final List<WorkspaceListener> listeners;
-    private WorkspaceImpl temporaryOpeningWorkspace;
+    private WorkspaceImpl temporaryOpeningWorkspace=null;
 
     public ProjectControllerImpl() {
 

@@ -26,7 +26,7 @@ public class Project extends GWTTestCase {
 	public void testNewProject() {
 		
 		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
-		//pc.newProject();
+		pc.newProject();
 		
 		GraphModel gm=null;
 		DirectedGraph dg=null;
