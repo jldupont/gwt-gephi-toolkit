@@ -46,7 +46,11 @@ public class ProjectInformationImpl implements ProjectInformation {
     private Project project;
     //Event
     //private transient List<ChangeListener> listeners;
-
+    
+    public ProjectInformationImpl() {
+    	init();
+    }
+    
     public ProjectInformationImpl(Project project) {
         this.project = project;
         name = "Project " + (count++);
