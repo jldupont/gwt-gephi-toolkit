@@ -37,7 +37,7 @@ import org.openide.util.Lookup;
 public class WorkspaceImpl implements Workspace {
 
     //private transient InstanceContent instanceContent;
-    private transient Lookup lookup;
+    //private transient Lookup lookup;
 
     public WorkspaceImpl(Project project) {
         init(project);
@@ -62,7 +62,8 @@ public class WorkspaceImpl implements Workspace {
     }
 
     public Lookup getLookup() {
-        return lookup;
+        //return lookup;
+    	return Lookup.getDefault();
     }
     
 }
