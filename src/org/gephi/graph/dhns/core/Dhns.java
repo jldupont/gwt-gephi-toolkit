@@ -63,14 +63,14 @@ import org.openide.util.Lookup;
 public class Dhns implements GraphModel {
 
     //Core
-    private final Workspace workspace;
-    private final DhnsGraphController controller;
-    private GraphStructure graphStructure;
-    private GraphVersion graphVersion;
+    private  Workspace workspace=null;
+    private  DhnsGraphController controller=null;
+    private GraphStructure graphStructure=null;
+    private GraphVersion graphVersion=null;
     //private final EventManager eventManager;
-    private final SettingsManager settingsManager;
-    private final GraphFactoryImpl factory;
-    private final DuplicateManager duplicateManager;
+    private  SettingsManager settingsManager=null;
+    private  GraphFactoryImpl factory=null;
+    private  DuplicateManager duplicateManager=null;
     //Type
     private boolean directed = false;
     private boolean undirected = false;
@@ -78,6 +78,10 @@ public class Dhns implements GraphModel {
     //Locking
     //private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
+    public Dhns() {
+    	
+    }
+    
     public Dhns(DhnsGraphController controller, Workspace workspace) {
         this.controller = controller;
         this.workspace = workspace;

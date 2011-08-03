@@ -93,13 +93,13 @@ public interface AttributeModel {
      * events when columns are added or removed, as well as when values are set.
      * @param listener      the listener that is to be added
      */
-    public void addAttributeListener(AttributeListener listener);
+    //public void addAttributeListener(AttributeListener listener);
 
     /**
      * Removes <code>listener</code> to the listeners of this table.
      * @param listener      the listener that is to be removed
      */
-    public void removeAttributeListener(AttributeListener listener);
+    //public void removeAttributeListener(AttributeListener listener);
 
     /**
      * Merge <code>model</code> in this model. Makes the union of tables and
