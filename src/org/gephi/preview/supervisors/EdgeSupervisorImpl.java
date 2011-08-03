@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.preview.supervisors;
 
-//import java.awt.Font;
+import java.awt.Font;
 import java.util.Set;
 import org.gephi.preview.EdgeImpl;
 import org.gephi.preview.EdgeLabelImpl;
@@ -47,7 +47,7 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
     protected Boolean showLabelsFlag;
     protected Boolean shortenLabelsFlag;
     protected Integer labelMaxChar;
-    //protected Font baseLabelFont;
+    protected Font baseLabelFont;
     protected EdgeChildColorizer labelColorizer;
     protected Float edgeScale;
     protected Boolean rescaleWeight;
@@ -141,14 +141,14 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
         showLabelsFlag = value;
     }
 
-    //public Font getBaseLabelFont() {
-    //    return baseLabelFont;
-    //}
+    public Font getBaseLabelFont() {
+        return baseLabelFont;
+    }
 
-   // public void setBaseLabelFont(Font value) {
-    //    baseLabelFont = value;
-    //    adjustEdgeLabelFonts();
-    //}
+    public void setBaseLabelFont(Font value) {
+        baseLabelFont = value;
+        adjustEdgeLabelFonts();
+    }
 
     public Integer getLabelMaxChar() {
         return labelMaxChar;
@@ -344,10 +344,10 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
     /**
      * Adjusts the label fonts of the supervised edges.
      */
-    @SuppressWarnings("unused")
+    
 	private void adjustEdgeLabelFonts() {
         for (EdgeImpl e : getSupervisedEdges()) {
-            adjustEdgeLabelFont(e);
-        }
+           adjustEdgeLabelFont(e);
+       }
     }
 }

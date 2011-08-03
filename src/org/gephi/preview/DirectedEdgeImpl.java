@@ -106,6 +106,7 @@ public abstract class DirectedEdgeImpl extends EdgeImpl implements DirectedEdge 
         return supervisor.getShowMiniLabelsFlag() && length >= minlength;
     }
 
+    
     @Override
     protected EdgeSupervisorImpl getEdgeSupervisor() {
         return getDirectedEdgeSupervisor();

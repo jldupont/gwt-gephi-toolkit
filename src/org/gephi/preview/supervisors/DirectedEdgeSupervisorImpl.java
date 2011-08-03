@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.preview.supervisors;
 
-//import java.awt.Font;
+import java.awt.Font;
 import java.util.HashSet;
 import java.util.Set;
 import org.gephi.preview.DirectedEdgeImpl;
@@ -47,7 +47,7 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
     protected Boolean showMiniLabelsFlag;
     protected Boolean shortenMiniLabelsFlag;
     protected Integer miniLabelMaxChar;
-    //protected Font miniLabelFont;
+    protected Font miniLabelFont;
     protected Float miniLabelAddedRadius;
     protected EdgeChildColorizer miniLabelColorizer;
     protected Boolean showArrowsFlag;
@@ -75,7 +75,7 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
     public void setShowMiniLabelsFlag(Boolean value) {
         showMiniLabelsFlag = value;
     }
-/*
+
     public Font getMiniLabelFont() {
         return miniLabelFont;
     }
@@ -83,7 +83,7 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
     public void setMiniLabelFont(Font value) {
         miniLabelFont = value;
     }
-*/
+
     public Integer getMiniLabelMaxChar() {
         return miniLabelMaxChar;
     }

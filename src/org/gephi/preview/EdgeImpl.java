@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.preview;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import org.gephi.graph.api.Edge;
@@ -45,7 +45,7 @@ public abstract class EdgeImpl extends AbstractEdge implements org.gephi.preview
     protected final ArrayList<CubicBezierCurve> curves = new ArrayList<CubicBezierCurve>();
     private final EdgeLabelImpl label;
     protected static final float BEZIER_CURVE_FACTOR = 0.2f;
-    protected final Color originalColor;
+    //protected final Color originalColor;
     protected Boolean metaEdge;
 
     /**
@@ -71,11 +71,11 @@ public abstract class EdgeImpl extends AbstractEdge implements org.gephi.preview
         direction.normalize();
 
         //Color
-        if (edge.getEdgeData().r() != -1) {
-            originalColor = new Color(edge.getEdgeData().r(), edge.getEdgeData().g(), edge.getEdgeData().b(), edge.getEdgeData().alpha());
-        } else {
-            originalColor = null;
-        }
+        //if (edge.getEdgeData().r() != -1) {
+        //    originalColor = new Color(edge.getEdgeData().r(), edge.getEdgeData().g(), edge.getEdgeData().b(), edge.getEdgeData().alpha());
+        //} else {
+        //    originalColor = null;
+        //}
 
         // curved edge (cubic Bézier curve)
         genCurves();
@@ -133,9 +133,9 @@ public abstract class EdgeImpl extends AbstractEdge implements org.gephi.preview
         return node2;
     }
 
-    public Color getOriginalColor() {
-        return originalColor;
-    }
+    //public Color getOriginalColor() {
+    //    return originalColor;
+    //}
 
     public EdgeLabelImpl getLabel() {
         return label;

@@ -73,7 +73,7 @@ public class EdgeLabelImpl extends AbstractEdgeLabel
     }
 
     public Font getFont() {
-        return font;
+       return font;
     }
 
     public Font getBaseFont() {
