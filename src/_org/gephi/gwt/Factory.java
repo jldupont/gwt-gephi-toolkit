@@ -76,6 +76,8 @@ public class Factory {
 		case WORKSPACE_PROVIDER_IMPL:      o=GWT.create(WorkspaceProviderImpl.class); break;
 		}
 		
+		map.put(klass, o);
+		
 		return (T) o;
 	}//
 	
