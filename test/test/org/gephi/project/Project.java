@@ -56,19 +56,18 @@ public class Project extends GWTTestCase {
 		System.out.println("testNewProject: after .getDirectedGraph creation");
 		
 		assertTrue(dg!=null);
-	}
-	
-	public void testGraphFactory() {
+		
 		gf=gm.factory();
 		assertTrue(gf!=null);
-	}
-	
-	public void testAddEdge() {
+		
 		Node node1a=gf.newNode("V1a");
 		Node node1b=gf.newNode("V1b");
 		
 		assertTrue(node1a!=null);
 		assertTrue(node1b!=null);
+		
+		dg.addNode(node1a);
+		dg.addNode(node1b);
 		
 		Edge e1 = gm.factory().newEdge(node1a, node1b, 1f, true);
 		

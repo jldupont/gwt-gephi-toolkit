@@ -89,6 +89,7 @@ public class Factory {
 				return;				
 			}
 		}
+		System.out.println("Factory.add: adding class '"+o.getClass()+"'");
 		map.put(o.getClass(), o);
 	}
 	public static void remove(Object o) {

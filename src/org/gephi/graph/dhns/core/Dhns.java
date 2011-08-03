@@ -79,10 +79,12 @@ public class Dhns implements GraphModel {
     //private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     public Dhns() {
-    	
+    	System.out.println("**Dhns: default constructor...");
     }
     
     public Dhns(DhnsGraphController controller, Workspace workspace) {
+    	//System.out.println("**Dhns: complete constructor...");
+    	
         this.controller = controller;
         this.workspace = workspace;
         graphVersion = new GraphVersion();
@@ -102,7 +104,8 @@ public class Dhns implements GraphModel {
             }
         }
         factory = new GraphFactoryImpl(controller.getIDGen(), attributeRowFactory);
-
+        System.out.println("**Dhns: factory: "+factory);
+        
         init();
     }
 
@@ -236,6 +239,7 @@ public class Dhns implements GraphModel {
 
     //API
     public GraphFactoryImpl factory() {
+    	System.out.println("**Dhns.factory: factory: "+factory);
         return factory;
     }
 
