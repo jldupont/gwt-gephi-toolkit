@@ -12,7 +12,7 @@ public class _InstanceLookup extends Lookup {
 		return i;
 	}
 	
-	public static Lookup getSingleton() {
+	public static _InstanceLookup getSingleton() {
 		return i;
 	}
 	

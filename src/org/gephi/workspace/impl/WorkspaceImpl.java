@@ -54,12 +54,14 @@ public class WorkspaceImpl implements Workspace {
     }
 
     public void add(Object instance) {
-        throw new RuntimeException("WorkspaceImpl.add: "+instance.getClass());
+    	_InstanceLookup.getSingleton().add(instance);
+        //throw new RuntimeException("WorkspaceImpl.add: "+instance.getClass());
     }
 
     public void remove(Object instance) {
         //instanceContent.remove(instance);
-    	throw new RuntimeException("WorkspaceImpl.remove: "+instance.getClass());
+    	_InstanceLookup.getSingleton().remove(instance);
+    	//throw new RuntimeException("WorkspaceImpl.remove: "+instance.getClass());
     }
 
     public Lookup getLookup() {
