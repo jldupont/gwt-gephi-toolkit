@@ -25,9 +25,10 @@ package org.gephi.workspace.impl;
 //import javax.swing.event.ChangeEvent;
 //import javax.swing.event.ChangeListener;
 import org.gephi.project.api.Project;
+import org.gephi.project.api.ProjectController;
 //import org.gephi.project.api.ProjectController;
 import org.gephi.project.api.WorkspaceInformation;
-//import org.openide.util.Lookup;
+import org.openide.util.Lookup;
 
 /**
  *
@@ -39,32 +40,35 @@ public class WorkspaceInformationImpl implements WorkspaceInformation {
 
         OPEN, CLOSED, INVALID
     };
-    //private static int count = 0;
-    private Project project;
-    private String name;
+    private static int count = 0;
+    private Project project=null;
+    private String name=null;
     private Status status = Status.CLOSED;
-    private String source;
+    private String source=null;
     //Lookup
     //private transient List<ChangeListener> listeners = new ArrayList<ChangeListener>();
 
+    public WorkspaceInformationImpl() {
+    	
+    }
     public WorkspaceInformationImpl(Project project) {
-    /*
+    
         this(project, "Workspace " + (
                 (Lookup.getDefault().lookup(ProjectController.class).getCurrentWorkspace() != null) ? count : 0
                 ));
-    */
+    
     }
 
     public WorkspaceInformationImpl(Project project, String name) {
         this.project = project;
         this.name = name;
-        /*
+        
         ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
         if (pc.getCurrentWorkspace() == null) {
             count = 0;
         }
         count++;
-        */
+        
     }
 
     @Override
