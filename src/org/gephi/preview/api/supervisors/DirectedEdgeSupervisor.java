@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.preview.api.supervisors;
 
-import java.awt.Font;
+//import java.awt.Font;
 import org.gephi.preview.api.EdgeChildColorizer;
 
 /**
@@ -49,14 +49,14 @@ public interface DirectedEdgeSupervisor extends EdgeSupervisor {
      *
      * @return the edge mini-label font
      */
-    public Font getMiniLabelFont();
+    //public Font getMiniLabelFont();
 
     /**
      * Defines the edge mini-label font.
      *
      * @param value  the edge mini-label font to set
      */
-    public void setMiniLabelFont(Font value);
+    //public void setMiniLabelFont(Font value);
 
     /**
      * Returns the edge mini-label character limit.

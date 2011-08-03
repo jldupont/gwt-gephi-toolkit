@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.preview.supervisors;
 
-import java.awt.Font;
+//import java.awt.Font;
 import java.util.Set;
 import org.gephi.preview.EdgeImpl;
 import org.gephi.preview.EdgeLabelImpl;
@@ -32,7 +32,7 @@ import org.gephi.preview.api.supervisors.EdgeSupervisor;
 import org.gephi.preview.api.supervisors.GlobalEdgeSupervisor;
 import org.gephi.preview.updaters.LabelFontAdjuster;
 import org.gephi.preview.updaters.LabelShortener;
-import org.gephi.visualization.api.VisualizationController;
+//import org.gephi.visualization.api.VisualizationController;
 import org.openide.util.Lookup;
 
 /**
@@ -47,11 +47,11 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
     protected Boolean showLabelsFlag;
     protected Boolean shortenLabelsFlag;
     protected Integer labelMaxChar;
-    protected Font baseLabelFont;
+    //protected Font baseLabelFont;
     protected EdgeChildColorizer labelColorizer;
     protected Float edgeScale;
     protected Boolean rescaleWeight;
-    protected VisualizationController visualizationController;
+    //protected VisualizationController visualizationController;
 
     /**
      * Adds the given edge to the list of the supervised edges.
@@ -67,9 +67,9 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
         updateEdgeLabelValue(edge);
         adjustEdgeLabelFont(edge);
 
-        if (visualizationController == null) {
-            visualizationController = Lookup.getDefault().lookup(VisualizationController.class);
-        }
+        //if (visualizationController == null) {
+        //    visualizationController = Lookup.getDefault().lookup(VisualizationController.class);
+        //}
 
         float weight = edge.getThickness();
         float min = edge.getMetaEdge() ? edge.getGraph().getMinMetaWeight() : edge.getGraph().getMinWeight();
@@ -83,9 +83,9 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
             weight += Math.abs(min) + 1;
         }
 
-        if (edge.getMetaEdge() && visualizationController != null) {
-            weight *= visualizationController.getMetaEdgeScale();
-        }
+        //if (edge.getMetaEdge() && visualizationController != null) {
+        //    weight *= visualizationController.getMetaEdgeScale();
+        //}
 
         edge.setThickness(weight);
     }
@@ -141,14 +141,14 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
         showLabelsFlag = value;
     }
 
-    public Font getBaseLabelFont() {
-        return baseLabelFont;
-    }
+    //public Font getBaseLabelFont() {
+    //    return baseLabelFont;
+    //}
 
-    public void setBaseLabelFont(Font value) {
-        baseLabelFont = value;
-        adjustEdgeLabelFonts();
-    }
+   // public void setBaseLabelFont(Font value) {
+    //    baseLabelFont = value;
+    //    adjustEdgeLabelFonts();
+    //}
 
     public Integer getLabelMaxChar() {
         return labelMaxChar;
@@ -344,7 +344,8 @@ public abstract class EdgeSupervisorImpl implements EdgeSupervisor {
     /**
      * Adjusts the label fonts of the supervised edges.
      */
-    private void adjustEdgeLabelFonts() {
+    @SuppressWarnings("unused")
+	private void adjustEdgeLabelFonts() {
         for (EdgeImpl e : getSupervisedEdges()) {
             adjustEdgeLabelFont(e);
         }
