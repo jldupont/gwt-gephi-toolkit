@@ -80,9 +80,15 @@ public class AttributeUtilsImpl extends AttributeUtils {
     @Override
     public boolean isNumberColumn(AttributeColumn column) {
         AttributeType attributeType = column.getType();
-        return Number.class.isAssignableFrom(attributeType.getType());
+        //return Number.class.isAssignableFrom(attributeType.getType());
+        return isType(Number.class, attributeType);
     }
 
+    @SuppressWarnings("unchecked")
+	public boolean isType(Class k, AttributeType at) {
+    	throw new RuntimeException("AttributeUtilsImpl.isType: not implemented...");
+    }
+    
     @Override
     public boolean areAllNumberColumns(AttributeColumn[] columns) {
         for (AttributeColumn column : columns) {
@@ -96,7 +102,8 @@ public class AttributeUtilsImpl extends AttributeUtils {
     @Override
     public boolean isNumberListColumn(AttributeColumn column) {
         AttributeType attributeType = column.getType();
-        return NumberList.class.isAssignableFrom(attributeType.getType());
+        //return NumberList.class.isAssignableFrom(attributeType.getType());
+        return isType(NumberList.class, attributeType);
     }
 
     @Override
