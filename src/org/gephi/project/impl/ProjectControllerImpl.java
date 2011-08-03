@@ -34,6 +34,7 @@ import org.gephi.project.api.Workspace;
 //import org.gephi.project.api.WorkspaceListener;
 import org.gephi.workspace.impl.WorkspaceImpl;
 import org.gephi.workspace.impl.WorkspaceInformationImpl;
+import org.openide.util.Lookup;
 //import org.gephi.project.spi.WorkspaceDuplicateProvider;
 //import org.openide.util.Lookup;
 //import org.openide.util.NbPreferences;
@@ -260,7 +261,11 @@ public class ProjectControllerImpl implements ProjectController {
     		throw new RuntimeException("ProjectControllerImpl.openWorkspace: workspace is null...");
         closeCurrentWorkspace();
         getCurrentProject().getLookup().lookup(WorkspaceProviderImpl.class).setCurrentWorkspace(workspace);
-        WorkspaceInformationImpl wii=workspace.getLookup().lookup(WorkspaceInformationImpl.class);
+        Lookup lu=workspace.getLookup();
+        if (lu==null)
+        	throw new RuntimeException("ProjectControllerImpl.openWorkspace: lookup is null...");
+        
+        WorkspaceInformationImpl wii=lu.lookup(WorkspaceInformationImpl.class);
         if (wii==null)
         	throw new RuntimeException("ProjectControllerImpl.openWorkspace: wii is null...");
         wii.open();
