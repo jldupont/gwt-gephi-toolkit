@@ -38,7 +38,7 @@ public class WorkspaceProviderImpl implements WorkspaceProvider {
     private transient List<Workspace> workspaces=null;
 
     public WorkspaceProviderImpl() {
-    	
+    	workspaces = new ArrayList<Workspace>();
     }
     public WorkspaceProviderImpl(Project project) {
         init(project);

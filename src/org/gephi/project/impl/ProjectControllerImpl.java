@@ -78,7 +78,7 @@ public class ProjectControllerImpl implements ProjectController {
     }
 
     public void newProject() {
-        //closeCurrentProject();
+        closeCurrentProject();
         ProjectImpl project = new ProjectImpl();
         projects.addProject(project);
         openProject(project);
