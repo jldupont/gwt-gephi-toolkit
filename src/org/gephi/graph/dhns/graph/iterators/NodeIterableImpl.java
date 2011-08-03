@@ -41,7 +41,7 @@ public class NodeIterableImpl implements NodeIterable {
     private NodeIteratorImpl iterator;
 
     public NodeIterableImpl(AbstractNodeIterator iterator) {
-        //this.iterator = new NodeIteratorImpl(iterator);
+        this.iterator = new NodeIteratorImpl(iterator);
     }
 
     public NodeIterableImpl(AbstractNodeIterator iterator, Predicate<Node> predicate) {

@@ -42,7 +42,7 @@ public class EdgeIterableImpl implements EdgeIterable {
     private EdgeIteratorImpl iterator;
 
     public EdgeIterableImpl(AbstractEdgeIterator iterator) {
-    //    this.iterator = new EdgeIteratorImpl(iterator, lock);
+    	this.iterator = new EdgeIteratorImpl(iterator);
     }
 
     public EdgeIterableImpl(AbstractEdgeIterator iterator, Predicate<AbstractEdge> predicate) {
