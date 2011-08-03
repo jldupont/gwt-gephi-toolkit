@@ -65,13 +65,26 @@ public class Factory {
 		initDone=true;
 	}
 	
+	public static void clear() {
+		System.out.println("Factory.clear");
+		map.clear();
+		init();
+	}
+	
 	public static void add(Object o) {
-		if (map.containsKey(o.getClass()))
-			throw new RuntimeException("Factory: class '"+o.getClass()+"' already exists...");
+		if (map.containsKey(o.getClass())) {
+			//throw new RuntimeException("Factory: class '"+o.getClass()+"' already exists...");
+			System.out.println("Factory.add: class '"+o.getClass()+"' already exists...");
+			return;
+		}
 		map.put(o.getClass(), o);
 	}
 	public static void remove(Object o) {
-		map.remove(o.getClass());
+		if (map.containsKey(o.getClass())) {
+			map.remove(o.getClass());
+		} else {
+			System.out.println("Factory.remove: class '"+o.getClass()+"' doesn't exist...");
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

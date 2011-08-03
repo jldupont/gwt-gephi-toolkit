@@ -25,6 +25,8 @@ public class Project extends GWTTestCase {
 	
 	public void testNewProject() {
 		
+		Lookup.getDefault().clear();
+		
 		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
 		pc.newProject();
 		
