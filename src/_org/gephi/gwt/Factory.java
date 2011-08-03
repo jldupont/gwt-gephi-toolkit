@@ -5,6 +5,8 @@ package _org.gephi.gwt;
 
 import java.util.HashMap;
 
+import org.gephi.data.attributes.AttributeControllerImpl;
+import org.gephi.data.attributes.api.AttributeController;
 import org.gephi.graph.api.GraphController;
 import org.gephi.project.api.ProjectController;
 import org.gephi.project.impl.ProjectControllerImpl;
@@ -22,6 +24,7 @@ public class Factory {
 	
 	static enum Classe {
 		DHNS,
+		ATTRIBUTE_CONTROLLER,
 		PROJECT_CONTROLLER,
 		PROJECT_INFORMATION_IMPL,
 		GRAPH_CONTROLLER,
@@ -43,21 +46,22 @@ public class Factory {
 
 		map.put(Dhns.class, null);
 		cmap.put(Dhns.class, Classe.DHNS);
+
+		map.put(AttributeController.class, null);
+		cmap.put(AttributeController.class, Classe.ATTRIBUTE_CONTROLLER);
 		
 		map.put(ProjectController.class, null);
 		cmap.put(ProjectController.class, Classe.PROJECT_CONTROLLER);
-		//smap.put(ProjectController.class, true);
+
 
 		map.put(ProjectInformationImpl.class, null);
 		cmap.put(ProjectInformationImpl.class, Classe.PROJECT_INFORMATION_IMPL);
 		
 		map.put(GraphController.class, null);
 		cmap.put(GraphController.class, Classe.GRAPH_CONTROLLER);
-		//smap.put(GraphController.class, true);
 
 		map.put(WorkspaceProviderImpl.class, null);
 		cmap.put(WorkspaceProviderImpl.class, Classe.WORKSPACE_PROVIDER_IMPL);
-		//smap.put(WorkspaceProviderImpl.class, true);
 
 		map.put(WorkspaceInformationImpl.class, null);
 		cmap.put(WorkspaceInformationImpl.class, Classe.WORKSPACE_INFORMATION_IMPL);
@@ -115,6 +119,7 @@ public class Factory {
 		
 		switch(c) {
 		case DHNS:							o=GWT.create(Dhns.class); break;
+		case ATTRIBUTE_CONTROLLER:			o=GWT.create(AttributeControllerImpl.class); break;
 		case PROJECT_CONTROLLER:			o=GWT.create(ProjectControllerImpl.class); break;
 		case PROJECT_INFORMATION_IMPL:		o=GWT.create(ProjectInformationImpl.class); break;
 		case GRAPH_CONTROLLER:      		o=GWT.create(DhnsGraphController.class); break;
