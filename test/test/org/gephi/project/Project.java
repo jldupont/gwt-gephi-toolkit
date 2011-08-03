@@ -1,8 +1,10 @@
 package test.org.gephi.project;
 
 import org.gephi.graph.api.DirectedGraph;
+import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
+import org.gephi.graph.api.Node;
 import org.gephi.project.api.ProjectController;
 import org.gephi.project.impl.ProjectControllerImpl;
 import org.openide.util.Lookup;
@@ -15,6 +17,9 @@ public class Project extends GWTTestCase {
 		return "test.org.gephi.project.Project";
 	}
 
+	DirectedGraph dg=null;
+	GraphModel gm=null;
+	
 	public void testCreate() {
 		
 		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
@@ -30,8 +35,8 @@ public class Project extends GWTTestCase {
 		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
 		pc.newProject();
 		
-		GraphModel gm=null;
-		DirectedGraph dg=null;
+		
+		
 		GraphController gc=null;
 		
 		System.out.println("testNewProject: before GraphController creation");
@@ -51,5 +56,13 @@ public class Project extends GWTTestCase {
 		assertTrue(dg!=null);
 	}
 	
+	public void testAddEdge() {
+		Node node1a=gm.factory().newNode("V1a");
+		Node node1b=gm.factory().newNode("V1b");
+		
+		Edge e1 = gm.factory().newEdge(node1a, node1b, 1f, true);
+		
+		dg.addEdge(e1);
+	}
 	
 }///
