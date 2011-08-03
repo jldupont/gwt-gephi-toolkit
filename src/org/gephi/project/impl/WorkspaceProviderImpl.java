@@ -33,10 +33,13 @@ import org.gephi.workspace.impl.WorkspaceImpl;
  */
 public class WorkspaceProviderImpl implements WorkspaceProvider {
 
-    private transient WorkspaceImpl currentWorkspace;
-    private transient Project project;
-    private transient List<Workspace> workspaces;
+    private transient WorkspaceImpl currentWorkspace=null;
+    private transient Project project=null;
+    private transient List<Workspace> workspaces=null;
 
+    public WorkspaceProviderImpl() {
+    	
+    }
     public WorkspaceProviderImpl(Project project) {
         init(project);
     }
