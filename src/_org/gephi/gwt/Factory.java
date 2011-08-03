@@ -10,6 +10,7 @@ import org.gephi.project.api.ProjectController;
 import org.gephi.project.impl.ProjectControllerImpl;
 import org.gephi.project.impl.ProjectInformationImpl;
 import org.gephi.project.impl.WorkspaceProviderImpl;
+import org.gephi.workspace.impl.WorkspaceInformationImpl;
 import org.gephi.graph.dhns.*;
 
 import com.google.gwt.core.client.GWT;
@@ -23,6 +24,7 @@ public class Factory {
 		PROJECT_INFORMATION_IMPL,
 		GRAPH_CONTROLLER,
 		WORKSPACE_PROVIDER_IMPL,
+		WORKSPACE_INFORMATION_IMPL,
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -44,6 +46,9 @@ public class Factory {
 
 		map.put(WorkspaceProviderImpl.class, null);
 		cmap.put(WorkspaceProviderImpl.class, Classe.WORKSPACE_PROVIDER_IMPL);
+
+		map.put(WorkspaceInformationImpl.class, null);
+		cmap.put(WorkspaceInformationImpl.class, Classe.WORKSPACE_INFORMATION_IMPL);
 		
 		initDone=true;
 	}
@@ -61,9 +66,12 @@ public class Factory {
 			if (k!=null) {
 				System.out.println("Factory: retrieving: "+klass.getName());
 				return (T) k;
-			}
+			} 
+			//else {
+			//	throw new RuntimeException("Factory: Map with null: "+klass.toString());
+			//}
 		} else {
-			throw new RuntimeException("Unknown class: "+klass.toString());
+			throw new RuntimeException("Factory: Unknown class: "+klass.toString());
 		}
 		
 		System.out.println("Factory: creating: "+klass.getName());
@@ -78,8 +86,11 @@ public class Factory {
 		case PROJECT_INFORMATION_IMPL:	o=GWT.create(ProjectInformationImpl.class); break;
 		case GRAPH_CONTROLLER:      o=GWT.create(DhnsGraphController.class); break;
 		case WORKSPACE_PROVIDER_IMPL:      o=GWT.create(WorkspaceProviderImpl.class); break;
+		case WORKSPACE_INFORMATION_IMPL:      o=GWT.create(WorkspaceInformationImpl.class); break;
 		}
 		
+		if (o==null)
+			throw new RuntimeException("Factory.get: created NULL object for class: "+klass.getName());
 		map.put(klass, o);
 		
 		return (T) o;
