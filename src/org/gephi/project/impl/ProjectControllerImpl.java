@@ -260,7 +260,10 @@ public class ProjectControllerImpl implements ProjectController {
     		throw new RuntimeException("ProjectControllerImpl.openWorkspace: workspace is null...");
         closeCurrentWorkspace();
         getCurrentProject().getLookup().lookup(WorkspaceProviderImpl.class).setCurrentWorkspace(workspace);
-        workspace.getLookup().lookup(WorkspaceInformationImpl.class).open();
+        WorkspaceInformationImpl wii=workspace.getLookup().lookup(WorkspaceInformationImpl.class);
+        if (wii==null)
+        	throw new RuntimeException("ProjectControllerImpl.openWorkspace: wii is null...");
+        wii.open();
 
         //Event
         //fireWorkspaceEvent(EventType.SELECT, workspace);
