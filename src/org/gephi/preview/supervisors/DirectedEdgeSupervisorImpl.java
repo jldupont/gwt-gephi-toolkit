@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.preview.supervisors;
 
-import java.awt.Font;
+//import java.awt.Font;
 import java.util.HashSet;
 import java.util.Set;
 import org.gephi.preview.DirectedEdgeImpl;
@@ -28,12 +28,12 @@ import org.gephi.preview.EdgeArrowImpl;
 import org.gephi.preview.EdgeMiniLabelImpl;
 import org.gephi.preview.api.EdgeArrow;
 import org.gephi.preview.api.EdgeChildColorizer;
-import org.gephi.preview.api.EdgeColorizer;
+//import org.gephi.preview.api.EdgeColorizer;
 import org.gephi.preview.api.EdgeMiniLabel;
-import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorPropery;
 import org.gephi.preview.api.supervisors.DirectedEdgeSupervisor;
-import org.gephi.preview.propertyeditors.EdgeChildColorizerPropertyEditor;
-import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.EdgeChildColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
 import org.gephi.preview.updaters.LabelShortener;
 
 /**
@@ -47,7 +47,7 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
     protected Boolean showMiniLabelsFlag;
     protected Boolean shortenMiniLabelsFlag;
     protected Integer miniLabelMaxChar;
-    protected Font miniLabelFont;
+    //protected Font miniLabelFont;
     protected Float miniLabelAddedRadius;
     protected EdgeChildColorizer miniLabelColorizer;
     protected Boolean showArrowsFlag;
@@ -75,7 +75,7 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
     public void setShowMiniLabelsFlag(Boolean value) {
         showMiniLabelsFlag = value;
     }
-
+/*
     public Font getMiniLabelFont() {
         return miniLabelFont;
     }
@@ -83,7 +83,7 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
     public void setMiniLabelFont(Font value) {
         miniLabelFont = value;
     }
-
+*/
     public Integer getMiniLabelMaxChar() {
         return miniLabelMaxChar;
     }
@@ -155,20 +155,10 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
         colorEdgeArrows();
     }
 
-    @Override
-    protected Set getSupervisedEdges() {
-        return supervisedEdges;
-    }
-
-    /**
-     * Generates the position of the given edge mini-label.
-     *
-     * @param edgeMiniLabel  the edge mini-label to position
-     */
     private void positionEdgeMiniLabel(EdgeMiniLabelImpl edgeMiniLabel) {
         edgeMiniLabel.genPosition();
     }
-
+    
     /**
      * Generates the position of the given edge's mini-labels.
      *
@@ -357,7 +347,7 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
             colorEdgeArrows(e);
         }
     }
-
+/*
     public SupervisorPropery[] getProperties() {
         final String CATEGORY = "Directed";
         try {
@@ -386,4 +376,5 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
         }
         return new SupervisorPropery[0];
     }
+    */
 }

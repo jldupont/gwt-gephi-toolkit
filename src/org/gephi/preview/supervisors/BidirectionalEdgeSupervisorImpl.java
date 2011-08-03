@@ -20,12 +20,12 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.preview.supervisors;
 
-import java.awt.Font;
-import org.gephi.preview.api.EdgeChildColorizer;
-import org.gephi.preview.api.EdgeColorizer;
-import org.gephi.preview.api.SupervisorPropery;
-import org.gephi.preview.propertyeditors.EdgeChildColorizerPropertyEditor;
-import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
+//import java.awt.Font;
+//import org.gephi.preview.api.EdgeChildColorizer;
+//import org.gephi.preview.api.EdgeColorizer;
+//import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.propertyeditors.EdgeChildColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
 import org.gephi.preview.updaters.EdgeBothBColorMode;
 import org.gephi.preview.updaters.ParentColorMode;
 
@@ -51,12 +51,12 @@ public class BidirectionalEdgeSupervisorImpl extends DirectedEdgeSupervisorImpl 
         showLabelsFlag = false;
         shortenLabelsFlag = false;
         labelMaxChar = 10;
-        baseLabelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
+        //baseLabelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
         labelColorizer = new ParentColorMode();
         showMiniLabelsFlag = false;
         shortenMiniLabelsFlag = false;
         miniLabelMaxChar = 10;
-        miniLabelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 8);
+        //miniLabelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 8);
         miniLabelAddedRadius = 15f;
         miniLabelColorizer = new ParentColorMode();
         showArrowsFlag = true;
@@ -66,7 +66,7 @@ public class BidirectionalEdgeSupervisorImpl extends DirectedEdgeSupervisorImpl 
         edgeScale = new Float(1f);
         rescaleWeight = Boolean.FALSE;
     }
-
+    /*
     @Override
     public SupervisorPropery[] getProperties() {
         final String CATEGORY = "Bidirectional";
@@ -96,4 +96,5 @@ public class BidirectionalEdgeSupervisorImpl extends DirectedEdgeSupervisorImpl 
         }
         return new SupervisorPropery[0];
     }
+    */
 }
