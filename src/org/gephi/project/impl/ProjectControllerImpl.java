@@ -256,6 +256,8 @@ public class ProjectControllerImpl implements ProjectController {
 	
     
     public void openWorkspace(Workspace workspace) {
+    	if (workspace==null)
+    		throw new RuntimeException("ProjectControllerImpl.openWorkspace: workspace is null...");
         closeCurrentWorkspace();
         getCurrentProject().getLookup().lookup(WorkspaceProviderImpl.class).setCurrentWorkspace(workspace);
         workspace.getLookup().lookup(WorkspaceInformationImpl.class).open();

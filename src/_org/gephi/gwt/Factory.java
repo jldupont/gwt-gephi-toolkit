@@ -51,7 +51,7 @@ public class Factory {
 	@SuppressWarnings("unchecked")
 	public static <T> T get(Class<T> klass){
 		
-		System.out.println("Factory: creating: "+klass.getName());
+		
 		
 		if (!initDone)
 			init();
@@ -59,11 +59,15 @@ public class Factory {
 		if (map.containsKey(klass)) {
 			Object k=map.get(klass);
 			if (k!=null) {
+				System.out.println("Factory: retrieving: "+klass.getName());
 				return (T) k;
 			}
 		} else {
 			throw new RuntimeException("Unknown class: "+klass.toString());
 		}
+		
+		System.out.println("Factory: creating: "+klass.getName());
+		
 		// instance doesn't exist yet... create it!
 		Classe c=cmap.get(klass);
 		
