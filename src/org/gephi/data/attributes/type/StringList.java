@@ -35,13 +35,18 @@ import org.gephi.data.attributes.api.AttributeType;
  */
 public final class StringList extends AbstractList<String> {
 
+	
     /**
      * Create a new string from a char array. One char per list cell.
      *
      * @param list      the list
      */
-    public StringList(char[] list) {
-        super(StringList.parse(list));
+    public StringList(char[] liste) {
+    	this.list=new String[liste.length];
+    	for (int p=0;p<liste.length;p++) {
+    		this.list[p]=Character.toString(liste[p]);
+    	}
+        //super(StringList.parse(list));
     }
 
     /**
@@ -49,8 +54,8 @@ public final class StringList extends AbstractList<String> {
      *
      * @param list      the list of string items
      */
-    public StringList(String[] list) {
-        super(list);
+    public StringList(String[] liste) {
+    	create(liste);
     }
 
     /**
@@ -71,9 +76,17 @@ public final class StringList extends AbstractList<String> {
      *                  <code>value</code>
      */
     public StringList(String input, String separator) {
-        super(input, separator, String.class);
+    	String[] stringValues = input.split(separator);
+    	create(stringValues);
+        //super(input, separator, String.class);
     }
-
+    
+    public void create(String[] liste) {
+    	this.list=new String[liste.length];
+    	for (int p=0;p<liste.length;p++)
+    		this.list[p]=liste[p];    	
+    }
+    /*
     private static String[] parse(char[] list) {
         String[] resultList = new String[list.length];
 
@@ -83,7 +96,8 @@ public final class StringList extends AbstractList<String> {
 
         return resultList;
     }
-
+	*/
+    
     /**
      * Returns the item at the specified <code>index</code>. May return
      * <code>null</code> if <code>index</code> is out of range.

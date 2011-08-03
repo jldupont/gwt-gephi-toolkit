@@ -29,11 +29,11 @@ package org.gephi.data.attributes.type;
 public final class CharacterList extends AbstractList<Character> {
     
     public CharacterList(char[] primitiveCharArray) {
-        super(TypeConvertor.<Character>convertPrimitiveToWrapperArray(primitiveCharArray));
+        create(primitiveCharArray);
     }
 
     public CharacterList(Character[] wrapperCharArray) {
-        super(wrapperCharArray);
+        create(wrapperCharArray);
     }
 
     public CharacterList(String input) {
@@ -41,6 +41,22 @@ public final class CharacterList extends AbstractList<Character> {
     }
 
     public CharacterList(String input, String separator) {
-        super(input, separator, Character.class);
+        //super(input, separator, Character.class);
+    	String[] values=input.split(separator);
+    	this.list=new Character[values.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=values[p].charAt(0);
     }
-}
+    
+    public void create(Character[] liste) {
+    	this.list=new Character[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    public void create(char[] liste) {
+    	this.list=new Character[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    
+}///

@@ -26,14 +26,14 @@ package org.gephi.data.attributes.type;
  * 
  * @author Martin Škurla
  */
-public final class IntegerList extends NumberList<Integer> {
+public final class IntegerList extends AbstractList<Integer> {//NumberList<Integer> {
 
     public IntegerList(int[] primitiveIntArray) {
-        super(TypeConvertor.<Integer>convertPrimitiveToWrapperArray(primitiveIntArray));
+        create(primitiveIntArray);
     }
 
     public IntegerList(Integer[] wrapperIntArray) {
-        super(wrapperIntArray);
+        create(wrapperIntArray);
     }
 
     public IntegerList(String input) {
@@ -41,6 +41,21 @@ public final class IntegerList extends NumberList<Integer> {
     }
 
     public IntegerList(String input, String separator) {
-        super(input, separator, Integer.class);
+        //super(input, separator, Integer.class);
+    	String[] values=input.split(separator);
+    	for (int p=0;p<values.length;p++)
+    		this.list[p]=Integer.parseInt(values[p]);
     }
+    
+    public void create(Integer[] liste) {
+    	this.list=new Integer[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    public void create(int[] liste) {
+    	this.list=new Integer[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    
 }

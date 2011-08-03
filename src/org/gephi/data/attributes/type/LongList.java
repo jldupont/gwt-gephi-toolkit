@@ -26,14 +26,14 @@ package org.gephi.data.attributes.type;
  * 
  * @author Martin Škurla
  */
-public final class LongList extends NumberList<Long> {
+public final class LongList extends AbstractList<Long> {//NumberList<Long> {
 
     public LongList(long[] primitiveLongArray) {
-        super(TypeConvertor.<Long>convertPrimitiveToWrapperArray(primitiveLongArray));
+        create(primitiveLongArray);
     }
 
     public LongList(Long[] wrapperLongArray) {
-        super(wrapperLongArray);
+        create(wrapperLongArray);
     }
 
     public LongList(String input) {
@@ -41,6 +41,21 @@ public final class LongList extends NumberList<Long> {
     }
 
     public LongList(String input, String separator) {
-        super(input, separator, Long.class);
+        //super(input, separator, Long.class);
+    	String[] values=input.split(separator);
+    	for (int p=0;p<values.length;p++) 
+    		this.list[p]=Long.parseLong(values[p]);
     }
+    
+    public void create(Long[] liste) {
+    	this.list=new Long[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    public void create(long[] liste) {
+    	this.list=new Long[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    
 }

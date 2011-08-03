@@ -29,11 +29,11 @@ package org.gephi.data.attributes.type;
 public final class BooleanList extends AbstractList<Boolean> {
 
     public BooleanList(boolean[] primitiveBooleanArray) {
-        super(TypeConvertor.<Boolean>convertPrimitiveToWrapperArray(primitiveBooleanArray));
+        create(primitiveBooleanArray);
     }
 
     public BooleanList(Boolean[] wrapperBooleanArray) {
-        super(wrapperBooleanArray);
+        create(wrapperBooleanArray);
     }
 
     public BooleanList(String input) {
@@ -41,6 +41,25 @@ public final class BooleanList extends AbstractList<Boolean> {
     }
 
     public BooleanList(String input, String separator) {
-        super(input, separator, Boolean.class);
+        //super(input, separator, Boolean.class);
+    	String[] stringValues = input.split(separator);
+    	this.list=new Boolean[stringValues.length];
+    	for (int p=0;p<list.length;p++) {
+    		this.list[p]=Boolean.parseBoolean(stringValues[p]);
+    	}
     }
+    
+    public void create(Boolean[] liste) {
+    	this.list=new Boolean[liste.length];
+    	for (int p=0;p<liste.length;p++) {
+    		this.list[p]=liste[p];
+    	}
+    }
+    public void create(boolean[] liste) {
+    	this.list=new Boolean[liste.length];
+    	for (int p=0;p<liste.length;p++) {
+    		this.list[p]=liste[p];
+    	}
+    }
+    
 }

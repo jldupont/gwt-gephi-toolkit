@@ -26,14 +26,14 @@ package org.gephi.data.attributes.type;
  * 
  * @author Martin Škurla
  */
-public final class FloatList extends NumberList<Float> {
+public final class FloatList extends AbstractList<Float> {//NumberList<Float> {
 
     public FloatList(float[] primitiveFloatArray) {
-        super(TypeConvertor.<Float>convertPrimitiveToWrapperArray(primitiveFloatArray));
+        create(primitiveFloatArray);
     }
 
     public FloatList(Float[] wrapperFloatArray) {
-        super(wrapperFloatArray);
+        create(wrapperFloatArray);
     }
 
     public FloatList(String input) {
@@ -41,6 +41,21 @@ public final class FloatList extends NumberList<Float> {
     }
 
     public FloatList(String input, String separator) {
-        super(input, separator, Float.class);
+        //super(input, separator, Float.class);
+    	String[] values=input.split(separator);
+    	for (int p=0;p<values.length;p++)
+    		this.list[p]=Float.parseFloat(values[p]);
     }
+
+    public void create(Float[] liste) {
+    	this.list=new Float[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    public void create(float[] liste) {
+    	this.list=new Float[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+
 }

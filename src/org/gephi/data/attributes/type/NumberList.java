@@ -30,7 +30,7 @@ package org.gephi.data.attributes.type;
 public abstract class NumberList<T extends Number> extends AbstractList<T> {
 
     public NumberList(T[] wrapperArray) {
-        super(wrapperArray);
+        //super(wrapperArray);
     }
 
     public NumberList(String input, Class<T> finalType) {
@@ -38,7 +38,7 @@ public abstract class NumberList<T extends Number> extends AbstractList<T> {
     }
 
     public NumberList(String input, String separator, Class<T> finalType) {
-        super(input, separator, finalType);
+        //super(input, separator, finalType);
     }
 }
 

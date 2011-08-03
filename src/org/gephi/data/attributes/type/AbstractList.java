@@ -86,9 +86,10 @@ package org.gephi.data.attributes.type;
 public abstract class AbstractList<T> {
 
     public static final String DEFAULT_SEPARATOR = ",|;";
-    protected final T[] list;
+    protected  T[] list=null;
     private volatile int hashCode = 0;
 
+    /*
     public AbstractList(String input, Class<T> finalType) {
         this(input, DEFAULT_SEPARATOR, finalType);
     }
@@ -99,9 +100,11 @@ public abstract class AbstractList<T> {
 
     public AbstractList(T[] array) {
         //this.list = Arrays.copyOf(array, array.length);
+    	
     	this.list = array.clone();
     }
-
+	*/
+    
     public int size() {
         return list.length;
     }

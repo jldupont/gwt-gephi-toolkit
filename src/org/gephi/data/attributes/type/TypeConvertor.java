@@ -144,6 +144,7 @@ public final class TypeConvertor {
      * @throws IllegalArgumentException if given parameter is not array or given parameter is not
      *                                  array of primitive type
      */
+    /*
     @SuppressWarnings("unchecked")
     public static <T> T[] convertPrimitiveToWrapperArray(Object primitiveArray) {
         if (primitiveArray == null) {
@@ -154,7 +155,7 @@ public final class TypeConvertor {
             throw new IllegalArgumentException("Given object is not of primitive array: " + primitiveArray.getClass());
         }
         throw new RuntimeException("TypeConvertor.convertPrimitiveToWrapperArray");
-        /*
+        *
         Class<?> primitiveClass = primitiveArray.getClass().getComponentType();
         Class<T> wrapperClass = (Class<T>) getWrapperFromPrimitive(primitiveClass);
         int arrayLength = Array.getLength(primitiveArray);
@@ -166,9 +167,10 @@ public final class TypeConvertor {
         }
 
         return wrapperArray;
-        */
+        *
     }
-
+	*/
+	
     /**
      * Returns wrapper type from given primitive type.
      *

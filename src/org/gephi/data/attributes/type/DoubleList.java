@@ -26,14 +26,14 @@ package org.gephi.data.attributes.type;
  * 
  * @author Martin Škurla
  */
-public final class DoubleList extends NumberList<Double> {
+public final class DoubleList extends AbstractList<Double> {//NumberList<Double> {
 
     public DoubleList(double[] primitiveDoubleArray) {
-        super(TypeConvertor.<Double>convertPrimitiveToWrapperArray(primitiveDoubleArray));
+        create(primitiveDoubleArray);
     }
 
     public DoubleList(Double[] wrapperDoubleArray) {
-        super(wrapperDoubleArray);
+        create(wrapperDoubleArray);
     }
 
     public DoubleList(String input) {
@@ -41,6 +41,21 @@ public final class DoubleList extends NumberList<Double> {
     }
 
     public DoubleList(String input, String separator) {
-        super(input, separator, Double.class);
+        //super(input, separator, Double.class);
+    	String[] values=input.split(separator);
+    	for (int p=0;p<values.length;p++)
+    		this.list[p]=Double.parseDouble(values[p]);
     }
+    
+    public void create(Double[] liste) {
+    	this.list=new Double[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    public void create(double[] liste) {
+    	this.list=new Double[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    
 }

@@ -26,14 +26,14 @@ package org.gephi.data.attributes.type;
  * 
  * @author Martin Škurla
  */
-public final class ShortList extends NumberList<Short> {
+public final class ShortList extends AbstractList<Short> { //NumberList<Short> {
     
     public ShortList(short[] primitiveShortArray) {
-        super(TypeConvertor.<Short>convertPrimitiveToWrapperArray(primitiveShortArray));
+        create(primitiveShortArray);
     }
 
     public ShortList(Short[] wrapperShortArray) {
-        super(wrapperShortArray);
+        create(wrapperShortArray);
     }
 
     public ShortList(String input) {
@@ -41,6 +41,21 @@ public final class ShortList extends NumberList<Short> {
     }
 
     public ShortList(String input, String separator) {
-        super(input, separator, Short.class);
+        //super(input, separator, Short.class);
+    	String[] values=input.split(separator);
+    	for (int p=0;p<values.length;p++)
+    		this.list[p]=Short.parseShort(values[p]);
     }
+    
+    public void create(Short[] liste) {
+    	this.list=new Short[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    public void create(short[] liste) {
+    	this.list=new Short[liste.length];
+    	for (int p=0;p<list.length;p++)
+    		this.list[p]=liste[p];
+    }
+    
 }

@@ -26,14 +26,15 @@ package org.gephi.data.attributes.type;
  * 
  * @author Martin Škurla
  */
-public final class ByteList extends NumberList<Byte> {
+public final class ByteList extends AbstractList<Byte> {
     
+	
     public ByteList(byte[] primitiveByteArray) {
-        super(TypeConvertor.<Byte>convertPrimitiveToWrapperArray(primitiveByteArray));
+        create(primitiveByteArray);
     }
 
     public ByteList(Byte[] wrapperByteArray) {
-        super(wrapperByteArray);
+        create(wrapperByteArray);
     }
 
     public ByteList(String input) {
@@ -41,6 +42,23 @@ public final class ByteList extends NumberList<Byte> {
     }
 
     public ByteList(String input, String separator) {
-        super(input, separator, Byte.class);
+        String[] values=input.split(separator);
+        this.list=new Byte[values.length];
+    	for (int p=0;p<list.length;p++) {
+    		this.list[p]=Byte.parseByte(values[p]);
+    	}        
     }
+    
+    public void create(byte[] arr) {
+    	this.list=new Byte[arr.length];
+    	for (int p=0;p<list.length;p++) {
+    		this.list[p]=arr[p];
+    	}
+    }
+    public void create(Byte[] arr) {
+    	this.list=new Byte[arr.length];
+    	for (int p=0;p<list.length;p++) {
+    		this.list[p]=arr[p];
+    	}
+    }    
 }
