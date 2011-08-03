@@ -22,14 +22,14 @@ package org.gephi.preview;
 
 import java.util.HashMap;
 import org.gephi.data.attributes.type.TimeInterval;
-import org.gephi.dynamic.DynamicUtilities;
-import org.gephi.dynamic.api.DynamicController;
+//import org.gephi.dynamic.DynamicUtilities;
+//import org.gephi.dynamic.api.DynamicController;
 import org.gephi.graph.api.HierarchicalDirectedGraph;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.HierarchicalMixedGraph;
 import org.gephi.graph.api.HierarchicalUndirectedGraph;
 import org.gephi.preview.api.PreviewModel;
-import org.openide.util.Lookup;
+//import org.openide.util.Lookup;
 
 /**
  * Factory creating preview graphs from workspace graphs.
@@ -156,6 +156,7 @@ public class PreviewGraphFactory {
     }
 
     private void calculateMinMaxWeight(HierarchicalGraph sourceGraph, GraphImpl previewGraph) {
+    	/*
         //Set time interval
         DynamicController dynamicController = Lookup.getDefault().lookup(DynamicController.class);
         if (dynamicController != null) {
@@ -164,6 +165,7 @@ public class PreviewGraphFactory {
         if (timeInterval == null) {
             timeInterval = new TimeInterval();
         }
+        */
 
         //Min/Max weight
         float minWeight = Float.POSITIVE_INFINITY;
@@ -240,7 +242,7 @@ public class PreviewGraphFactory {
      * @return              the generated preview self-loop
      */
     private SelfLoopImpl createPreviewSelfLoop(GraphImpl previewGraph, org.gephi.graph.api.Edge sourceEdge) {
-        org.gephi.graph.api.EdgeData sourceEdgeData = sourceEdge.getEdgeData();
+        //org.gephi.graph.api.EdgeData sourceEdgeData = sourceEdge.getEdgeData();
 
         SelfLoopImpl previewSelfLoop = new SelfLoopImpl(
                 previewGraph,

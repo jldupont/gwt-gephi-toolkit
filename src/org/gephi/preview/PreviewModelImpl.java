@@ -26,15 +26,15 @@ import java.beans.PropertyEditor;
 import java.beans.PropertyEditorManager;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamWriter;
+//import javax.xml.stream.XMLStreamException;
+//import javax.xml.stream.XMLStreamReader;
+//import javax.xml.stream.XMLStreamWriter;
 import org.gephi.graph.api.GraphEvent;
 import org.gephi.graph.api.GraphListener;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.preview.api.PreviewModel;
 import org.gephi.preview.api.PreviewPreset;
-import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorPropery;
 import org.gephi.preview.api.supervisors.DirectedEdgeSupervisor;
 import org.gephi.preview.api.supervisors.GlobalEdgeSupervisor;
 import org.gephi.preview.api.supervisors.NodeSupervisor;
@@ -82,13 +82,13 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
     }
 
     public void select(Workspace workspace) {
-        GraphModel graphModel = workspace.getLookup().lookup(GraphModel.class);
-        graphModel.addGraphListener(this);
+        //GraphModel graphModel = workspace.getLookup().lookup(GraphModel.class);
+        //graphModel.addGraphListener(this);
     }
 
     public void unselect(Workspace workspace) {
-        GraphModel graphModel = workspace.getLookup().lookup(GraphModel.class);
-        graphModel.removeGraphListener(this);
+        //GraphModel graphModel = workspace.getLookup().lookup(GraphModel.class);
+        //graphModel.removeGraphListener(this);
     }
 
     /**
@@ -167,7 +167,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
     public void setCurrentPreset(PreviewPreset currentPreset) {
         this.currentPreset = currentPreset;
     }
-
+/*
     public PreviewPreset wrapPreset(String name) {
         Map<String, String> propertiesMap = new HashMap<String, String>();
         for (Property p : getPropertiesMap().values()) {
@@ -192,7 +192,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
         }
         return new PreviewPreset(name, propertiesMap);
     }
-
+*/
     public void applyPreset(PreviewPreset preset) {
         Map<String, String> propertiesMap = preset.getProperties();
         for (Property p : getPropertiesMap().values()) {
@@ -222,7 +222,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
             }
         }
     }
-
+/*
     //PERSISTENCE
     public void writeXML(XMLStreamWriter writer) throws XMLStreamException {
         writer.writeStartElement("previewmodel");
@@ -332,7 +332,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
             }
         }
     }
-
+	*/
     private Map<String, Property> getPropertiesMap() {
         Map<String, Property> propertiesMap = new HashMap<String, Property>();
         Supervisor[] supervisors = new Supervisor[]{nodeSupervisor, globalEdgeSupervisor, selfLoopSupervisor, uniEdgeSupervisor, biEdgeSupervisor, undirectedEdgeSupervisor};
@@ -344,4 +344,5 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
         }
         return propertiesMap;
     }
+    
 }
