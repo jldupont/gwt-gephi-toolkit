@@ -81,7 +81,7 @@ public class ProjectControllerImpl implements ProjectController {
         //closeCurrentProject();
         ProjectImpl project = new ProjectImpl();
         projects.addProject(project);
-        //openProject(project);
+        openProject(project);
     }
 
     /*
@@ -105,27 +105,29 @@ public class ProjectControllerImpl implements ProjectController {
         return saveTask;
     }
     */
-    /*
+    
     public void closeCurrentProject() {
         if (projects.hasCurrentProject()) {
             ProjectImpl currentProject = projects.getCurrentProject();
 
+            /*
             //Event
             if (currentProject.getLookup().lookup(WorkspaceProvider.class).hasCurrentWorkspace()) {
-                fireWorkspaceEvent(EventType.UNSELECT, currentProject.getLookup().lookup(WorkspaceProvider.class).getCurrentWorkspace());
+                //fireWorkspaceEvent(EventType.UNSELECT, currentProject.getLookup().lookup(WorkspaceProvider.class).getCurrentWorkspace());
             }
             for (Workspace ws : currentProject.getLookup().lookup(WorkspaceProviderImpl.class).getWorkspaces()) {
-                fireWorkspaceEvent(EventType.CLOSE, ws);
+                //fireWorkspaceEvent(EventType.CLOSE, ws);
             }
-
+			*/
+            
             //Close
             currentProject.getLookup().lookup(ProjectInformationImpl.class).close();
             projects.closeCurrentProject();
 
-            fireWorkspaceEvent(EventType.DISABLE, null);
+            //fireWorkspaceEvent(EventType.DISABLE, null);
         }
     }
-	*/
+	
     /*
     public void removeProject(Project project) {
         if (projects.getCurrentProject() == project) {
@@ -165,7 +167,7 @@ public class ProjectControllerImpl implements ProjectController {
     }
 	*/
     
-    /*
+    
     public Workspace newWorkspace(Project project) {
         Workspace workspace = project.getLookup().lookup(WorkspaceProviderImpl.class).newWorkspace();
 
@@ -173,7 +175,7 @@ public class ProjectControllerImpl implements ProjectController {
         //fireWorkspaceEvent(EventType.INITIALIZE, workspace);
         return workspace;
     }
-
+    /*
     public void deleteWorkspace(Workspace workspace) {
         WorkspaceInformation wi = workspace.getLookup().lookup(WorkspaceInformation.class);
         WorkspaceProviderImpl workspaceProvider = wi.getProject().getLookup().lookup(WorkspaceProviderImpl.class);
@@ -200,7 +202,7 @@ public class ProjectControllerImpl implements ProjectController {
     }
     */
     
-    /*
+    
     public void openProject(Project project) {
         final ProjectImpl projectImpl = (ProjectImpl) project;
         final ProjectInformationImpl projectInformationImpl = projectImpl.getLookup().lookup(ProjectInformationImpl.class);
@@ -222,10 +224,10 @@ public class ProjectControllerImpl implements ProjectController {
                 openWorkspace(workspace);
             }
         } else {
-            fireWorkspaceEvent(EventType.SELECT, workspaceProviderImpl.getCurrentWorkspace());
+            //fireWorkspaceEvent(EventType.SELECT, workspaceProviderImpl.getCurrentWorkspace());
         }
     }
-	*/
+	
     
     public ProjectImpl getCurrentProject() {
         return projects.getCurrentProject();
@@ -241,30 +243,31 @@ public class ProjectControllerImpl implements ProjectController {
         return null;
     }
 
-    /*
+    
     public void closeCurrentWorkspace() {
         WorkspaceImpl workspace = getCurrentWorkspace();
         if (workspace != null) {
             workspace.getLookup().lookup(WorkspaceInformationImpl.class).close();
 
             //Event
-            fireWorkspaceEvent(EventType.UNSELECT, workspace);
+            //fireWorkspaceEvent(EventType.UNSELECT, workspace);
         }
     }
-
+	
+    
     public void openWorkspace(Workspace workspace) {
         closeCurrentWorkspace();
         getCurrentProject().getLookup().lookup(WorkspaceProviderImpl.class).setCurrentWorkspace(workspace);
         workspace.getLookup().lookup(WorkspaceInformationImpl.class).open();
 
         //Event
-        fireWorkspaceEvent(EventType.SELECT, workspace);
+        //fireWorkspaceEvent(EventType.SELECT, workspace);
     }
 	
     
     public void cleanWorkspace(Workspace workspace) {
     }
-    */
+    
     
     /*
     public Workspace duplicateWorkspace(Workspace workspace) {
