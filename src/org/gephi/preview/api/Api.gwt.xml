@@ -1,0 +1,10 @@
+<module>
+
+	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="org.gephi.preview.api.supervisors.Supervisors" />
+	<inherits name="org.gephi.preview.api.util.Util" />
+	
+	<source path="" />
+	
+</module>
