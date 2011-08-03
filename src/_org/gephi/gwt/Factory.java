@@ -14,7 +14,7 @@ import org.gephi.project.impl.ProjectInformationImpl;
 import org.gephi.project.impl.WorkspaceProviderImpl;
 import org.gephi.workspace.impl.WorkspaceInformationImpl;
 import org.gephi.graph.dhns.*;
-import org.gephi.graph.dhns.core.Dhns;
+//import org.gephi.graph.dhns.core.Dhns;
 
 import com.google.gwt.core.client.GWT;
 
@@ -23,7 +23,7 @@ public class Factory {
 	static boolean initDone=false;
 	
 	static enum Classe {
-		DHNS,
+		//DHNS,
 		ATTRIBUTE_CONTROLLER,
 		PROJECT_CONTROLLER,
 		PROJECT_INFORMATION_IMPL,
@@ -44,8 +44,8 @@ public class Factory {
 	
 	static void init() {
 
-		map.put(Dhns.class, null);
-		cmap.put(Dhns.class, Classe.DHNS);
+		//map.put(Dhns.class, null);
+		//cmap.put(Dhns.class, Classe.DHNS);
 
 		map.put(AttributeController.class, null);
 		cmap.put(AttributeController.class, Classe.ATTRIBUTE_CONTROLLER);
@@ -78,8 +78,11 @@ public class Factory {
 	public static void add(Object o) {
 		if (map.containsKey(o.getClass())) {
 			//throw new RuntimeException("Factory: class '"+o.getClass()+"' already exists...");
-			System.out.println("Factory.add: class '"+o.getClass()+"' already exists...");
-			return;
+			Object r=map.get(o.getClass());
+			if (r!=null) {
+				System.out.println("Factory.add: class '"+o.getClass()+"' already exists...");
+				return;				
+			}
 		}
 		map.put(o.getClass(), o);
 	}
@@ -107,7 +110,9 @@ public class Factory {
 			//	throw new RuntimeException("Factory: Map with null: "+klass.toString());
 			//}
 		} else {
-			throw new RuntimeException("Factory: Unknown class: "+klass.toString());
+			//throw new RuntimeException("Factory: Unknown class: "+klass.toString());
+			System.out.println("Factory.get: couldn't find instance for class: "+klass.toString());
+			return null;
 		}
 		
 		System.out.println("Factory: creating: "+klass.getName());
@@ -118,7 +123,7 @@ public class Factory {
 		Object o=null;
 		
 		switch(c) {
-		case DHNS:							o=GWT.create(Dhns.class); break;
+		//case DHNS:							o=GWT.create(Dhns.class); break;
 		case ATTRIBUTE_CONTROLLER:			o=GWT.create(AttributeControllerImpl.class); break;
 		case PROJECT_CONTROLLER:			o=GWT.create(ProjectControllerImpl.class); break;
 		case PROJECT_INFORMATION_IMPL:		o=GWT.create(ProjectInformationImpl.class); break;
@@ -127,9 +132,11 @@ public class Factory {
 		case WORKSPACE_INFORMATION_IMPL:    o=GWT.create(WorkspaceInformationImpl.class); break;
 		}
 		
-		if (o==null)
-			throw new RuntimeException("Factory.get: created NULL object for class: "+klass.getName());
-		map.put(klass, o);
+		if (o==null) {
+			System.out.println("Factory.get: couldn't create instance for class: "+klass.toString());
+		} else {
+			map.put(klass, o);	
+		}
 		
 		return (T) o;
 	}//

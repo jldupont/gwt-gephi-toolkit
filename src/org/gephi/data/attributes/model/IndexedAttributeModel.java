@@ -22,7 +22,7 @@ package org.gephi.data.attributes.model;
 
 import org.gephi.data.attributes.AbstractAttributeModel;
 import org.gephi.data.attributes.api.AttributeType;
-import org.gephi.data.attributes.event.AttributeEventManager;
+//import org.gephi.data.attributes.event.AttributeEventManager;
 
 /**
  *
@@ -35,10 +35,10 @@ public class IndexedAttributeModel extends AbstractAttributeModel {
 
     public IndexedAttributeModel() {
         dataIndex = new DataIndex();
-        eventManager = new AttributeEventManager(this);
+        //eventManager = new AttributeEventManager(this);
         createPropertiesColumn();
 
-        eventManager.start();
+        //eventManager.start();
     }
 
     @Override

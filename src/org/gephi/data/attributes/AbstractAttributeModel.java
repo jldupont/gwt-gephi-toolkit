@@ -22,14 +22,14 @@ package org.gephi.data.attributes;
 
 import java.util.HashMap;
 
-import org.gephi.data.attributes.api.AttributeListener;
+//import org.gephi.data.attributes.api.AttributeListener;
 import org.gephi.data.attributes.api.AttributeModel;
 import org.gephi.data.attributes.api.AttributeRowFactory;
 import org.gephi.data.attributes.api.AttributeTable;
 import org.gephi.data.attributes.api.AttributeType;
 import org.gephi.data.attributes.api.AttributeValueFactory;
 //import org.gephi.data.attributes.event.AbstractEvent;
-import org.gephi.data.attributes.event.AttributeEventManager;
+//import org.gephi.data.attributes.event.AttributeEventManager;
 import org.gephi.data.properties.PropertiesColumn;
 //import org.openide.util.NbBundle;
 
@@ -47,7 +47,7 @@ public abstract class AbstractAttributeModel implements AttributeModel {
     //Factory
     private AttributeFactoryImpl factory;
     //Events
-    protected AttributeEventManager eventManager;
+    //protected AttributeEventManager eventManager;
 
     //Data API
     public AbstractAttributeModel() {
@@ -116,10 +116,11 @@ public abstract class AbstractAttributeModel implements AttributeModel {
         tableMap.put(table.getName(), table);
     }
 
+    /*
     public void addAttributeListener(AttributeListener listener) {
         eventManager.addAttributeListener(listener);
     }
-    /*
+    
     public void removeAttributeListener(AttributeListener listener) {
         eventManager.removeAttributeListener(listener);
     }

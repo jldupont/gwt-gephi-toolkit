@@ -43,9 +43,12 @@ public class Project extends GWTTestCase {
 		gm = gc.getModel();
 		System.out.println("testNewProject: after .getModel creation");
 		assertTrue(gm!=null);
-		//dg = gm.getDirectedGraph();
 		
-		//assertTrue();
+		
+		dg = gm.getDirectedGraph();
+		System.out.println("testNewProject: after .getDirectedGraph creation");
+		
+		assertTrue(dg!=null);
 	}
 	
 	
