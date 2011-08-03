@@ -3,6 +3,7 @@ package test.org.gephi.project;
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.GraphController;
+import org.gephi.graph.api.GraphFactory;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
 import org.gephi.project.api.ProjectController;
@@ -19,6 +20,7 @@ public class Project extends GWTTestCase {
 
 	DirectedGraph dg=null;
 	GraphModel gm=null;
+	GraphFactory gf=null;
 	
 	public void testCreate() {
 		
@@ -56,9 +58,17 @@ public class Project extends GWTTestCase {
 		assertTrue(dg!=null);
 	}
 	
+	public void testGraphFactory() {
+		gf=gm.factory();
+		assertTrue(gf!=null);
+	}
+	
 	public void testAddEdge() {
-		Node node1a=gm.factory().newNode("V1a");
-		Node node1b=gm.factory().newNode("V1b");
+		Node node1a=gf.newNode("V1a");
+		Node node1b=gf.newNode("V1b");
+		
+		assertTrue(node1a!=null);
+		assertTrue(node1b!=null);
 		
 		Edge e1 = gm.factory().newEdge(node1a, node1b, 1f, true);
 		
