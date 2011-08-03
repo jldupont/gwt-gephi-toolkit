@@ -29,11 +29,11 @@ import org.gephi.preview.NodeLabelImpl;
 import org.gephi.preview.api.GenericColorizer;
 import org.gephi.preview.api.NodeChildColorizer;
 import org.gephi.preview.api.NodeColorizer;
-import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorPropery;
 import org.gephi.preview.api.supervisors.NodeSupervisor;
-import org.gephi.preview.propertyeditors.GenericColorizerPropertyEditor;
-import org.gephi.preview.propertyeditors.NodeChildColorizerPropertyEditor;
-import org.gephi.preview.propertyeditors.NodeColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.GenericColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.NodeChildColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.NodeColorizerPropertyEditor;
 import org.gephi.preview.updaters.CustomColorMode;
 import org.gephi.preview.updaters.LabelFontAdjuster;
 import org.gephi.preview.updaters.LabelShortener;
@@ -370,7 +370,7 @@ public class NodeSupervisorImpl implements NodeSupervisor {
             adjustNodeLabelFont(n);
         }
     }
-
+/*
     public SupervisorPropery[] getProperties() {
         final String CATEGORY = "Node";
         try {
@@ -393,4 +393,5 @@ public class NodeSupervisorImpl implements NodeSupervisor {
         }
         return new SupervisorPropery[0];
     }
+    */
 }

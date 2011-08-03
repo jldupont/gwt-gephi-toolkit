@@ -155,6 +155,12 @@ public abstract class DirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
         colorEdgeArrows();
     }
 
+    
+    @SuppressWarnings("unchecked")
+	protected Set getSupervisedEdges() {
+        return supervisedEdges;
+    }
+    
     private void positionEdgeMiniLabel(EdgeMiniLabelImpl edgeMiniLabel) {
         edgeMiniLabel.genPosition();
     }

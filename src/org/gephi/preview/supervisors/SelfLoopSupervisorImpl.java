@@ -25,9 +25,9 @@ import java.util.Set;
 import org.gephi.preview.GraphImpl;
 import org.gephi.preview.SelfLoopImpl;
 import org.gephi.preview.api.EdgeColorizer;
-import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorPropery;
 import org.gephi.preview.api.supervisors.SelfLoopSupervisor;
-import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
 import org.gephi.preview.updaters.CustomColorMode;
 
 /**
@@ -160,7 +160,7 @@ public class SelfLoopSupervisorImpl implements SelfLoopSupervisor {
             colorSelfLoop(sl);
         }
     }
-
+/*
     public SupervisorPropery[] getProperties() {
         final String CATEGORY = "Self-Loop";
         try {
@@ -174,4 +174,5 @@ public class SelfLoopSupervisorImpl implements SelfLoopSupervisor {
         }
         return new SupervisorPropery[0];
     }
+    */
 }

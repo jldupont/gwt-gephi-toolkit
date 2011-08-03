@@ -20,16 +20,16 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.preview.supervisors;
 
-import java.awt.Font;
+//import java.awt.Font;
 import java.util.HashSet;
 import java.util.Set;
 import org.gephi.preview.UndirectedEdgeImpl;
-import org.gephi.preview.api.EdgeChildColorizer;
-import org.gephi.preview.api.EdgeColorizer;
-import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.EdgeChildColorizer;
+//import org.gephi.preview.api.EdgeColorizer;
+//import org.gephi.preview.api.SupervisorPropery;
 import org.gephi.preview.api.supervisors.UndirectedEdgeSupervisor;
-import org.gephi.preview.propertyeditors.EdgeChildColorizerPropertyEditor;
-import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.EdgeChildColorizerPropertyEditor;
+//import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
 import org.gephi.preview.updaters.EdgeBothBColorMode;
 import org.gephi.preview.updaters.ParentColorMode;
 
@@ -58,17 +58,18 @@ public class UndirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
         showLabelsFlag = false;
         shortenLabelsFlag = false;
         labelMaxChar = 10;
-        baseLabelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
+        //baseLabelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
         labelColorizer = new ParentColorMode();
         edgeScale = new Float(1f);
         rescaleWeight = Boolean.FALSE;
     }
 
-    @Override
-    protected Set getSupervisedEdges() {
+    
+    @SuppressWarnings("unchecked")
+	protected Set getSupervisedEdges() {
         return supervisedEdges;
     }
-
+/*
     public SupervisorPropery[] getProperties() {
         final String CATEGORY = "Undirected";
         try {
@@ -87,4 +88,5 @@ public class UndirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
         }
         return new SupervisorPropery[0];
     }
+    */
 }
