@@ -9,6 +9,7 @@ import org.gephi.data.attributes.AttributeControllerImpl;
 import org.gephi.data.attributes.api.AttributeController;
 import org.gephi.graph.api.GraphController;
 import org.gephi.project.api.ProjectController;
+import org.gephi.project.api.WorkspaceProvider;
 import org.gephi.project.impl.ProjectControllerImpl;
 import org.gephi.project.impl.ProjectInformationImpl;
 import org.gephi.project.impl.WorkspaceProviderImpl;
@@ -28,6 +29,7 @@ public class Factory {
 		PROJECT_CONTROLLER,
 		PROJECT_INFORMATION_IMPL,
 		GRAPH_CONTROLLER,
+		WORKSPACE_PROVIDER,
 		WORKSPACE_PROVIDER_IMPL,
 		WORKSPACE_INFORMATION_IMPL,
 	}
@@ -60,6 +62,9 @@ public class Factory {
 		map.put(GraphController.class, null);
 		cmap.put(GraphController.class, Classe.GRAPH_CONTROLLER);
 
+		map.put(WorkspaceProvider.class, null);
+		cmap.put(WorkspaceProvider.class, Classe.WORKSPACE_PROVIDER_IMPL);
+		
 		map.put(WorkspaceProviderImpl.class, null);
 		cmap.put(WorkspaceProviderImpl.class, Classe.WORKSPACE_PROVIDER_IMPL);
 
