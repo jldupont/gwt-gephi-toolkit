@@ -27,6 +27,7 @@ package org.gephi.workspace.impl;
 import org.gephi.project.api.Project;
 import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
+import org.openide.util._InstanceLookup;
 //import org.openide.util.lookup.AbstractLookup;
 //import org.openide.util.lookup.InstanceContent;
 
@@ -63,7 +64,7 @@ public class WorkspaceImpl implements Workspace {
 
     public Lookup getLookup() {
         //return lookup;
-    	return Lookup.getDefault();
+    	return _InstanceLookup.getSingleton();
     }
     
 }
