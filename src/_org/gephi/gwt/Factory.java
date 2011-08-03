@@ -9,6 +9,7 @@ import org.gephi.graph.api.GraphController;
 import org.gephi.project.api.ProjectController;
 import org.gephi.project.impl.ProjectControllerImpl;
 import org.gephi.project.impl.ProjectInformationImpl;
+import org.gephi.project.impl.WorkspaceProviderImpl;
 import org.gephi.graph.dhns.*;
 
 import com.google.gwt.core.client.GWT;
@@ -21,6 +22,7 @@ public class Factory {
 		PROJECT_CONTROLLER,
 		PROJECT_INFORMATION_IMPL,
 		GRAPH_CONTROLLER,
+		WORKSPACE_PROVIDER_IMPL,
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -39,6 +41,9 @@ public class Factory {
 		
 		map.put(GraphController.class, null);
 		cmap.put(GraphController.class, Classe.GRAPH_CONTROLLER);
+
+		map.put(WorkspaceProviderImpl.class, null);
+		cmap.put(WorkspaceProviderImpl.class, Classe.WORKSPACE_PROVIDER_IMPL);
 		
 		initDone=true;
 	}
@@ -68,6 +73,7 @@ public class Factory {
 		case PROJECT_CONTROLLER:	o=GWT.create(ProjectControllerImpl.class); break;
 		case PROJECT_INFORMATION_IMPL:	o=GWT.create(ProjectInformationImpl.class); break;
 		case GRAPH_CONTROLLER:      o=GWT.create(DhnsGraphController.class); break;
+		case WORKSPACE_PROVIDER_IMPL:      o=GWT.create(WorkspaceProviderImpl.class); break;
 		}
 		
 		return (T) o;
