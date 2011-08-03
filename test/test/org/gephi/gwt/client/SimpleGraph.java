@@ -1,4 +1,4 @@
-package test.org.gephi.project;
+package test.org.gephi.gwt.client;
 
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.Edge;
@@ -8,66 +8,49 @@ import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
 import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
 import org.gephi.project.api.ProjectController;
-import org.gephi.project.impl.ProjectControllerImpl;
 import org.openide.util.Lookup;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
 
-public class Project extends GWTTestCase {
-
-	public String getModuleName() {
-		return "test.org.gephi.project.Project";
-	}
-
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+public class SimpleGraph implements EntryPoint {
+	
 	DirectedGraph dg=null;
 	GraphModel gm=null;
 	GraphFactory gf=null;
 	ForceAtlasLayout layout=null;
 	
-	public void testCreate() {
+	public void onModuleLoad() {
+		RootPanel rootPanel = RootPanel.get();
+
+		createGraph();
+		doLayout();
 		
-		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
-		pc.newProject();
-		
-		assertTrue(pc.getClass()==ProjectControllerImpl.class);
 	}
 	
-	public void testNewProject() {
-		
-		Lookup.getDefault().clear();
-		
+	public void createGraph() {
 		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
 		pc.newProject();
-		
-		
 		
 		GraphController gc=null;
 		
-		System.out.println("testNewProject: before GraphController creation");
 		gc = Lookup.getDefault().lookup(GraphController.class);
-		System.out.println("testNewProject: after GraphController creation");
-		assertTrue(gc!=null);
-		
-		System.out.println("testNewProject: before .getModel creation");
 		gm = gc.getModel();
-		System.out.println("testNewProject: after .getModel creation");
-		assertTrue(gm!=null);
-		
-		
 		dg = gm.getDirectedGraph();
-		System.out.println("testNewProject: after .getDirectedGraph creation");
-		
-		assertTrue(dg!=null);
-		
+
 		gf=gm.factory();
-		assertTrue(gf!=null);
+
 		
 		Node node1a=gf.newNode("V1a");
 		Node node1b=gf.newNode("V1b");
 		Node node1c=gf.newNode("V1c");
-		
-		assertTrue(node1a!=null);
-		assertTrue(node1b!=null);
 		
 		dg.addNode(node1a);
 		dg.addNode(node1b);
@@ -78,7 +61,9 @@ public class Project extends GWTTestCase {
 		
 		dg.addEdge(e1);
 		dg.addEdge(e2);
-		
+	}
+	
+	public void doLayout() {
 		layout=new ForceAtlasLayout(null);
 		layout.setGraphModel(gm);
 		layout.setAttractionStrength(2.0);

@@ -1,0 +1,9 @@
+<module>
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+	
+	<inherits name="org.gephi.Gephi" />
+	
+	<entry-point class="test.org.gephi.gwt.client.SimpleGraph"/>
+	
+</module>

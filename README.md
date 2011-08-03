@@ -11,12 +11,12 @@
 * java.util.concurrent.atomic.AtomicInteger: alternative implementation non-thread-safe
 * removed dependency on gnu.trove
 
-* java.util.GregorianCalendar : 
-
+* java.util.GregorianCalendar : removed
 * java.beans.PropertyEditor: removed
 
-* org.openide.nodes.PropertySupport;
-* org.openide.nodes.Node.Property: 
+* org.openide.nodes.PropertySupport: removed
+* org.openide.nodes.Node.Property: removed
 
 * no layout spi
-* node/edge locking
+* removed all locking/unlocking
+* removed eventing system
