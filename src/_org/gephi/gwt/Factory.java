@@ -41,6 +41,8 @@ public class Factory {
 	@SuppressWarnings("unchecked")
 	public static <T> T get(Class<T> klass){
 		
+		System.out.println("Factory: creating: "+klass.getName());
+		
 		if (!initDone)
 			init();
 		
