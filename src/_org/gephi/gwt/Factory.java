@@ -12,6 +12,7 @@ import org.gephi.project.impl.ProjectInformationImpl;
 import org.gephi.project.impl.WorkspaceProviderImpl;
 import org.gephi.workspace.impl.WorkspaceInformationImpl;
 import org.gephi.graph.dhns.*;
+import org.gephi.graph.dhns.core.Dhns;
 
 import com.google.gwt.core.client.GWT;
 
@@ -20,6 +21,7 @@ public class Factory {
 	static boolean initDone=false;
 	
 	static enum Classe {
+		DHNS,
 		PROJECT_CONTROLLER,
 		PROJECT_INFORMATION_IMPL,
 		GRAPH_CONTROLLER,
@@ -33,19 +35,29 @@ public class Factory {
 	@SuppressWarnings("unchecked")
 	static HashMap<Class, Classe> cmap=new HashMap<Class, Classe>();
 	
+	// Singleton flag map
+	//@SuppressWarnings("unchecked")
+	//static HashMap<Class, Boolean> smap=new HashMap<Class, Boolean>();
+	
 	static void init() {
+
+		map.put(Dhns.class, null);
+		cmap.put(Dhns.class, Classe.DHNS);
 		
 		map.put(ProjectController.class, null);
 		cmap.put(ProjectController.class, Classe.PROJECT_CONTROLLER);
+		//smap.put(ProjectController.class, true);
 
 		map.put(ProjectInformationImpl.class, null);
 		cmap.put(ProjectInformationImpl.class, Classe.PROJECT_INFORMATION_IMPL);
 		
 		map.put(GraphController.class, null);
 		cmap.put(GraphController.class, Classe.GRAPH_CONTROLLER);
+		//smap.put(GraphController.class, true);
 
 		map.put(WorkspaceProviderImpl.class, null);
 		cmap.put(WorkspaceProviderImpl.class, Classe.WORKSPACE_PROVIDER_IMPL);
+		//smap.put(WorkspaceProviderImpl.class, true);
 
 		map.put(WorkspaceInformationImpl.class, null);
 		cmap.put(WorkspaceInformationImpl.class, Classe.WORKSPACE_INFORMATION_IMPL);
@@ -53,10 +65,17 @@ public class Factory {
 		initDone=true;
 	}
 	
+	public static void add(Object o) {
+		if (map.containsKey(o.getClass()))
+			throw new RuntimeException("Factory: class '"+o.getClass()+"' already exists...");
+		map.put(o.getClass(), o);
+	}
+	public static void remove(Object o) {
+		map.remove(o.getClass());
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static <T> T get(Class<T> klass){
-		
-		
 		
 		if (!initDone)
 			init();
@@ -82,11 +101,12 @@ public class Factory {
 		Object o=null;
 		
 		switch(c) {
-		case PROJECT_CONTROLLER:	o=GWT.create(ProjectControllerImpl.class); break;
-		case PROJECT_INFORMATION_IMPL:	o=GWT.create(ProjectInformationImpl.class); break;
-		case GRAPH_CONTROLLER:      o=GWT.create(DhnsGraphController.class); break;
-		case WORKSPACE_PROVIDER_IMPL:      o=GWT.create(WorkspaceProviderImpl.class); break;
-		case WORKSPACE_INFORMATION_IMPL:      o=GWT.create(WorkspaceInformationImpl.class); break;
+		case DHNS:							o=GWT.create(Dhns.class); break;
+		case PROJECT_CONTROLLER:			o=GWT.create(ProjectControllerImpl.class); break;
+		case PROJECT_INFORMATION_IMPL:		o=GWT.create(ProjectInformationImpl.class); break;
+		case GRAPH_CONTROLLER:      		o=GWT.create(DhnsGraphController.class); break;
+		case WORKSPACE_PROVIDER_IMPL:      	o=GWT.create(WorkspaceProviderImpl.class); break;
+		case WORKSPACE_INFORMATION_IMPL:    o=GWT.create(WorkspaceInformationImpl.class); break;
 		}
 		
 		if (o==null)

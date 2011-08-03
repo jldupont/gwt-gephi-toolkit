@@ -165,6 +165,12 @@ public class Lookup {
         defaultLookup=new Lookup();
         return defaultLookup;
     }
+    public void add(Object o) {
+    	Factory.add(o);
+    }
+    public void remove(Object o) {
+    	Factory.remove(o);
+    }
     /**
      * JLD
      */

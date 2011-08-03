@@ -27,7 +27,7 @@ package org.gephi.workspace.impl;
 import org.gephi.project.api.Project;
 import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
-import org.openide.util._InstanceLookup;
+//import org.openide.util._InstanceLookup;
 //import org.openide.util.lookup.AbstractLookup;
 //import org.openide.util.lookup.InstanceContent;
 
@@ -54,19 +54,19 @@ public class WorkspaceImpl implements Workspace {
     }
 
     public void add(Object instance) {
-    	_InstanceLookup.getSingleton().add(instance);
+    	Lookup.getDefault().add(instance);
         //throw new RuntimeException("WorkspaceImpl.add: "+instance.getClass());
     }
 
     public void remove(Object instance) {
         //instanceContent.remove(instance);
-    	_InstanceLookup.getSingleton().remove(instance);
+    	Lookup.getDefault().remove(instance);
     	//throw new RuntimeException("WorkspaceImpl.remove: "+instance.getClass());
     }
 
     public Lookup getLookup() {
         //return lookup;
-    	return _InstanceLookup.getSingleton();
+    	return Lookup.getDefault();
     }
     
 }
