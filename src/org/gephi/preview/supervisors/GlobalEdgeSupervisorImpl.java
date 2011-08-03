@@ -23,7 +23,7 @@ package org.gephi.preview.supervisors;
 import java.util.HashSet;
 import java.util.Set;
 import org.gephi.preview.EdgeImpl;
-//import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorProperty;
 import org.gephi.preview.api.supervisors.GlobalEdgeSupervisor;
 
 /**
@@ -82,15 +82,15 @@ public class GlobalEdgeSupervisorImpl implements GlobalEdgeSupervisor {
         showEdges = value;
     }
 /*
-    public SupervisorPropery[] getProperties() {
+    public SupervisorProperty[] getProperties() {
         final String CATEGORY = "Edge";
         try {
-            return new SupervisorPropery[]{
-                        SupervisorPropery.createProperty(this, Boolean.class, "GlobalEdge_showFlag", CATEGORY, "Show", "getShowFlag", "setShowFlag")};
+            return new SupervisorProperty[]{
+                        SupervisorProperty.createProperty(this, Boolean.class, "GlobalEdge_showFlag", CATEGORY, "Show", "getShowFlag", "setShowFlag")};
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new SupervisorPropery[0];
+        return new SupervisorProperty[0];
     }
     */
 }

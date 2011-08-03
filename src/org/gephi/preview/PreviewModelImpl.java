@@ -21,25 +21,25 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.preview;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.beans.PropertyEditor;
-import java.beans.PropertyEditorManager;
-import java.util.HashMap;
-import java.util.Map;
+//import java.awt.Font;
+//import java.beans.PropertyEditor;
+//import java.beans.PropertyEditorManager;
+//import java.util.HashMap;
+//import java.util.Map;
 //import javax.xml.stream.XMLStreamException;
 //import javax.xml.stream.XMLStreamReader;
 //import javax.xml.stream.XMLStreamWriter;
 import org.gephi.graph.api.GraphEvent;
 import org.gephi.graph.api.GraphListener;
-import org.gephi.graph.api.GraphModel;
+//import org.gephi.graph.api.GraphModel;
 import org.gephi.preview.api.PreviewModel;
 import org.gephi.preview.api.PreviewPreset;
-//import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorProperty;
 import org.gephi.preview.api.supervisors.DirectedEdgeSupervisor;
 import org.gephi.preview.api.supervisors.GlobalEdgeSupervisor;
 import org.gephi.preview.api.supervisors.NodeSupervisor;
 import org.gephi.preview.api.supervisors.SelfLoopSupervisor;
-import org.gephi.preview.api.supervisors.Supervisor;
+//import org.gephi.preview.api.supervisors.Supervisor;
 import org.gephi.preview.api.supervisors.UndirectedEdgeSupervisor;
 import org.gephi.preview.presets.DefaultPreset;
 import org.gephi.preview.supervisors.BidirectionalEdgeSupervisorImpl;
@@ -49,7 +49,7 @@ import org.gephi.preview.supervisors.SelfLoopSupervisorImpl;
 import org.gephi.preview.supervisors.UndirectedEdgeSupervisorImpl;
 import org.gephi.preview.supervisors.UnidirectionalEdgeSupervisorImpl;
 import org.gephi.project.api.Workspace;
-import org.openide.nodes.Node.Property;
+//import org.openide.nodes.Node.Property;
 
 /**
  *
@@ -78,7 +78,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
         biEdgeSupervisor = new BidirectionalEdgeSupervisorImpl();
         undirectedEdgeSupervisor = new UndirectedEdgeSupervisorImpl();
         currentPreset = new DefaultPreset();
-        applyPreset(currentPreset);
+        //applyPreset(currentPreset);
     }
 
     public void select(Workspace workspace) {
@@ -193,6 +193,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
         return new PreviewPreset(name, propertiesMap);
     }
 */
+    /*
     public void applyPreset(PreviewPreset preset) {
         Map<String, String> propertiesMap = preset.getProperties();
         for (Property p : getPropertiesMap().values()) {
@@ -222,6 +223,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
             }
         }
     }
+    */
 /*
     //PERSISTENCE
     public void writeXML(XMLStreamWriter writer) throws XMLStreamException {
@@ -249,7 +251,7 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
     }
 
     private void writeProperties(XMLStreamWriter writer, Supervisor supervisor) {
-        for (SupervisorPropery p : supervisor.getProperties()) {
+        for (SupervisorProperty p : supervisor.getProperties()) {
             String propertyName = p.getProperty().getName();
             try {
                 Object propertyValue = p.getProperty().getValue();
@@ -333,16 +335,17 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
         }
     }
 	*/
+    /*
     private Map<String, Property> getPropertiesMap() {
         Map<String, Property> propertiesMap = new HashMap<String, Property>();
         Supervisor[] supervisors = new Supervisor[]{nodeSupervisor, globalEdgeSupervisor, selfLoopSupervisor, uniEdgeSupervisor, biEdgeSupervisor, undirectedEdgeSupervisor};
         for (Supervisor s : supervisors) {
-            for (SupervisorPropery p : s.getProperties()) {
+            for (SupervisorProperty p : s.getProperties()) {
                 String propertyName = p.getProperty().getName();
                 propertiesMap.put(propertyName, p.getProperty());
             }
         }
         return propertiesMap;
     }
-    
+    */
 }

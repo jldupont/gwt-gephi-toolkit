@@ -26,7 +26,7 @@ import java.util.Set;
 import org.gephi.preview.UndirectedEdgeImpl;
 //import org.gephi.preview.api.EdgeChildColorizer;
 //import org.gephi.preview.api.EdgeColorizer;
-//import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorProperty;
 import org.gephi.preview.api.supervisors.UndirectedEdgeSupervisor;
 //import org.gephi.preview.propertyeditors.EdgeChildColorizerPropertyEditor;
 //import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
@@ -70,23 +70,23 @@ public class UndirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
         return supervisedEdges;
     }
 /*
-    public SupervisorPropery[] getProperties() {
+    public SupervisorProperty[] getProperties() {
         final String CATEGORY = "Undirected";
         try {
-            return new SupervisorPropery[]{
-                        SupervisorPropery.createProperty(this, Boolean.class, "Undirected_curvedFlag", CATEGORY, "Curved", "getCurvedFlag", "setCurvedFlag"),
-                        SupervisorPropery.createProperty(this, Float.class, "Undirected_edgeScale", CATEGORY, "Thickness", "getEdgeScale", "setEdgeScale"),
-                        SupervisorPropery.createProperty(this, Boolean.class, "Undirected_rescaleWeight", CATEGORY, "Rescale Weight", "getRescaleWeight", "setRescaleWeight"),
-                        SupervisorPropery.createProperty(this, EdgeColorizer.class, "Undirected_colorizer", CATEGORY, "Color", "getColorizer", "setColorizer", EdgeColorizerPropertyEditor.class),
-                        SupervisorPropery.createProperty(this, Boolean.class, "Undirected_showLabelsFlag", CATEGORY, "Show labels", "getShowLabelsFlag", "setShowLabelsFlag"),
-                        SupervisorPropery.createProperty(this, Boolean.class, "Undirected_shortenLabelsFlag", CATEGORY, "Shorten labels", "getShortenLabelsFlag", "setShortenLabelsFlag"),
-                        SupervisorPropery.createProperty(this, Integer.class, "Undirected_labelMaxChar", CATEGORY, "Shorten limit", "getLabelMaxChar", "setLabelMaxChar"),
-                        SupervisorPropery.createProperty(this, Font.class, "Undirected_baseLabelFont", CATEGORY, "Font", "getBaseLabelFont", "setBaseLabelFont"),
-                        SupervisorPropery.createProperty(this, EdgeChildColorizer.class, "Undirected_labelColorizer", CATEGORY, "Label color", "getLabelColorizer", "setLabelColorizer", EdgeChildColorizerPropertyEditor.class)};
+            return new SupervisorProperty[]{
+                        SupervisorProperty.createProperty(this, Boolean.class, "Undirected_curvedFlag", CATEGORY, "Curved", "getCurvedFlag", "setCurvedFlag"),
+                        SupervisorProperty.createProperty(this, Float.class, "Undirected_edgeScale", CATEGORY, "Thickness", "getEdgeScale", "setEdgeScale"),
+                        SupervisorProperty.createProperty(this, Boolean.class, "Undirected_rescaleWeight", CATEGORY, "Rescale Weight", "getRescaleWeight", "setRescaleWeight"),
+                        SupervisorProperty.createProperty(this, EdgeColorizer.class, "Undirected_colorizer", CATEGORY, "Color", "getColorizer", "setColorizer", EdgeColorizerPropertyEditor.class),
+                        SupervisorProperty.createProperty(this, Boolean.class, "Undirected_showLabelsFlag", CATEGORY, "Show labels", "getShowLabelsFlag", "setShowLabelsFlag"),
+                        SupervisorProperty.createProperty(this, Boolean.class, "Undirected_shortenLabelsFlag", CATEGORY, "Shorten labels", "getShortenLabelsFlag", "setShortenLabelsFlag"),
+                        SupervisorProperty.createProperty(this, Integer.class, "Undirected_labelMaxChar", CATEGORY, "Shorten limit", "getLabelMaxChar", "setLabelMaxChar"),
+                        SupervisorProperty.createProperty(this, Font.class, "Undirected_baseLabelFont", CATEGORY, "Font", "getBaseLabelFont", "setBaseLabelFont"),
+                        SupervisorProperty.createProperty(this, EdgeChildColorizer.class, "Undirected_labelColorizer", CATEGORY, "Label color", "getLabelColorizer", "setLabelColorizer", EdgeChildColorizerPropertyEditor.class)};
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new SupervisorPropery[0];
+        return new SupervisorProperty[0];
     }
     */
 }

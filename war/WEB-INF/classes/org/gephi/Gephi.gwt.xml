@@ -1,5 +1,7 @@
 <module>
 
+    
+    
 	<inherits name="com.google.gwt.user.User" />
 	
 	<inherits name="org.gephi.algorithms.Algorithms" />
@@ -12,6 +14,14 @@
 	<inherits name="org.gephi.workspace.Workspace" />
 	
 	<inherits name="org.openide.Openide" />
+	
+	<replace-with class="_org.gephi.gwt.Color">
+    	<when-type-is class="java.awt.Color"/>
+    </replace-with>
+
+	<replace-with class="_org.gephi.gwt.Font">
+    	<when-type-is class="java.awt.Font"/>
+    </replace-with>
 	
 	<source path="" />
 	

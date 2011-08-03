@@ -20,7 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.preview.api.supervisors;
 
-//import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorProperty;
 
 /**
  * Generic interface of a supervisor.
@@ -37,5 +37,5 @@ public interface Supervisor {
     /**
      * Return properties for this supervisor. Can get or set values.
      */
-    //public SupervisorPropery[] getProperties();
+    //public SupervisorProperty[] getProperties();
 }

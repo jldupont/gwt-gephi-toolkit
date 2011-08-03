@@ -25,7 +25,7 @@ import java.util.Set;
 import org.gephi.preview.GraphImpl;
 import org.gephi.preview.SelfLoopImpl;
 import org.gephi.preview.api.EdgeColorizer;
-//import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorProperty;
 import org.gephi.preview.api.supervisors.SelfLoopSupervisor;
 //import org.gephi.preview.propertyeditors.EdgeColorizerPropertyEditor;
 import org.gephi.preview.updaters.CustomColorMode;
@@ -161,18 +161,18 @@ public class SelfLoopSupervisorImpl implements SelfLoopSupervisor {
         }
     }
 /*
-    public SupervisorPropery[] getProperties() {
+    public SupervisorProperty[] getProperties() {
         final String CATEGORY = "Self-Loop";
         try {
-            return new SupervisorPropery[]{
-                        SupervisorPropery.createProperty(this, Boolean.class, "SelfLoop_showFlag", CATEGORY, "Show", "getShowFlag", "setShowFlag"),
-                        SupervisorPropery.createProperty(this, Float.class, "SelfLoop_edgeScale", CATEGORY, "Thickness", "getEdgeScale", "setEdgeScale"),
-                        SupervisorPropery.createProperty(this, Boolean.class, "SelfLoop_rescaleWeight", CATEGORY, "Rescale Weight", "getRescaleWeight", "setRescaleWeight"),
-                        SupervisorPropery.createProperty(this, EdgeColorizer.class, "SelfLoop_colorizer", CATEGORY, "Color", "getColorizer", "setColorizer", EdgeColorizerPropertyEditor.class)};
+            return new SupervisorProperty[]{
+                        SupervisorProperty.createProperty(this, Boolean.class, "SelfLoop_showFlag", CATEGORY, "Show", "getShowFlag", "setShowFlag"),
+                        SupervisorProperty.createProperty(this, Float.class, "SelfLoop_edgeScale", CATEGORY, "Thickness", "getEdgeScale", "setEdgeScale"),
+                        SupervisorProperty.createProperty(this, Boolean.class, "SelfLoop_rescaleWeight", CATEGORY, "Rescale Weight", "getRescaleWeight", "setRescaleWeight"),
+                        SupervisorProperty.createProperty(this, EdgeColorizer.class, "SelfLoop_colorizer", CATEGORY, "Color", "getColorizer", "setColorizer", EdgeColorizerPropertyEditor.class)};
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new SupervisorPropery[0];
+        return new SupervisorProperty[0];
     }
     */
 }

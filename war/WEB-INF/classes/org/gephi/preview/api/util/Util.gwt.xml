@@ -2,7 +2,6 @@
 
 	<inherits name="com.google.gwt.user.User" />
 	
-	<inherits name="org.gephi.preview.api.util.color.Color" />
 	<source path="" />
 	
 </module>

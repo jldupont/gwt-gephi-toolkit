@@ -29,7 +29,7 @@ import org.gephi.preview.NodeLabelImpl;
 import org.gephi.preview.api.GenericColorizer;
 import org.gephi.preview.api.NodeChildColorizer;
 import org.gephi.preview.api.NodeColorizer;
-//import org.gephi.preview.api.SupervisorPropery;
+//import org.gephi.preview.api.SupervisorProperty;
 import org.gephi.preview.api.supervisors.NodeSupervisor;
 //import org.gephi.preview.propertyeditors.GenericColorizerPropertyEditor;
 //import org.gephi.preview.propertyeditors.NodeChildColorizerPropertyEditor;
@@ -371,27 +371,27 @@ public class NodeSupervisorImpl implements NodeSupervisor {
         }
     }
 /*
-    public SupervisorPropery[] getProperties() {
+    public SupervisorProperty[] getProperties() {
         final String CATEGORY = "Node";
         try {
-            return new SupervisorPropery[]{
-                        SupervisorPropery.createProperty(this, Boolean.class, "showNodes", CATEGORY, "Show"),
-                        SupervisorPropery.createProperty(this, Float.class, "nodeBorderWidth", CATEGORY, "Border width"),
-                        SupervisorPropery.createProperty(this, NodeColorizer.class, "nodeColorizer", CATEGORY, "Color", NodeColorizerPropertyEditor.class),
-                        SupervisorPropery.createProperty(this, GenericColorizer.class, "nodeBorderColorizer", CATEGORY, "Border color", GenericColorizerPropertyEditor.class),
-                        SupervisorPropery.createProperty(this, Boolean.class, "showNodeLabels", CATEGORY, "Show labels"),
-                        SupervisorPropery.createProperty(this, Boolean.class, "proportionalLabelSize", CATEGORY, "Proportional label size"),
-                        SupervisorPropery.createProperty(this, Font.class, "baseNodeLabelFont", CATEGORY, "Label font"),
-                        SupervisorPropery.createProperty(this, Boolean.class, "shortenLabelsFlag", CATEGORY, "Shorten labels"),
-                        SupervisorPropery.createProperty(this, Integer.class, "nodeLabelMaxChar", CATEGORY, "Shorten limit"),
-                        SupervisorPropery.createProperty(this, NodeChildColorizer.class, "nodeLabelColorizer", CATEGORY, "Label color", NodeChildColorizerPropertyEditor.class),
-                        SupervisorPropery.createProperty(this, Boolean.class, "showNodeLabelBorders", CATEGORY, "Label border"),
-                        SupervisorPropery.createProperty(this, NodeChildColorizer.class, "nodeLabelBorderColorizer", CATEGORY, "Label Border Color", NodeChildColorizerPropertyEditor.class)
+            return new SupervisorProperty[]{
+                        SupervisorProperty.createProperty(this, Boolean.class, "showNodes", CATEGORY, "Show"),
+                        SupervisorProperty.createProperty(this, Float.class, "nodeBorderWidth", CATEGORY, "Border width"),
+                        SupervisorProperty.createProperty(this, NodeColorizer.class, "nodeColorizer", CATEGORY, "Color", NodeColorizerPropertyEditor.class),
+                        SupervisorProperty.createProperty(this, GenericColorizer.class, "nodeBorderColorizer", CATEGORY, "Border color", GenericColorizerPropertyEditor.class),
+                        SupervisorProperty.createProperty(this, Boolean.class, "showNodeLabels", CATEGORY, "Show labels"),
+                        SupervisorProperty.createProperty(this, Boolean.class, "proportionalLabelSize", CATEGORY, "Proportional label size"),
+                        SupervisorProperty.createProperty(this, Font.class, "baseNodeLabelFont", CATEGORY, "Label font"),
+                        SupervisorProperty.createProperty(this, Boolean.class, "shortenLabelsFlag", CATEGORY, "Shorten labels"),
+                        SupervisorProperty.createProperty(this, Integer.class, "nodeLabelMaxChar", CATEGORY, "Shorten limit"),
+                        SupervisorProperty.createProperty(this, NodeChildColorizer.class, "nodeLabelColorizer", CATEGORY, "Label color", NodeChildColorizerPropertyEditor.class),
+                        SupervisorProperty.createProperty(this, Boolean.class, "showNodeLabelBorders", CATEGORY, "Label border"),
+                        SupervisorProperty.createProperty(this, NodeChildColorizer.class, "nodeLabelBorderColorizer", CATEGORY, "Label Border Color", NodeChildColorizerPropertyEditor.class)
                     };
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new SupervisorPropery[0];
+        return new SupervisorProperty[0];
     }
     */
 }
