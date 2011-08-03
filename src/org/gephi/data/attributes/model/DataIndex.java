@@ -20,12 +20,12 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.data.attributes.model;
 
-import java.lang.ref.WeakReference;
+//import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
+
 import org.gephi.data.attributes.api.AttributeRow;
 import org.gephi.data.attributes.api.AttributeType;
 import org.gephi.data.attributes.type.BigDecimalList;
@@ -64,24 +64,24 @@ public class DataIndex {
         StringList.class, BigIntegerList.class, BigDecimalList.class};
 
 
-    private static Map<Class<?>, WeakHashMap> centralHashMap;
+    private static Map<Class<?>, HashMap> centralHashMap;
 
 
     public DataIndex() {
-        centralHashMap = new HashMap<Class<?>, WeakHashMap>();
+        centralHashMap = new HashMap<Class<?>, HashMap>();
 
         for (Class<?> supportedType : SUPPORTED_TYPES)
             putInCentralMap(supportedType);
     }
 
     private static <T> void putInCentralMap(Class<T> supportedType) {
-        centralHashMap.put(supportedType, new WeakHashMap<T, WeakReference<T>>());
+        centralHashMap.put(supportedType, new HashMap<T, Object>());
     }
 
     public int countEntries() {
         int entries = 0;
 
-        for (WeakHashMap<?,?> weakHashMap : centralHashMap.values())
+        for (HashMap<?,?> weakHashMap : centralHashMap.values())
             entries += weakHashMap.size();
 
         return entries;
@@ -89,23 +89,23 @@ public class DataIndex {
 
     <T> T pushData(T data) {
         Class<?> classObjectKey = data.getClass();
-        WeakHashMap<T, WeakReference<T>> weakHashMap = centralHashMap.get(classObjectKey);
+        HashMap<T, Object> weakHashMap = centralHashMap.get(classObjectKey);
 
         if (weakHashMap == null)
             return data;
 
-        WeakReference<T> value = weakHashMap.get(data);
+        Object value = weakHashMap.get(data);
         if (value == null) {
-            WeakReference<T> weakRef = new WeakReference<T>(data);
-            weakHashMap.put(data, weakRef);
+            //Object weakRef = new WeakReference<T>(data);
+            weakHashMap.put(data, data);
             return data;
         }
 
-        return value.get();
+        return (T) value;
     }
 
     public void clear() {
-        for (WeakHashMap<?,?> weakHashMap : centralHashMap.values())
+        for (HashMap<?,?> weakHashMap : centralHashMap.values())
             weakHashMap.clear();
     }
 }
