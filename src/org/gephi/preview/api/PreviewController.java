@@ -46,11 +46,11 @@ public interface PreviewController {
 
     public PreviewPreset[] getDefaultPresets();
 
-    public PreviewPreset[] getUserPresets();
+   // public PreviewPreset[] getUserPresets();
 
-    public void savePreset(String name);
+    //public void savePreset(String name);
 
-    public void setCurrentPreset(PreviewPreset preset);
+    //public void setCurrentPreset(PreviewPreset preset);
 
-    public void setBackgroundColor(java.awt.Color color);
+    //public void setBackgroundColor(java.awt.Color color);
 }

@@ -20,9 +20,9 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.preview;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.List;
 import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
@@ -40,21 +40,21 @@ import org.gephi.preview.presets.SmallLabels;
 import org.gephi.preview.presets.TagCloud;
 import org.gephi.project.api.ProjectController;
 import org.gephi.project.api.Workspace;
-import org.gephi.project.api.WorkspaceListener;
+//import org.gephi.project.api.WorkspaceListener;
 import org.openide.util.Lookup;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  * Implementation of the preview controller.
  *
  * @author Jérémy Subtil <jeremy.subtil@gephi.org>
  */
-@ServiceProvider(service = PreviewController.class)
+//@ServiceProvider(service = PreviewController.class)
 public class PreviewControllerImpl implements PreviewController {
 
     //Utils
     private final PreviewGraphFactory factory = new PreviewGraphFactory();
-    private final PresetUtils presetUtils = new PresetUtils();
+    //private final PresetUtils presetUtils = new PresetUtils();
     //Current graphs
     private GraphImpl previewGraph = null;
     private PartialGraphImpl partialPreviewGraph = null;
@@ -68,6 +68,7 @@ public class PreviewControllerImpl implements PreviewController {
      */
     public PreviewControllerImpl() {
         ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
+        /*
         pc.addWorkspaceListener(new WorkspaceListener() {
 
             public void initialize(Workspace workspace) {
@@ -95,7 +96,8 @@ public class PreviewControllerImpl implements PreviewController {
                 previewGraph=null;
             }
         });
-
+		*/
+        
         // checks the current workspace state
         if (pc.getCurrentWorkspace() != null) {
             Workspace workspace = pc.getCurrentWorkspace();
@@ -183,7 +185,7 @@ public class PreviewControllerImpl implements PreviewController {
         GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
         model.clearSupervisors();
 
-        graphModel.getGraph().readLock();
+        //graphModel.getGraph().readLock();
 
         if (graphModel.isUndirected()) {
             previewGraph = factory.createPreviewGraph(model, graphModel.getHierarchicalUndirectedGraphVisible());
@@ -193,7 +195,7 @@ public class PreviewControllerImpl implements PreviewController {
             previewGraph = factory.createPreviewGraph(model, graphModel.getHierarchicalMixedGraphVisible());
         }
 
-        graphModel.getGraph().readUnlockAll();
+        //graphModel.getGraph().readUnlockAll();
 
         model.setUpdateFlag(true);
     }
@@ -213,7 +215,7 @@ public class PreviewControllerImpl implements PreviewController {
         presets.add(new EdgesCustomColor());
         return presets.toArray(new PreviewPreset[0]);
     }
-
+/*
     public PreviewPreset[] getUserPresets() {
         PreviewPreset[] presetsArray = presetUtils.getPresets();
         Arrays.sort(presetsArray);
@@ -240,4 +242,6 @@ public class PreviewControllerImpl implements PreviewController {
             model.setBackgroundColor(color);
         }
     }
+    */
+    
 }
