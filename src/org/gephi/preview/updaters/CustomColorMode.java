@@ -116,12 +116,14 @@ public class CustomColorMode
      */
     @Override
     public String toString() {
+    	throw new RuntimeException(this.getClass().toString()+".toString: not implemented");
+    	/*
         return String.format(
                 "%s [%d,%d,%d]",
                 IDENTIFIER,
                 color.getRed(),
                 color.getGreen(),
-                color.getBlue());
+                color.getBlue());*/
     }
 
     /**

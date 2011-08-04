@@ -794,9 +794,15 @@ public class _PVector implements Serializable {
   @Override
   public int hashCode() {
     int result = 1;
-    result = 31 * result + Float.floatToIntBits(x);
-    result = 31 * result + Float.floatToIntBits(y);
-    result = 31 * result + Float.floatToIntBits(z);
+    result = 31 * result + floatToInt(x);
+    result = 31 * result + floatToInt(y);
+    result = 31 * result + floatToInt(z);
     return result;
   }
+  
+  private int floatToInt(float f) {
+	  Float rf=new Float(f);
+	  return rf.intValue();
+  }
+  
 }
