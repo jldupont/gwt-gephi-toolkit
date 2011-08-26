@@ -51,7 +51,7 @@ import org.gephi.data.attributes.type.TimeInterval;
  * @author Martin Škurla
  * @see AttributeType
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class DataIndex {
 
     

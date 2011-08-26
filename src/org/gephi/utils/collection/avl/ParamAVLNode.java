@@ -26,7 +26,7 @@ package org.gephi.utils.collection.avl;
  * @author Mathieu Bastian
  * @param <Item> The type of Object in the tree
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"rawtypes"})
 public class ParamAVLNode<Item> {
 
     

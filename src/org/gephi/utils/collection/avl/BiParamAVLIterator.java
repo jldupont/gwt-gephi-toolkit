@@ -31,10 +31,11 @@ import java.util.Iterator;
  * @author Mathieu Bastian
  * @param <Item> The type of Object in the tree
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class BiParamAVLIterator<Item> implements Iterator<Item> {
 
     
+	
 	private ParamAVLTree tree2;
     private ParamAVLTree currentTree;
     private ParamAVLNode<Item> next;

@@ -36,6 +36,7 @@ import org.gephi.data.attributes.type.NumberList;
  * @author Martin Škurla
  */
 //@ServiceProvider(service = AttributeUtils.class)
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class AttributeUtilsImpl extends AttributeUtils {
 
     @Override
@@ -84,7 +85,6 @@ public class AttributeUtilsImpl extends AttributeUtils {
         return isType(Number.class, attributeType);
     }
 
-    @SuppressWarnings("unchecked")
 	public boolean isType(Class k, AttributeType at) {
     	throw new RuntimeException("AttributeUtilsImpl.isType: not implemented...");
     }
@@ -156,8 +156,6 @@ public class AttributeUtilsImpl extends AttributeUtils {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
-	@Override
     public Comparable getMin(AttributeColumn column, Comparable[] values) {
         if (!isNumberColumn(column) && !isDynamicNumberColumn(column)) {
             throw new IllegalArgumentException("Colun must be a number column");
@@ -183,8 +181,6 @@ public class AttributeUtilsImpl extends AttributeUtils {
         }
     }
 
-    @SuppressWarnings("unchecked")
-	@Override
     public Comparable getMax(AttributeColumn column, Comparable[] values) {
         if (!isNumberColumn(column) && !isDynamicNumberColumn(column)) {
             throw new IllegalArgumentException("Colun must be a number column");

@@ -29,9 +29,9 @@ import org.gephi.utils.collection.avl.ResetableIterator;
  * @author Mathieu Bastian
  * @param <Item> The type of Object in the tree
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class ParamAVLIterator<Item> implements Iterator<Item>, ResetableIterator {
 
-    @SuppressWarnings("unchecked")
 	private ParamAVLTree tree;
     private ParamAVLNode<Item> next;
     private Item current;
@@ -39,26 +39,22 @@ public class ParamAVLIterator<Item> implements Iterator<Item>, ResetableIterator
     public ParamAVLIterator() {
     }
 
-    @SuppressWarnings("unchecked")
 	public ParamAVLIterator(ParamAVLNode node) {
         this.next = node;
         goToDownLeft();
     }
 
-    @SuppressWarnings("unchecked")
 	public ParamAVLIterator(ParamAVLTree tree) {
         this(tree.root);
         this.tree = tree;
     }
 
-    @SuppressWarnings("unchecked")
 	public void setNode(ParamAVLTree tree) {
         this.next = tree.root;
         this.tree = tree;
         goToDownLeft();
     }
 
-    @SuppressWarnings("unchecked")
 	private void goToDownLeft() {
         if (next != null) {
             while (next.left != null) {
@@ -67,7 +63,6 @@ public class ParamAVLIterator<Item> implements Iterator<Item>, ResetableIterator
         }
     }
 
-    @SuppressWarnings("unchecked")
 	public boolean hasNext() {
         if (next == null) {
             return false;
@@ -96,7 +91,6 @@ public class ParamAVLIterator<Item> implements Iterator<Item>, ResetableIterator
         return current;
     }
 
-    @SuppressWarnings("unchecked")
 	public void remove() {
         tree.remove(current);   //TODO Optimize, remove in O(1) instead of O(ln(n))
     }

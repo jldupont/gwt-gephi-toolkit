@@ -32,7 +32,7 @@ import org.gephi.data.attributes.api.Estimator;
  * 
  * @author Cezary Bartosiak
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public final class DynamicDouble extends DynamicType<Double> {
 	/**
 	 * Constructs a new {@code DynamicType} instance with no intervals.

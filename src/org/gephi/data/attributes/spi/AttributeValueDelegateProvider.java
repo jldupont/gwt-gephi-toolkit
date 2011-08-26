@@ -81,7 +81,7 @@ import org.gephi.data.attributes.api.AttributeColumn;
  *
  * @param <T> type parameter used to restrict delegate id type
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"rawtypes"})
 public abstract class AttributeValueDelegateProvider<T> {
     /**
      * Returns the delegated node attribute value.

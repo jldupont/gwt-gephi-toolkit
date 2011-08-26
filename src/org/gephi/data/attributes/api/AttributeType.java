@@ -58,7 +58,7 @@ import org.gephi.data.attributes.type.Interval;
  * @author Martin Škurla
  * @author Cezary Bartosiak
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public enum AttributeType {
 
     BYTE(Byte.class),

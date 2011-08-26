@@ -48,7 +48,7 @@ import java.util.List;
  *
  * @param <T> type of data
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public final class IntervalTree<T> {
 	private Node nil;  // the sentinel node
 	private Node root; // the root of this interval tree
@@ -72,6 +72,7 @@ public final class IntervalTree<T> {
 		copy(intervalTree.root.left, intervalTree.nil);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void copy(IntervalTree.Node x, IntervalTree.Node nil) {
 		if (x != nil) {
 			copy(x.left, nil);
@@ -563,6 +564,7 @@ public final class IntervalTree<T> {
 	 * 
 	 * @see #hashCode
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj.getClass().equals(this.getClass())) {

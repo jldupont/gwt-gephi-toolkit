@@ -239,7 +239,8 @@ public class TreeStructure {
     public void showTreeAsTable() {
         System.out.println("pre\tsize\tlevel\tparent\tpost\tenabled\tid");
         System.out.println("-----------------------------------------------------------------");
-        int pre = 0;
+        @SuppressWarnings("unused")
+		int pre = 0;
         for (AbstractNode p : tree) {
             System.out.println(p.pre + "\t" + p.size + "\t" + p.level + "\t" + (p.parent == null ? "null" : p.parent.getPre()) + "\t" + p.post + "\t" + p.isEnabled() + "\t" + p.getId());
             pre++;

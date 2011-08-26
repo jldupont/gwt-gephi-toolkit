@@ -32,7 +32,6 @@ import org.gephi.data.attributes.api.Estimator;
  * 
  * @author Cezary Bartosiak
  */
-@SuppressWarnings("unchecked")
 public final class DynamicBigDecimal extends DynamicType<BigDecimal> {
 	/**
 	 * Constructs a new {@code DynamicType} instance with no intervals.
@@ -124,7 +123,7 @@ public final class DynamicBigDecimal extends DynamicType<BigDecimal> {
 		super(source, in, out);
 	}
 	
-	@Override
+	@SuppressWarnings("rawtypes")
 	public BigDecimal getValue(Interval interval, Estimator estimator) {
 		List<BigDecimal> values = getValues(interval);
 		if (values.isEmpty())
@@ -187,7 +186,7 @@ public final class DynamicBigDecimal extends DynamicType<BigDecimal> {
 		}
 	}
 
-	@Override
+	@SuppressWarnings("rawtypes")
 	public Class getUnderlyingType() {
 		return BigDecimal.class;
 	}

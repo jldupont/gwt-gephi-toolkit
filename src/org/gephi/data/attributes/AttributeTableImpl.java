@@ -39,6 +39,7 @@ import org.gephi.data.properties.PropertiesColumn;
  * @author Mathieu Bastian
  * @author Martin Škurla
  */
+@SuppressWarnings({"rawtypes"})
 public class AttributeTableImpl implements AttributeTable {
 
     protected String name;
@@ -84,12 +85,10 @@ public class AttributeTableImpl implements AttributeTable {
         return addColumn(id, title, type, origin, defaultValue, null);
     }
 
-    @SuppressWarnings("unchecked")
 	public AttributeColumn addColumn(String id, String title, AttributeType type, AttributeValueDelegateProvider attributeValueDelegateProvider, Object defaultValue) {
         return addColumn(id, title, type, AttributeOrigin.DELEGATE, defaultValue, attributeValueDelegateProvider);
     }
 
-    @SuppressWarnings("unchecked")
 	private synchronized AttributeColumnImpl addColumn(String id, String title, AttributeType type, AttributeOrigin origin, Object defaultValue, AttributeValueDelegateProvider attributeValueDelegateProvider) {
         if (title == null || title.isEmpty() || hasColumn(title)) {
             throw new IllegalArgumentException("The title can't be null, empty or already existing in the table");

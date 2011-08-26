@@ -19,6 +19,7 @@ import org.gephi.graph.dhns.*;
 
 import com.google.gwt.core.client.GWT;
 
+@SuppressWarnings("rawtypes")
 public class Factory {
 
 	static boolean initDone=false;
@@ -34,10 +35,9 @@ public class Factory {
 		WORKSPACE_INFORMATION_IMPL,
 	}
 	
-	@SuppressWarnings("unchecked")
+
 	static HashMap<Class, Object> map=new HashMap<Class, Object>();
 	
-	@SuppressWarnings("unchecked")
 	static HashMap<Class, Classe> cmap=new HashMap<Class, Classe>();
 	
 	// Singleton flag map

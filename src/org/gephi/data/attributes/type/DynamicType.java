@@ -32,7 +32,7 @@ import org.gephi.data.attributes.api.Estimator;
  * 
  * @param <T> type of data
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public abstract class DynamicType<T> {
 	protected IntervalTree<T> intervalTree;
 
@@ -427,7 +427,7 @@ public abstract class DynamicType<T> {
 	 * 
 	 * @see #hashCode
 	 */
-	@Override
+	@SuppressWarnings("unchecked")
 	public boolean equals(Object obj) {
 		if (obj != null && obj.getClass().equals(this.getClass()) &&
 				((DynamicType<T>)obj).intervalTree.equals(intervalTree))

@@ -30,7 +30,7 @@ import org.gephi.data.attributes.api.Estimator;
  * 
  * @author Cezary Bartosiak
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public final class DynamicBoolean extends DynamicType<Boolean> {
 	/**
 	 * Constructs a new {@code DynamicType} instance with no intervals.

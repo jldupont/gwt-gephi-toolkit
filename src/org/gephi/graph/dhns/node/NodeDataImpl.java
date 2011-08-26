@@ -50,13 +50,13 @@ public class NodeDataImpl implements NodeData, GroupData {
     protected float b = 0.6f;
     protected float alpha = 1f;
     protected float size = 1f;
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
 	protected Model model;
     protected boolean fixed;
     protected String label;
     protected Attributes attributes;
     protected TextData textData;
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
 	protected Model hullModel;
 
     public NodeDataImpl(int ID, AbstractNode rootNode) {
@@ -197,12 +197,12 @@ public class NodeDataImpl implements NodeData, GroupData {
         this.alpha = alpha;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
 	public Model getModel() {
         return model;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
 	public void setModel(Model obj) {
         this.model = obj;
     }
@@ -247,12 +247,12 @@ public class NodeDataImpl implements NodeData, GroupData {
         this.textData = textData;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
 	public Model getHullModel() {
         return hullModel;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
 	public void setHullModel(Model hullModel) {
         this.hullModel = hullModel;
     }

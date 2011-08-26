@@ -37,6 +37,7 @@ import org.gephi.graph.api.TextData;
  *
  * @author Mathieu Bastian
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class EdgeDataImpl implements EdgeData {
 
     protected AbstractEdge edge;
@@ -46,7 +47,6 @@ public class EdgeDataImpl implements EdgeData {
     protected float b = 0f;
     protected float alpha = 1f;
     private String label;
-    @SuppressWarnings("unchecked")
 	private Model model;
     protected Attributes attributes;
     protected TextData textData;
@@ -75,7 +75,6 @@ public class EdgeDataImpl implements EdgeData {
         }
     }
 
-    @SuppressWarnings("unchecked")
 	public LayoutData getLayoutData() {
         return layoutData;
     }
@@ -166,12 +165,10 @@ public class EdgeDataImpl implements EdgeData {
         this.alpha = alpha;
     }
 
-    @SuppressWarnings("unchecked")
 	public Model getModel() {
         return model;
     }
 
-    @SuppressWarnings("unchecked")
 	public void setModel(Model obj) {
         this.model = obj;
     }

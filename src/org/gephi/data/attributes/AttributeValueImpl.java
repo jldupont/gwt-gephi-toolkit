@@ -29,6 +29,7 @@ import org.gephi.data.attributes.spi.AttributeValueDelegateProvider;
  * @author Mathieu Bastian
  * @author Martin Škurla
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public final class AttributeValueImpl implements AttributeValue {
 
     private final AttributeColumnImpl column;
@@ -43,7 +44,6 @@ public final class AttributeValueImpl implements AttributeValue {
         return column;
     }
 
-    @SuppressWarnings("unchecked")
 	public Object getValue() {
         if (column.getOrigin() != AttributeOrigin.DELEGATE) {
             return value;

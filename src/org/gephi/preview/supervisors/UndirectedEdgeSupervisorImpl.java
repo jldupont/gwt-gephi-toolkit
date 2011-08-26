@@ -65,7 +65,7 @@ public class UndirectedEdgeSupervisorImpl extends EdgeSupervisorImpl
     }
 
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Set getSupervisedEdges() {
         return supervisedEdges;
     }

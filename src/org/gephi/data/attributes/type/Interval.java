@@ -29,7 +29,7 @@ import org.gephi.data.attributes.api.AttributeUtils;
  *
  * @param <T> type of data
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public final class Interval<T> implements Comparable<Interval> {
 	private double  low;   // the left endpoint
 	private double  high;  // the right endpoint
@@ -217,6 +217,7 @@ public final class Interval<T> implements Comparable<Interval> {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj.getClass().equals(this.getClass())) {
+			@SuppressWarnings("unchecked")
 			Interval<T> interval = (Interval<T>)obj;
 			if (low == interval.low && high == interval.high &&
 					lopen == interval.lopen && ropen == interval.ropen)

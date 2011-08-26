@@ -30,7 +30,7 @@ import java.util.Iterator;
  * @author Mathieu Bastian
  * @param <Item> The type of Object in the tree
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class ParamAVLTree<Item> implements Iterable<Item> {
 
     protected ParamAVLNode<Item> root;

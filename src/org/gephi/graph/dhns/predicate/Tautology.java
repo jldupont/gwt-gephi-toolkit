@@ -24,7 +24,7 @@ package org.gephi.graph.dhns.predicate;
  *
  * @author Mathieu Bastian
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public class Tautology implements Predicate {
 
     public static Tautology instance = new Tautology();

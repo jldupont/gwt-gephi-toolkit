@@ -27,7 +27,7 @@ import org.gephi.graph.api.GraphView;
  *
  * @author Mathieu Bastian
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class GeneralEvent extends AbstractEvent {
 
     public GeneralEvent(EventType eventType, GraphView view) {

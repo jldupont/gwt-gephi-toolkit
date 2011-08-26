@@ -36,7 +36,7 @@ import org.gephi.data.properties.PropertiesColumn;
  * @see AttributeColumn
  * @see AttributeRow
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"rawtypes"})
 public interface AttributeTable {
 
     /**

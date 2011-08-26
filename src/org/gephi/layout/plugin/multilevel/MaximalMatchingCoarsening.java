@@ -30,7 +30,8 @@ import org.gephi.graph.api.Node;
  */
 public class MaximalMatchingCoarsening implements MultiLevelLayout.CoarseningStrategy {
 
-    public void coarsen(HierarchicalGraph g) {
+    @SuppressWarnings("unused")
+	public void coarsen(HierarchicalGraph g) {
         HierarchicalGraph graph = g;
         int retract = 0;
         int count = 0;
@@ -51,6 +52,7 @@ public class MaximalMatchingCoarsening implements MultiLevelLayout.CoarseningStr
         }
     }
 
+    @SuppressWarnings("unused")
     public void refine(HierarchicalGraph graph) {
         double r = 10;
         int count = 0;

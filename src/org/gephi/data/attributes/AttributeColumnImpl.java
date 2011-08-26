@@ -30,7 +30,7 @@ import org.gephi.data.attributes.spi.AttributeValueDelegateProvider;
  * @author Mathieu Bastian
  * @author Martin Škurla
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"rawtypes"})
 public class AttributeColumnImpl implements AttributeColumn {
 
     protected final AttributeTableImpl table;

@@ -31,7 +31,7 @@ import org.openide.util.Lookup;
  * @author Mathieu Bastian
  * @author Martin  Škurla
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"rawtypes"})
 public abstract class AttributeUtils {
 
     public abstract boolean isNodeColumn(AttributeColumn column);
