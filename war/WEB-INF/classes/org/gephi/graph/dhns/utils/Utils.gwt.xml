@@ -1,0 +1,9 @@
+<module>
+
+	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="org.gephi.graph.dhns.utils.avl.Avl" />
+	
+	<source path="" />
+	
+</module>

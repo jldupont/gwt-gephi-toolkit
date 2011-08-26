@@ -1,0 +1,17 @@
+<module>
+
+	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="org.gephi.layout.plugin.force.Force" />
+	<inherits name="org.gephi.layout.plugin.forceAtlas.ForceAtlas" />
+	<inherits name="org.gephi.layout.plugin.fruchterman.Fruchterman" />
+	<inherits name="org.gephi.layout.plugin.labelAdjust.LabelAdjust" />
+	<inherits name="org.gephi.layout.plugin.multilevel.Multilevel" />
+	<inherits name="org.gephi.layout.plugin.random.Random" />
+	<inherits name="org.gephi.layout.plugin.rotate.Rotate" />
+	<inherits name="org.gephi.layout.plugin.scale.Scale" />
+	
+	
+	<source path="" />
+	
+</module>

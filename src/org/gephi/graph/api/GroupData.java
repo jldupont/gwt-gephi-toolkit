@@ -26,9 +26,9 @@ package org.gephi.graph.api;
  */
 public interface GroupData {
 
-	@SuppressWarnings("unchecked")
-    public Model getHullModel();
+    @SuppressWarnings("rawtypes")
+	public Model getHullModel();
 
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public void setHullModel(Model hullModel);
 }

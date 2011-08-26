@@ -58,10 +58,10 @@ public interface Renderable extends Spatial {
 
     public void setAlpha(float alpha);
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"rawtypes" })
 	public Model getModel();
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"rawtypes" })
     public void setModel(Model obj);
 
     public TextData getTextData();

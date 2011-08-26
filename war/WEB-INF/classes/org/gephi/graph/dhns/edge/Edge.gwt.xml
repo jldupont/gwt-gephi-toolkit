@@ -1,0 +1,12 @@
+<module>
+
+	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="org.gephi.graph.dhns.core.Core" />
+	<inherits name="org.gephi.graph.dhns.edge.iterators.Iterators" />
+	
+	<inherits name="org.gephi.graph.dhns.event.Event" />
+	
+	<source path="" />
+	
+</module>
