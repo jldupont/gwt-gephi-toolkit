@@ -2,9 +2,13 @@
 
 	<inherits name="com.google.gwt.user.User" />
 	
-	<inherits name="org.openide.nodes.Nodes" />
-	<inherits name="org.openide.util.Util" />
-	
+	<inherits name="_org.gephi.gwt.Gwt" />
+		
+	<replace-with class="_org.gephi.gwt.Dummy">
+	    <when-type-is class="org.openide.util.lookup.ServiceProvider"/>
+	 </replace-with>
+		
+		
 	<source path="" />
 	
 </module>

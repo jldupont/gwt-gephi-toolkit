@@ -5,24 +5,45 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
  */
 package org.gephi.graph.dhns.graph;
 
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
-//import org.gephi.graph.api.ImmutableTreeNode;
+import org.gephi.graph.api.ImmutableTreeNode;
 import org.gephi.graph.api.Node;
 import org.gephi.graph.api.NodeIterable;
 import org.gephi.graph.dhns.core.Dhns;
@@ -35,7 +56,7 @@ import org.gephi.graph.dhns.node.iterators.LevelIterator;
 import org.gephi.graph.dhns.node.iterators.TreeIterator;
 import org.gephi.graph.dhns.predicate.Predicate;
 import org.gephi.graph.dhns.predicate.Tautology;
-//import org.gephi.graph.dhns.utils.TreeNodeWrapper;
+import org.gephi.graph.dhns.utils.TreeNodeWrapper;
 
 /**
  *
@@ -123,15 +144,13 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         return dhns.getGraphStructure().getEdgeFromDictionnary(id);
     }
 
-    @SuppressWarnings("unchecked")
-	public NodeIterable getNodes() {
-        //readLock();
+    public NodeIterable getNodes() {
+        readLock();
         return dhns.newNodeIterable(new TreeIterator(structure, true, Tautology.instance));
     }
 
-    @SuppressWarnings("unchecked")
-	public NodeIterable getNodesTree() {
-        //readLock();
+    public NodeIterable getNodesTree() {
+        readLock();
         return dhns.newNodeIterable(new TreeIterator(structure, false, Tautology.instance));
     }
 
@@ -141,13 +160,12 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         return count;
     }
 
-    @SuppressWarnings("unchecked")
-	public NodeIterable getNodes(int level) {
+    public NodeIterable getNodes(int level) {
         level += 1;     //Because we ignore the virtual root
-        //readLock();
+        readLock();
         int height = structure.getTreeHeight();
         if (level > height) {
-            //readUnlock();
+            readUnlock();
             throw new IllegalArgumentException("Level must be between 0 and the height of the tree, currently height=" + (height - 1));
         }
         return dhns.newNodeIterable(new LevelIterator(structure, level, Tautology.instance));
@@ -229,20 +247,17 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         }
         dhns.getGraphStructure().setEdgeId((AbstractEdge) edge, id);
     }
-/*
-    @SuppressWarnings("unchecked")
-	public ImmutableTreeNode wrapToTreeNode() {
+
+    public ImmutableTreeNode wrapToTreeNode() {
         TreeNodeWrapper wrapper = new TreeNodeWrapper(structure);
         ImmutableTreeNode treeNode;
-        //readLock();
+        readLock();
         treeNode = wrapper.wrap(new TreeIterator(structure, false, Tautology.instance));
-        //readUnlock();
+        readUnlock();
         return treeNode;
     }
-*/
-    
-    @SuppressWarnings("unchecked")
-	public int getChildrenCount(Node node) {
+
+    public int getChildrenCount(Node node) {
         AbstractNode absNode = checkNode(node);
         int count = 0;
         ChildrenIterator itr = new ChildrenIterator(structure, absNode, Tautology.instance);
@@ -267,23 +282,20 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
         return parent;
     }
 
-    @SuppressWarnings("unchecked")
-	public NodeIterable getChildren(Node node) {
-        //readLock();
+    public NodeIterable getChildren(Node node) {
+        readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new ChildrenIterator(structure, absNode, Tautology.instance));
     }
 
-    @SuppressWarnings("unchecked")
-	public NodeIterable getDescendant(Node node) {
-        //readLock();
+    public NodeIterable getDescendant(Node node) {
+        readLock();
         AbstractNode absNode = checkNode(node);
         return dhns.newNodeIterable(new DescendantIterator(structure, absNode, Tautology.instance));
     }
 
-    @SuppressWarnings("unchecked")
-	public NodeIterable getTopNodes() {
-        //readLock();
+    public NodeIterable getTopNodes() {
+        readLock();
         return dhns.newNodeIterable(new ChildrenIterator(structure, Tautology.instance));
     }
 
@@ -403,14 +415,14 @@ public abstract class HierarchicalGraphImpl extends AbstractGraphImpl implements
     }
 
     public void resetViewToLevel(int level) {
-        //readLock();
+        readLock();
         level += 1;     //Because we ignore the virtual root
         int height = structure.getTreeHeight();
         if (level > height) {
-            //readUnlock();
+            readUnlock();
             throw new IllegalArgumentException("Level must be between 0 and the height of the tree, currently height=" + (height - 1));
         }
-        //readUnlock();
+        readUnlock();
         view.getStructureModifier().resetViewToLevel(level);
     }
 

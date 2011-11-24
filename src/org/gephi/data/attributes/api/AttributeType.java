@@ -5,26 +5,51 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
  */
 package org.gephi.data.attributes.api;
 
 import java.math.BigInteger;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-//import java.util.regex.Pattern;
+import java.util.regex.Pattern;
 import org.gephi.data.attributes.type.DynamicByte;
 import org.gephi.data.attributes.type.DynamicShort;
 import org.gephi.data.attributes.type.DynamicInteger;
@@ -58,7 +83,6 @@ import org.gephi.data.attributes.type.Interval;
  * @author Martin Škurla
  * @author Cezary Bartosiak
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
 public enum AttributeType {
 
     BYTE(Byte.class),
@@ -103,8 +127,7 @@ public enum AttributeType {
 
     @Override
     public String toString() {
-    	// return type.getSimpleName(); //JLD
-        return type.getName();
+        return type.getSimpleName();
     }
 
     /**
@@ -198,205 +221,229 @@ public enum AttributeType {
         return str;
     }
 
-	private Object parseDynamic(String str) {
-		if (str.equals("<empty>"))
-			return createDynamicObject(null);
+    private Object parseDynamic(String str) {
+        if (str.equals("<empty>")) {
+            return createDynamicObject(null);
+        }
 
-                if(str.startsWith("<")){
-                    str=str.substring(1);
+        if (str.startsWith("<")) {
+            str = str.substring(1);
+        }
+        if (str.endsWith(">")) {
+            str = str.substring(0, str.length() - 1);
+        }
+        String[] intervals = str.split("; *");
+
+        List<Interval> in = new ArrayList<Interval>();
+
+        for (String interval : intervals) {
+            boolean lopen = interval.startsWith("(");
+            boolean ropen = interval.endsWith(")");
+
+            interval = interval.substring(1, interval.length() - 1);
+            String[] parts = interval.split(", *", 3);
+            double low, high;
+            try {
+                //Try first to parse as a date:
+                low =parseDateToDouble(parts[0]);
+            } catch (ParseException ex) {
+                low = Double.parseDouble(parts[0]);
+            }
+            try {
+                //Try first to parse as a date:
+                high =parseDateToDouble(parts[1]);                
+            } catch (ParseException ex) {
+                high = Double.parseDouble(parts[1]);
+            }            
+            Object value = null;
+            switch (this) {
+                case DYNAMIC_BYTE:
+                    value = new Byte(removeDecimalDigitsFromString(parts[2]));
+                    break;
+                case DYNAMIC_SHORT:
+                    value = new Short(removeDecimalDigitsFromString(parts[2]));
+                    break;
+                case DYNAMIC_INT:
+                    value = new Integer(removeDecimalDigitsFromString(parts[2]));
+                    break;
+                case DYNAMIC_LONG:
+                    value = new Long(removeDecimalDigitsFromString(parts[2]));
+                    break;
+                case DYNAMIC_FLOAT:
+                    value = new Float(parts[2]);
+                    break;
+                case DYNAMIC_DOUBLE:
+                    value = new Double(parts[2]);
+                    break;
+                case DYNAMIC_BOOLEAN:
+                    value = new Boolean(parts[2]);
+                    break;
+                case DYNAMIC_CHAR:
+                    value = new Character(parts[2].charAt(0));
+                    break;
+                case DYNAMIC_STRING:
+                    value = parts[2];
+                    break;
+                case DYNAMIC_BIGINTEGER:
+                    value = new BigInteger(removeDecimalDigitsFromString(parts[2]));
+                    break;
+                case DYNAMIC_BIGDECIMAL:
+                    value = new BigDecimal(parts[2]);
+                    break;
+                case TIME_INTERVAL:
+                default:
+                    value = null;
+                    break;
+            }
+
+            in.add(new Interval(low, high, lopen, ropen, value));
+        }
+
+        return createDynamicObject(in);
+    }
+
+    private DynamicType createDynamicObject(List<Interval> in) {
+        if (!this.isDynamicType()) {
+            return null;
+        }
+
+        switch (this) {
+            case DYNAMIC_BYTE: {
+                ArrayList<Interval<Byte>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Byte>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Byte>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Byte) interval.getValue()));
+                    }
                 }
-                if(str.endsWith(">")){
-                    str=str.substring(0, str.length()-1);
+                return new DynamicByte(lin);
+            }
+            case DYNAMIC_SHORT: {
+                ArrayList<Interval<Short>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Short>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Short>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Short) interval.getValue()));
+                    }
                 }
-		String[] intervals = str.split("; *");
-
-		List<Interval> in = new ArrayList<Interval>();
-
-		for (String interval : intervals) {
-			boolean lopen = interval.startsWith("(");
-			boolean ropen = interval.endsWith(")");
-
-			interval = interval.substring(1, interval.length() - 1);
-			String[] parts = interval.split(", *", 3);
-
-			double low   = Double.parseDouble(parts[0]);
-			double high  = Double.parseDouble(parts[1]);
-			Object value = null;
-			switch (this) {
-				case DYNAMIC_BYTE:
-					value = new Byte(removeDecimalDigitsFromString(parts[2]));
-					break;
-				case DYNAMIC_SHORT:
-					value = new Short(removeDecimalDigitsFromString(parts[2]));
-					break;
-				case DYNAMIC_INT:
-					value = new Integer(removeDecimalDigitsFromString(parts[2]));
-					break;
-				case DYNAMIC_LONG:
-					value = new Long(removeDecimalDigitsFromString(parts[2]));
-					break;
-				case DYNAMIC_FLOAT:
-					value = new Float(parts[2]);
-					break;
-				case DYNAMIC_DOUBLE:
-					value = new Double(parts[2]);
-					break;
-				case DYNAMIC_BOOLEAN:
-					value = new Boolean(parts[2]);
-					break;
-				case DYNAMIC_CHAR:
-					value = new Character(parts[2].charAt(0));
-					break;
-				case DYNAMIC_STRING:
-					value = parts[2];
-					break;
-				case DYNAMIC_BIGINTEGER:
-					value = new BigInteger(removeDecimalDigitsFromString(parts[2]));
-					break;
-				case DYNAMIC_BIGDECIMAL:
-					value = new BigDecimal(parts[2]);
-					break;
-				case TIME_INTERVAL:
-				default:
-					value = null;
-					break;
-			}
-
-			in.add(new Interval(low, high, lopen, ropen, value));
-		}
-
-		return createDynamicObject(in);
-	}
-
-	private DynamicType createDynamicObject(List<Interval> in) {
-		if (!this.isDynamicType())
-			return null;
-
-		switch (this) {
-			case DYNAMIC_BYTE: {
-				ArrayList<Interval<Byte>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Byte>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Byte>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Byte)interval.getValue()));
-				}
-				return new DynamicByte(lin);
-			}
-			case DYNAMIC_SHORT: {
-				ArrayList<Interval<Short>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Short>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Short>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Short)interval.getValue()));
-				}
-				return new DynamicShort(lin);
-			}
-			case DYNAMIC_INT: {
-				ArrayList<Interval<Integer>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Integer>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Integer>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Integer)interval.getValue()));
-				}
-				return new DynamicInteger(lin);
-			}
-			case DYNAMIC_LONG: {
-				ArrayList<Interval<Long>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Long>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Long>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Long)interval.getValue()));
-				}
-				return new DynamicLong(lin);
-			}
-			case DYNAMIC_FLOAT: {
-				ArrayList<Interval<Float>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Float>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Float>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Float)interval.getValue()));
-				}
-				return new DynamicFloat(lin);
-			}
-			case DYNAMIC_DOUBLE: {
-				ArrayList<Interval<Double>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Double>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Double>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Double)interval.getValue()));
-				}
-				return new DynamicDouble(lin);
-			}
-			case DYNAMIC_BOOLEAN: {
-				ArrayList<Interval<Boolean>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Boolean>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Boolean>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Boolean)interval.getValue()));
-				}
-				return new DynamicBoolean(lin);
-			}
-			case DYNAMIC_CHAR: {
-				ArrayList<Interval<Character>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<Character>>();
-					for (Interval interval : in)
-						lin.add(new Interval<Character>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (Character)interval.getValue()));
-				}
-				return new DynamicCharacter(lin);
-			}
-			case DYNAMIC_STRING: {
-				ArrayList<Interval<String>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<String>>();
-					for (Interval interval : in)
-						lin.add(new Interval<String>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (String)interval.getValue()));
-				}
-				return new DynamicString(lin);
-			}
-			case DYNAMIC_BIGINTEGER: {
-				ArrayList<Interval<BigInteger>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<BigInteger>>();
-					for (Interval interval : in)
-						lin.add(new Interval<BigInteger>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (BigInteger)interval.getValue()));
-				}
-				return new DynamicBigInteger(lin);
-			}
-			case DYNAMIC_BIGDECIMAL: {
-				ArrayList<Interval<BigDecimal>> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval<BigDecimal>>();
-					for (Interval interval : in)
-						lin.add(new Interval<BigDecimal>(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded(), (BigDecimal)interval.getValue()));
-				}
-				return new DynamicBigDecimal(lin);
-			}
-			case TIME_INTERVAL: {
-				ArrayList<Interval> lin = null;
-				if (in != null) {
-					lin = new ArrayList<Interval>();
-					for (Interval interval : in)
-						lin.add(new Interval(interval.getLow(), interval.getHigh(),
-							interval.isLowExcluded(), interval.isHighExcluded()));
-				}
-				return new TimeInterval(lin);
-			}
-			default:
-				return null;
-		}
-	}
+                return new DynamicShort(lin);
+            }
+            case DYNAMIC_INT: {
+                ArrayList<Interval<Integer>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Integer>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Integer>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Integer) interval.getValue()));
+                    }
+                }
+                return new DynamicInteger(lin);
+            }
+            case DYNAMIC_LONG: {
+                ArrayList<Interval<Long>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Long>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Long>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Long) interval.getValue()));
+                    }
+                }
+                return new DynamicLong(lin);
+            }
+            case DYNAMIC_FLOAT: {
+                ArrayList<Interval<Float>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Float>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Float>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Float) interval.getValue()));
+                    }
+                }
+                return new DynamicFloat(lin);
+            }
+            case DYNAMIC_DOUBLE: {
+                ArrayList<Interval<Double>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Double>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Double>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Double) interval.getValue()));
+                    }
+                }
+                return new DynamicDouble(lin);
+            }
+            case DYNAMIC_BOOLEAN: {
+                ArrayList<Interval<Boolean>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Boolean>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Boolean>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Boolean) interval.getValue()));
+                    }
+                }
+                return new DynamicBoolean(lin);
+            }
+            case DYNAMIC_CHAR: {
+                ArrayList<Interval<Character>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<Character>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<Character>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (Character) interval.getValue()));
+                    }
+                }
+                return new DynamicCharacter(lin);
+            }
+            case DYNAMIC_STRING: {
+                ArrayList<Interval<String>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<String>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<String>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (String) interval.getValue()));
+                    }
+                }
+                return new DynamicString(lin);
+            }
+            case DYNAMIC_BIGINTEGER: {
+                ArrayList<Interval<BigInteger>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<BigInteger>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<BigInteger>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (BigInteger) interval.getValue()));
+                    }
+                }
+                return new DynamicBigInteger(lin);
+            }
+            case DYNAMIC_BIGDECIMAL: {
+                ArrayList<Interval<BigDecimal>> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval<BigDecimal>>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval<BigDecimal>(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded(), (BigDecimal) interval.getValue()));
+                    }
+                }
+                return new DynamicBigDecimal(lin);
+            }
+            case TIME_INTERVAL: {
+                ArrayList<Interval> lin = null;
+                if (in != null) {
+                    lin = new ArrayList<Interval>();
+                    for (Interval interval : in) {
+                        lin.add(new Interval(interval.getLow(), interval.getHigh(),
+                                interval.isLowExcluded(), interval.isHighExcluded()));
+                    }
+                }
+                return new TimeInterval(lin);
+            }
+            default:
+                return null;
+        }
+    }
 
     /**
      * Build an <code>AttributeType</code> from the given <code>obj</code> type.
@@ -443,7 +490,7 @@ public enum AttributeType {
         if (obj == null) {
             return null;
         }
-		
+
         Class<?> c = obj.getClass();
 
         if (c.equals(Byte.class)) {
@@ -507,9 +554,9 @@ public enum AttributeType {
             default:
                 return false;
         }
-    }    
-	
-	public boolean isListType() {
+    }
+
+    public boolean isListType() {
         if (this.equals(LIST_BIGDECIMAL)
                 || this.equals(LIST_BIGINTEGER)
                 || this.equals(LIST_BOOLEAN)
@@ -533,10 +580,16 @@ public enum AttributeType {
      * @param s String to remove decimal digits
      * @return String without dot and decimal digits.
      */
-    private String removeDecimalDigitsFromString(String s){
-        //return removeDecimalDigitsFromStringPattern.matcher(s).replaceAll("");
-    	return s.split("\\.")[0];
+    private String removeDecimalDigitsFromString(String s) {
+        return removeDecimalDigitsFromStringPattern.matcher(s).replaceAll("");
     }
+    private static final Pattern removeDecimalDigitsFromStringPattern = Pattern.compile("\\.[0-9]*");
 
-    //private static final Pattern removeDecimalDigitsFromStringPattern=Pattern.compile("\\.[0-9]*");
+    private static double parseDateToDouble(String date) throws ParseException {
+        Date d = dateFormat.parse(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        return cal.getTimeInMillis();
+    }
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 }

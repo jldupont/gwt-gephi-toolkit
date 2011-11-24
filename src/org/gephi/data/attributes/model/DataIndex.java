@@ -5,27 +5,48 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
 */
 package org.gephi.data.attributes.model;
 
-//import java.lang.ref.WeakReference;
+import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.WeakHashMap;
 import org.gephi.data.attributes.api.AttributeRow;
 import org.gephi.data.attributes.api.AttributeType;
 import org.gephi.data.attributes.type.BigDecimalList;
@@ -51,61 +72,58 @@ import org.gephi.data.attributes.type.TimeInterval;
  * @author Martin Škurla
  * @see AttributeType
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
 public class DataIndex {
-
-    
-	private static final Class[] SUPPORTED_TYPES = {
-        Byte.class,       Short.class,          Integer.class,     Long.class,
-        Float.class,      Double.class,         Boolean.class,     Character.class,
+    @SuppressWarnings("rawtypes")
+    private static final Class[] SUPPORTED_TYPES = {
         String.class,     BigInteger.class,     BigDecimal.class,  TimeInterval.class,
         ByteList.class,   ShortList.class,      IntegerList.class, LongList.class,
         FloatList.class,  DoubleList.class,     BooleanList.class, CharacterList.class,
         StringList.class, BigIntegerList.class, BigDecimalList.class};
 
+    @SuppressWarnings("rawtypes")
+    private static Map<Class<?>, WeakHashMap> centralHashMap;
 
-    private static Map<Class<?>, HashMap> centralHashMap;
-
-
+    @SuppressWarnings("rawtypes")
     public DataIndex() {
-        centralHashMap = new HashMap<Class<?>, HashMap>();
+        centralHashMap = new HashMap<Class<?>, WeakHashMap>();
 
         for (Class<?> supportedType : SUPPORTED_TYPES)
             putInCentralMap(supportedType);
     }
 
     private static <T> void putInCentralMap(Class<T> supportedType) {
-        centralHashMap.put(supportedType, new HashMap<T, Object>());
+        centralHashMap.put(supportedType, new WeakHashMap<T, WeakReference<T>>());
     }
 
     public int countEntries() {
         int entries = 0;
 
-        for (HashMap<?,?> weakHashMap : centralHashMap.values())
+        for (WeakHashMap<?,?> weakHashMap : centralHashMap.values())
             entries += weakHashMap.size();
 
         return entries;
     }
 
+    @SuppressWarnings("unchecked")
     <T> T pushData(T data) {
         Class<?> classObjectKey = data.getClass();
-        HashMap<T, Object> weakHashMap = centralHashMap.get(classObjectKey);
+        WeakHashMap<T, WeakReference<T>> weakHashMap = centralHashMap.get(classObjectKey);
 
         if (weakHashMap == null)
             return data;
 
-        Object value = weakHashMap.get(data);
+        WeakReference<T> value = weakHashMap.get(data);
         if (value == null) {
-            //Object weakRef = new WeakReference<T>(data);
-            weakHashMap.put(data, data);
+            WeakReference<T> weakRef = new WeakReference<T>(data);
+            weakHashMap.put(data, weakRef);
             return data;
         }
 
-        return (T) value;
+        return value.get();
     }
 
     public void clear() {
-        for (HashMap<?,?> weakHashMap : centralHashMap.values())
+        for (WeakHashMap<?,?> weakHashMap : centralHashMap.values())
             weakHashMap.clear();
     }
 }

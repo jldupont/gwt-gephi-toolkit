@@ -44,6 +44,10 @@
 
 package org.openide.util;
 
+import java.util.Collection;
+
+import org.gephi.filters.spi.FilterBuilder;
+
 import _org.gephi.gwt.Factory;
 
 //import java.util.ArrayList;
@@ -221,8 +225,7 @@ public class Lookup {
             def.init(l, Lookups.metaInfServices(l), true);
         }
     }
-	*/
-    
+    */
     
     /** Look up an object matching a given interface.
      * This is the simplest method to use.
@@ -262,8 +265,7 @@ public class Lookup {
         Iterator<? extends Item<T>> it = res.allItems().iterator();
         return it.hasNext() ? it.next() : null;
     }
-	*/
-    
+    */
     /**
      * Find a result corresponding to a given class.
      * Equivalent to calling {@link #lookup(Lookup.Template)} but slightly more convenient.
@@ -294,11 +296,11 @@ public class Lookup {
      * @return all currently available instances of that type
      * @since org.openide.util 6.10
      */
-    /*
     public <T> Collection<? extends T> lookupAll(Class<T> clazz) {
-        return lookupResult(clazz).allInstances();
+        //return lookupResult(clazz).allInstances();
+    	return null;
     }
-	*/
+
     /**
      * Objects implementing interface Lookup.Provider are capable of
      * and willing to provide a lookup (usually bound to the object).
@@ -319,42 +321,43 @@ public class Lookup {
 
     /** Template defining a pattern to filter instances by.
      */
-    /*
+
     public static final class Template<T> extends Object {
-        ** cached hash code *
+        //** cached hash code *
         private int hashCode;
 
-        ** type of the service *
+        //** type of the service *
         private Class<T> type;
 
-        ** identity to search for *
+        //** identity to search for *
         private String id;
 
-        ** instance to search for *
+        //** instance to search for *
         private T instance;
 
-        ** General template to find all possible instances.
+        /*
+        * General template to find all possible instances.
          * @deprecated Use <code>new Template (Object.class)</code> which
          *   is going to be better typed with JDK1.5 templates and should produce
          *   the same result.
-         *
+         */
         @Deprecated
         public Template() {
             this(null);
         }
 
-        ** Create a simple template matching by class.
+        /** Create a simple template matching by class.
          * @param type the class of service we are looking for (subclasses will match)
-         *
+         */
         public Template(Class<T> type) {
             this(type, null, null);
         }
 
-        ** Constructor to create new template.
+        /** Constructor to create new template.
          * @param type the class of service we are looking for or <code>null</code> to leave unspecified
          * @param id the ID of the item/service we are looking for or <code>null</code> to leave unspecified
          * @param instance a specific known instance to look for or <code>null</code> to leave unspecified
-         *
+         */
         public Template(Class<T> type, String id, T instance) {
             this.type = extractType(type);
             this.id = id;
@@ -366,40 +369,40 @@ public class Lookup {
             return (type == null) ? (Class<T>)Object.class : type;
         }
 
-        ** Get the class (or superclass or interface) to search for.
+        /** Get the class (or superclass or interface) to search for.
          * If it was not specified in the constructor, <code>Object</code> is used as
          * this will match any instance.
          * @return the class to search for
-         *
+         */
         public Class<T> getType() {
             return type;
         }
 
-        ** Get the persistent identifier being searched for, if any.
+        /** Get the persistent identifier being searched for, if any.
          * @return the ID or <code>null</code>
          * @see Lookup.Item#getId
          *
          * @since 1.8
-         *
+         */
         public String getId() {
             return id;
         }
 
-        ** Get the specific instance being searched for, if any.
+        /** Get the specific instance being searched for, if any.
          * Most useful for finding an <code>Item</code> when the instance
          * is already known.
          *
          * @return the object to find or <code>null</code>
          *
          * @since 1.8
-         *
+         */
         public T getInstance() {
             return instance;
         }
 
-        * Computes hashcode for this template. The hashcode is cached.
+        /* Computes hashcode for this template. The hashcode is cached.
          * @return hashcode
-         *
+         */
         @Override
         public int hashCode() {
             if (hashCode != 0) {
@@ -412,10 +415,10 @@ public class Lookup {
             return hashCode;
         }
 
-        * Checks whether two templates represent the same query.
+        /* Checks whether two templates represent the same query.
          * @param obj another template to check
          * @return true if so, false otherwise
-         *
+         */
         @Override
         public boolean equals(Object obj) {
             if (!(obj instanceof Template)) {
@@ -451,13 +454,13 @@ public class Lookup {
             }
         }
 
-        * for debugging *
+        //* for debugging *
         @Override
         public String toString() {
             return "Lookup.Template[type=" + type + ",id=" + id + ",instance=" + instance + "]"; // NOI18N
         }
     }
-    */
+
     /** Result of a lookup request.
      * Allows access to all matching instances at once.
      * Also permits listening to changes in the result.
@@ -527,21 +530,21 @@ public class Lookup {
      *
      * @since 1.25
      */
-    /*
+
     public static abstract class Item<T> extends Object {
-        ** Get the instance itself.
+        /** Get the instance itself.
          * @return the instance or null if the instance cannot be created
-         *
+         */
         public abstract T getInstance();
 
-        ** Get the implementing class of the instance.
+        /** Get the implementing class of the instance.
          * @return the class of the item
-         *
+         */
         public abstract Class<? extends T> getType();
 
         // XXX can it be null??
 
-        ** Get a persistent indentifier for the item.
+        /** Get a persistent indentifier for the item.
          * This identifier should uniquely represent the item
          * within its containing lookup (and if possible within the
          * global lookup as a whole). For example, it might represent
@@ -551,23 +554,23 @@ public class Lookup {
          * lookup template.
          *
          * @return a string ID of the item
-         *
+         */
         public abstract String getId();
 
-        ** Get a human presentable name for the item.
+        /** Get a human presentable name for the item.
          * This might be used when summarizing all the items found in a
          * lookup result in some part of a GUI.
          * @return the string suitable for presenting the object to a user
-         *
+         */
         public abstract String getDisplayName();
 
-        * show ID for debugging *
+        //* show ID for debugging *
         @Override
         public String toString() {
             return getId();
         }
-    }*/
-    
+    }
+
     /*
     //
     // Implementation of the default lookup

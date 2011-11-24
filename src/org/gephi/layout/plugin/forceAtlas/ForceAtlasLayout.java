@@ -5,25 +5,46 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
 */
 package org.gephi.layout.plugin.forceAtlas;
 
-//import java.util.ArrayList;
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import org.gephi.data.attributes.type.TimeInterval;
-//import org.gephi.dynamic.DynamicUtilities;
+import org.gephi.dynamic.DynamicUtilities;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
@@ -34,8 +55,8 @@ import org.gephi.layout.plugin.ForceVectorUtils;
 import org.gephi.layout.plugin.ForceVectorNodeLayoutData;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
-//import org.openide.util.NbBundle;
+import org.gephi.layout.spi.LayoutProperty;
+import org.openide.util.NbBundle;
 
 /**
  *
@@ -59,7 +80,7 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
     private boolean outboundAttractionDistribution;
     private boolean adjustSizes;
     //Dynamic Weight
-    private TimeInterval timeInterval=null;
+    private TimeInterval timeInterval;
 
     public ForceAtlasLayout(LayoutBuilder layoutBuilder) {
         super(layoutBuilder);
@@ -86,8 +107,8 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
 
     public void goAlgo() {
         this.graph = graphModel.getHierarchicalGraphVisible();
-        //this.timeInterval = DynamicUtilities.getVisibleInterval(dynamicModel);
-        //graph.readLock();
+        this.timeInterval = DynamicUtilities.getVisibleInterval(dynamicModel);
+        graph.readLock();
         Node[] nodes = graph.getNodes().toArray();
         Edge[] edges = graph.getEdgesAndMetaEdges().toArray();
 
@@ -207,7 +228,7 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
                 nData.setY(y);
             }
         }
-        //graph.readUnlock();
+        graph.readUnlock();
     }
 
     public void endAlgo() {
@@ -228,7 +249,7 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
             return edge.getWeight();
         }
     }
-    /*
+
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
         final String FORCE_ATLAS = "Force Atlas";
@@ -238,66 +259,77 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.inertia.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.inertia.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.inertia.desc"),
                     "getInertia", "setInertia"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.repulsionStrength.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.repulsionStrength.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.repulsionStrength.desc"),
                     "getRepulsionStrength", "setRepulsionStrength"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.attractionStrength.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.attractionStrength.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.attractionStrength.desc"),
                     "getAttractionStrength", "setAttractionStrength"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.maxDisplacement.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.maxDisplacement.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.maxDisplacement.desc"),
                     "getMaxDisplacement", "setMaxDisplacement"));
             properties.add(LayoutProperty.createProperty(
                     this, Boolean.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeBalance.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.freezeBalance.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeBalance.desc"),
                     "isFreezeBalance", "setFreezeBalance"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeStrength.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.freezeStrength.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeStrength.desc"),
                     "getFreezeStrength", "setFreezeStrength"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeInertia.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.freezeInertia.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeInertia.desc"),
                     "getFreezeInertia", "setFreezeInertia"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.gravity.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.gravity.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.gravity.desc"),
                     "getGravity", "setGravity"));
             properties.add(LayoutProperty.createProperty(
                     this, Boolean.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.outboundAttractionDistribution.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.outboundAttractionDistribution.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.outboundAttractionDistribution.desc"),
                     "isOutboundAttractionDistribution", "setOutboundAttractionDistribution"));
             properties.add(LayoutProperty.createProperty(
                     this, Boolean.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.adjustSizes.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.adjustSizes.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.adjustSizes.desc"),
                     "isAdjustSizes", "setAdjustSizes"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.speed.name"),
                     FORCE_ATLAS,
+                    "forceAtlas.speed.name",
                     NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.speed.desc"),
                     "getSpeed", "setSpeed"));
         } catch (Exception e) {
@@ -306,8 +338,7 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
 
         return properties.toArray(new LayoutProperty[0]);
     }
-	*/
-    
+
     public void setInertia(Double inertia) {
         this.inertia = inertia;
     }

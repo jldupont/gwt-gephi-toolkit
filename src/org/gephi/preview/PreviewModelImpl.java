@@ -1,314 +1,274 @@
 /*
-Copyright 2008-2010 Gephi
-Authors : Mathieu Bastian <mathieu.bastian@gephi.org>
+Copyright 2008-2011 Gephi
+Authors : Mathieu Bastian
 Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
  */
 package org.gephi.preview;
 
-import java.awt.Color;
-//import java.awt.Font;
-//import java.beans.PropertyEditor;
-//import java.beans.PropertyEditorManager;
-//import java.util.HashMap;
-//import java.util.Map;
-//import javax.xml.stream.XMLStreamException;
-//import javax.xml.stream.XMLStreamReader;
-//import javax.xml.stream.XMLStreamWriter;
-import org.gephi.graph.api.GraphEvent;
-import org.gephi.graph.api.GraphListener;
-//import org.gephi.graph.api.GraphModel;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.beans.PropertyEditor;
+import java.beans.PropertyEditorManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
+import org.gephi.preview.api.Item;
 import org.gephi.preview.api.PreviewModel;
-import org.gephi.preview.api.PreviewPreset;
-//import org.gephi.preview.api.SupervisorProperty;
-import org.gephi.preview.api.supervisors.DirectedEdgeSupervisor;
-import org.gephi.preview.api.supervisors.GlobalEdgeSupervisor;
-import org.gephi.preview.api.supervisors.NodeSupervisor;
-import org.gephi.preview.api.supervisors.SelfLoopSupervisor;
-//import org.gephi.preview.api.supervisors.Supervisor;
-import org.gephi.preview.api.supervisors.UndirectedEdgeSupervisor;
+import org.gephi.preview.api.PreviewProperties;
+import org.gephi.preview.api.PreviewProperty;
 import org.gephi.preview.presets.DefaultPreset;
-import org.gephi.preview.supervisors.BidirectionalEdgeSupervisorImpl;
-import org.gephi.preview.supervisors.GlobalEdgeSupervisorImpl;
-import org.gephi.preview.supervisors.NodeSupervisorImpl;
-import org.gephi.preview.supervisors.SelfLoopSupervisorImpl;
-import org.gephi.preview.supervisors.UndirectedEdgeSupervisorImpl;
-import org.gephi.preview.supervisors.UnidirectionalEdgeSupervisorImpl;
+import org.gephi.preview.spi.Renderer;
 import org.gephi.project.api.Workspace;
-//import org.openide.nodes.Node.Property;
+import org.openide.util.Lookup;
 
 /**
  *
  * @author Mathieu Bastian
  */
-public class PreviewModelImpl implements PreviewModel, GraphListener {
-
-    //Supervisors
-    private final NodeSupervisorImpl nodeSupervisor;
-    private final GlobalEdgeSupervisorImpl globalEdgeSupervisor;
-    private final SelfLoopSupervisorImpl selfLoopSupervisor;
-    private final UnidirectionalEdgeSupervisorImpl uniEdgeSupervisor;
-    private final BidirectionalEdgeSupervisorImpl biEdgeSupervisor;
-    private final UndirectedEdgeSupervisorImpl undirectedEdgeSupervisor;
-    //States
-    private boolean updateFlag = true;
-    private float visibilityRatio = 1;
-    private Color backgroundColor = Color.WHITE;
-    private PreviewPreset currentPreset;
-
-    public PreviewModelImpl() {
-        nodeSupervisor = new NodeSupervisorImpl();
-        globalEdgeSupervisor = new GlobalEdgeSupervisorImpl();
-        selfLoopSupervisor = new SelfLoopSupervisorImpl();
-        uniEdgeSupervisor = new UnidirectionalEdgeSupervisorImpl();
-        biEdgeSupervisor = new BidirectionalEdgeSupervisorImpl();
-        undirectedEdgeSupervisor = new UndirectedEdgeSupervisorImpl();
-        currentPreset = new DefaultPreset();
-        //applyPreset(currentPreset);
+public class PreviewModelImpl implements PreviewModel {
+    
+    private final Workspace workspace;
+    //Items
+    private final Map<String, List<Item>> typeMap;
+    private final Map<Object, Object> sourceMap;
+    //Properties
+    private PreviewProperties properties;
+    //Dimensions
+    private Dimension dimensions;
+    private Point topLeftPosition;
+    
+    public PreviewModelImpl(Workspace workspace) {
+        typeMap = new HashMap<String, List<Item>>();
+        sourceMap = new HashMap<Object, Object>();
+        this.workspace = workspace;
     }
+    
+    private synchronized void initProperties() {
+        if (properties == null) {
+            properties = new PreviewProperties();
 
-    public void select(Workspace workspace) {
-        //GraphModel graphModel = workspace.getLookup().lookup(GraphModel.class);
-        //graphModel.addGraphListener(this);
-    }
+            //Properties from renderers
+            for (Renderer renderer : Lookup.getDefault().lookupAll(Renderer.class)) {
+                PreviewProperty[] props = renderer.getProperties();
+                for (PreviewProperty p : props) {
+                    properties.addProperty(p);
+                }
+            }
 
-    public void unselect(Workspace workspace) {
-        //GraphModel graphModel = workspace.getLookup().lookup(GraphModel.class);
-        //graphModel.removeGraphListener(this);
-    }
+            //Default preset
+            properties.applyPreset(new DefaultPreset());
 
-    /**
-     * Sets the update flag when the structure of the workspace graph has
-     * changed.
-     *
-     * @see GraphListener#graphChanged(org.gephi.graph.api.GraphEvent)
-     */
-    public void graphChanged(GraphEvent event) {
-        updateFlag = true;
+            //Defaut values
+            properties.putValue(PreviewProperty.VISIBILITY_RATIO, 1f);
+        }
     }
+    
+    @Override
+    public PreviewProperties getProperties() {
+        initProperties();
+        return properties;
+    }
+    
+    @Override
+    public Item[] getItems(String type) {
+        List<Item> list = typeMap.get(type);
+        if (list != null) {
+            return list.toArray(new Item[0]);
+        }
+        return new Item[0];
+    }
+    
+    @Override
+    public Item getItem(String type, Object source) {
+        Item[] items = getItems(source);
+        for (Item item : items) {
+            if (item.getType().equals(type)) {
+                return item;
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public Item[] getItems(Object source) {
+        Object value = sourceMap.get(source);
+        if (value instanceof List) {
+            return ((List<Item>) value).toArray(new Item[0]);
+        } else if (value instanceof Item) {
+            return new Item[]{(Item) value};
+        }
+        return new Item[0];
+    }
+    
+    public String[] getItemTypes() {
+        return typeMap.keySet().toArray(new String[0]);
+    }
+    
+    public void loadItems(String type, Item[] items) {
+        //Add to type map
+        List<Item> typeList = typeMap.get(type);
+        if (typeList == null) {
+            typeList = new ArrayList<Item>(items.length);
+            typeList.addAll(Arrays.asList(items));
+            typeMap.put(type, typeList);
 
-    /**
-     * Clears the supervisors' lists of supervised elements.
-     */
-    public void clearSupervisors() {
-        nodeSupervisor.clearSupervised();
-        globalEdgeSupervisor.clearSupervised();
-        selfLoopSupervisor.clearSupervised();
-        uniEdgeSupervisor.clearSupervised();
-        biEdgeSupervisor.clearSupervised();
-    }
-
-    public NodeSupervisor getNodeSupervisor() {
-        return nodeSupervisor;
-    }
-
-    public GlobalEdgeSupervisor getGlobalEdgeSupervisor() {
-        return globalEdgeSupervisor;
-    }
-
-    public SelfLoopSupervisor getSelfLoopSupervisor() {
-        return selfLoopSupervisor;
-    }
-
-    public DirectedEdgeSupervisor getUniEdgeSupervisor() {
-        return uniEdgeSupervisor;
-    }
-
-    public DirectedEdgeSupervisor getBiEdgeSupervisor() {
-        return biEdgeSupervisor;
-    }
-
-    public UndirectedEdgeSupervisor getUndirectedEdgeSupervisor() {
-        return undirectedEdgeSupervisor;
-    }
-
-    public boolean isUpdateFlag() {
-        return updateFlag;
-    }
-
-    public void setUpdateFlag(boolean updateFlag) {
-        this.updateFlag = updateFlag;
-    }
-
-    public float getVisibilityRatio() {
-        return visibilityRatio;
-    }
-
-    public void setVisibilityRatio(float visibilityRatio) {
-        this.visibilityRatio = visibilityRatio;
-    }
-
-    public Color getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public PreviewPreset getCurrentPreset() {
-        return currentPreset;
-    }
-
-    public void setCurrentPreset(PreviewPreset currentPreset) {
-        this.currentPreset = currentPreset;
-    }
-/*
-    public PreviewPreset wrapPreset(String name) {
-        Map<String, String> propertiesMap = new HashMap<String, String>();
-        for (Property p : getPropertiesMap().values()) {
-            try {
-                Object propertyValue = p.getValue();
-                if (propertyValue != null) {
-                    PropertyEditor editor = p.getPropertyEditor();
-                    if (editor == null) {
-                        editor = PropertyEditorManager.findEditor(p.getValueType());
-                    }
-                    if (editor != null) {
-                        editor.setValue(propertyValue);
-                        String val = editor.getAsText();
-                        if (!val.isEmpty()) {
-                            propertiesMap.put(p.getName(), val);
+            //Add to source map
+            for (Item item : items) {
+                Object value = sourceMap.get(item.getSource());
+                if (value == null) {
+                    sourceMap.put(item.getSource(), item);
+                } else if (value instanceof List) {
+                    ((List) value).add(item);
+                } else {
+                    List<Item> list = new ArrayList<Item>();
+                    list.add((Item) value);
+                    list.add(item);
+                }
+            }
+        } else {
+            //Possible items to merge
+            for (Item item : items) {
+                Object value = sourceMap.get(item.getSource());
+                if (value == null) {
+                    //No other object attached to this item
+                    typeList.add(item);
+                    sourceMap.put(item.getSource(), item);
+                } else if (value instanceof Item && ((Item) value).getType().equals(item.getType())) {
+                    //An object already exists with the same type and source, merge them
+                    mergeItems(item, ((Item) value));
+                } else if (value instanceof List) {
+                    List<Item> list = (List<Item>) value;
+                    for (Item itemSameSource : list) {
+                        if (itemSameSource.getType().equals(item.getType())) {
+                            //An object already exists with the same type and source, merge them
+                            mergeItems(item, itemSameSource);
+                            break;
                         }
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return new PreviewPreset(name, propertiesMap);
-    }
-*/
-    /*
-    public void applyPreset(PreviewPreset preset) {
-        Map<String, String> propertiesMap = preset.getProperties();
-        for (Property p : getPropertiesMap().values()) {
-            try {
-                PropertyEditor editor = p.getPropertyEditor();
-                if (editor == null) {
-                    editor = PropertyEditorManager.findEditor(p.getValueType());
-                }
-                if (editor != null) {
-                    String valueStr = propertiesMap.get(p.getName());
-                    if (valueStr != null && !valueStr.isEmpty()) {
-                        if (p.getValueType().equals(Font.class)) { //bug 551877
-                            p.setValue(Font.decode(valueStr));
-                        } else {
-                            editor.setAsText(valueStr);
-                            Object value = editor.getValue();
-                            if (value != null) {
-                                p.setValue(value);
-                            }
-                        }
-
-                    }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
-    */
-/*
+    
+    private Item mergeItems(Item item, Item toBeMerged) {
+        for (String key : toBeMerged.getKeys()) {
+            item.setData(key, toBeMerged.getData(key));
+        }
+        return item;
+    }
+    
+    public void clear() {
+        typeMap.clear();
+        sourceMap.clear();
+    }
+    
+    public Workspace getWorkspace() {
+        return workspace;
+    }
+    
+    @Override
+    public Dimension getDimensions() {
+        return dimensions;
+    }
+    
+    @Override
+    public Point getTopLeftPosition() {
+        return topLeftPosition;
+    }
+    
+    public void setDimensions(Dimension dimensions) {
+        this.dimensions = dimensions;
+    }
+    
+    public void setTopLeftPosition(Point topLeftPosition) {
+        this.topLeftPosition = topLeftPosition;
+    }
+
     //PERSISTENCE
     public void writeXML(XMLStreamWriter writer) throws XMLStreamException {
         writer.writeStartElement("previewmodel");
-
-        //Ratio
-        writer.writeStartElement("ratio");
-        writer.writeCharacters(String.valueOf(visibilityRatio));
-        writer.writeEndElement();
-
-        //Color
-        writer.writeStartElement("backgroundcolor");
-        writer.writeCharacters("" + backgroundColor.getRGB());
-        writer.writeEndElement();
-
-        //Properties
-        writeProperties(writer, nodeSupervisor);
-        writeProperties(writer, globalEdgeSupervisor);
-        writeProperties(writer, selfLoopSupervisor);
-        writeProperties(writer, uniEdgeSupervisor);
-        writeProperties(writer, biEdgeSupervisor);
-        writeProperties(writer, undirectedEdgeSupervisor);
-
-        writer.writeEndElement();
-    }
-
-    private void writeProperties(XMLStreamWriter writer, Supervisor supervisor) {
-        for (SupervisorProperty p : supervisor.getProperties()) {
-            String propertyName = p.getProperty().getName();
-            try {
-                Object propertyValue = p.getProperty().getValue();
-                if (propertyValue != null) {
-                    PropertyEditor editor = p.getProperty().getPropertyEditor();
-                    if (editor == null) {
-                        editor = PropertyEditorManager.findEditor(p.getProperty().getValueType());
-                    }
-                    if (editor != null) {
-                        writer.writeStartElement("previewproperty");
-                        writer.writeAttribute("name", propertyName);
-                        editor.setValue(propertyValue);
-                        writer.writeCharacters(editor.getAsText());
-                        writer.writeEndElement();
-                    }
+        
+        for (PreviewProperty property : properties.getProperties()) {
+            String propertyName = property.getName();
+            Object propertyValue = property.getValue();
+            if (propertyValue != null) {
+                PropertyEditor editor = PropertyEditorManager.findEditor(propertyValue.getClass());
+                if (editor != null) {
+                    writer.writeStartElement("previewproperty");
+                    writer.writeAttribute("name", propertyName);
+                    editor.setValue(propertyValue);
+                    writer.writeCharacters(editor.getAsText());
+                    writer.writeEndElement();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
+        
+        writer.writeEndElement();
     }
-
+    
     public void readXML(XMLStreamReader reader) throws XMLStreamException {
-        Map<String, Property> propertiesMap = getPropertiesMap();
-
-        boolean ratio = false;
-        boolean bgColor = false;
+        PreviewProperties props = getProperties();
+        
         String propName = null;
-
+        
         boolean end = false;
         while (reader.hasNext() && !end) {
             int type = reader.next();
-
+            
             switch (type) {
                 case XMLStreamReader.START_ELEMENT:
                     String name = reader.getLocalName();
-                    if ("ratio".equalsIgnoreCase(name)) {
-                        ratio = true;
-                    } else if ("backgroundcolor".equalsIgnoreCase(name)) {
-                        bgColor = true;
-                    } else if ("previewproperty".equalsIgnoreCase(name)) {
+                    if ("previewproperty".equalsIgnoreCase(name)) {
                         propName = reader.getAttributeValue(null, "name");
                     }
                     break;
                 case XMLStreamReader.CHARACTERS:
                     if (!reader.isWhiteSpace()) {
-                        if (ratio) {
-                            visibilityRatio = Float.parseFloat(reader.getText());
-                        } else if (bgColor) {
-                            backgroundColor = new Color(Integer.parseInt(reader.getText()));
-                        } else if (propName != null) {
-                            Property p = propertiesMap.get(propName);
+                        if (propName != null) {
+                            PreviewProperty p = props.getProperty(propName);
                             if (p != null) {
-                                PropertyEditor editor = p.getPropertyEditor();
-                                if (editor == null) {
-                                    editor = PropertyEditorManager.findEditor(p.getValueType());
-                                }
+                                PropertyEditor editor = PropertyEditorManager.findEditor(p.getType());
                                 if (editor != null) {
                                     editor.setAsText(reader.getText());
                                     if (editor.getValue() != null) {
@@ -327,25 +287,9 @@ public class PreviewModelImpl implements PreviewModel, GraphListener {
                     if ("previewmodel".equalsIgnoreCase(reader.getLocalName())) {
                         end = true;
                     }
-                    bgColor = false;
-                    ratio = false;
                     name = null;
                     break;
             }
         }
     }
-	*/
-    /*
-    private Map<String, Property> getPropertiesMap() {
-        Map<String, Property> propertiesMap = new HashMap<String, Property>();
-        Supervisor[] supervisors = new Supervisor[]{nodeSupervisor, globalEdgeSupervisor, selfLoopSupervisor, uniEdgeSupervisor, biEdgeSupervisor, undirectedEdgeSupervisor};
-        for (Supervisor s : supervisors) {
-            for (SupervisorProperty p : s.getProperties()) {
-                String propertyName = p.getProperty().getName();
-                propertiesMap.put(propertyName, p.getProperty());
-            }
-        }
-        return propertiesMap;
-    }
-    */
 }

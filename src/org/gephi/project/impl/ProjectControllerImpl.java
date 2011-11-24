@@ -5,77 +5,94 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
  */
 package org.gephi.project.impl;
 
-//import java.io.File;
-//import java.util.ArrayList;
-//import java.util.List;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import org.gephi.project.api.Project;
 import org.gephi.project.api.ProjectController;
-//import org.gephi.project.api.Projects;
-//import org.gephi.project.api.WorkspaceProvider;
-//import org.gephi.project.io.LoadTask;
-//import org.gephi.project.io.SaveTask;
+import org.gephi.project.api.Projects;
+import org.gephi.project.api.WorkspaceProvider;
+import org.gephi.project.io.LoadTask;
+import org.gephi.project.io.SaveTask;
 import org.gephi.project.api.Workspace;
-//import org.gephi.project.api.WorkspaceInformation;
-//import org.gephi.project.api.WorkspaceListener;
+import org.gephi.project.api.WorkspaceInformation;
+import org.gephi.project.api.WorkspaceListener;
 import org.gephi.workspace.impl.WorkspaceImpl;
 import org.gephi.workspace.impl.WorkspaceInformationImpl;
+import org.gephi.project.spi.WorkspaceDuplicateProvider;
 import org.openide.util.Lookup;
-//import org.gephi.project.spi.WorkspaceDuplicateProvider;
-//import org.openide.util.Lookup;
-//import org.openide.util.NbPreferences;
-//import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.NbPreferences;
+import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Mathieu Bastian
  */
-//@ServiceProvider(service = ProjectController.class)
+@ServiceProvider(service = ProjectController.class)
 public class ProjectControllerImpl implements ProjectController {
 
-	/*
     private enum EventType {
 
         INITIALIZE, SELECT, UNSELECT, CLOSE, DISABLE
     };
-    */
     //Data
     private final ProjectsImpl projects = new ProjectsImpl();
-    //private final List<WorkspaceListener> listeners;
-    private WorkspaceImpl temporaryOpeningWorkspace=null;
+    private final List<WorkspaceListener> listeners;
+    private WorkspaceImpl temporaryOpeningWorkspace;
 
     public ProjectControllerImpl() {
 
         //Listeners
-        //listeners = new ArrayList<WorkspaceListener>();
-        //listeners.addAll(Lookup.getDefault().lookupAll(WorkspaceListener.class));
+        listeners = new ArrayList<WorkspaceListener>();
+        listeners.addAll(Lookup.getDefault().lookupAll(WorkspaceListener.class));
     }
 
     public void startup() {
-        //final String OPEN_LAST_PROJECT_ON_STARTUP = "Open_Last_Project_On_Startup";
-        //final String NEW_PROJECT_ON_STARTUP = "New_Project_On_Startup";
-        
-        //boolean openLastProject = NbPreferences.forModule(ProjectControllerImpl.class).getBoolean(OPEN_LAST_PROJECT_ON_STARTUP, false);
-        //boolean newProjectStartup = NbPreferences.forModule(ProjectControllerImpl.class).getBoolean(NEW_PROJECT_ON_STARTUP, false);
+        final String OPEN_LAST_PROJECT_ON_STARTUP = "Open_Last_Project_On_Startup";
+        final String NEW_PROJECT_ON_STARTUP = "New_Project_On_Startup";
+        boolean openLastProject = NbPreferences.forModule(ProjectControllerImpl.class).getBoolean(OPEN_LAST_PROJECT_ON_STARTUP, false);
+        boolean newProjectStartup = NbPreferences.forModule(ProjectControllerImpl.class).getBoolean(NEW_PROJECT_ON_STARTUP, false);
 
         //Default project
-        //if (!openLastProject && newProjectStartup) {
+        if (!openLastProject && newProjectStartup) {
             newProject();
-        //}
+        }
     }
 
     public void newProject() {
@@ -85,13 +102,10 @@ public class ProjectControllerImpl implements ProjectController {
         openProject(project);
     }
 
-    /*
     public Runnable openProject(File file) {
         return new LoadTask(file);
     }
-    */
-    
-    /*
+
     public Runnable saveProject(Project project) {
         if (project.getLookup().lookup(ProjectInformationImpl.class).hasFile()) {
             File file = project.getLookup().lookup(ProjectInformationImpl.class).getFile();
@@ -105,44 +119,38 @@ public class ProjectControllerImpl implements ProjectController {
         SaveTask saveTask = new SaveTask(project, file);
         return saveTask;
     }
-    */
-    
+
     public void closeCurrentProject() {
         if (projects.hasCurrentProject()) {
             ProjectImpl currentProject = projects.getCurrentProject();
 
-            /*
             //Event
             if (currentProject.getLookup().lookup(WorkspaceProvider.class).hasCurrentWorkspace()) {
-                //fireWorkspaceEvent(EventType.UNSELECT, currentProject.getLookup().lookup(WorkspaceProvider.class).getCurrentWorkspace());
+                fireWorkspaceEvent(EventType.UNSELECT, currentProject.getLookup().lookup(WorkspaceProvider.class).getCurrentWorkspace());
             }
             for (Workspace ws : currentProject.getLookup().lookup(WorkspaceProviderImpl.class).getWorkspaces()) {
-                //fireWorkspaceEvent(EventType.CLOSE, ws);
+                fireWorkspaceEvent(EventType.CLOSE, ws);
             }
-			*/
-            
+
             //Close
             currentProject.getLookup().lookup(ProjectInformationImpl.class).close();
             projects.closeCurrentProject();
 
-            //fireWorkspaceEvent(EventType.DISABLE, null);
+            fireWorkspaceEvent(EventType.DISABLE, null);
         }
     }
-	
-    /*
+
     public void removeProject(Project project) {
         if (projects.getCurrentProject() == project) {
             closeCurrentProject();
         }
         projects.removeProject(project);
     }
-	
+
     public Projects getProjects() {
         return projects;
     }
-    */
-    
-    /*
+
     public void setProjects(Projects projects) {
         final String OPEN_LAST_PROJECT_ON_STARTUP = "Open_Last_Project_On_Startup";
         boolean openLastProject = NbPreferences.forModule(ProjectControllerImpl.class).getBoolean(OPEN_LAST_PROJECT_ON_STARTUP, false);
@@ -166,17 +174,15 @@ public class ProjectControllerImpl implements ProjectController {
             //newProject();
         }
     }
-	*/
-    
-    
+
     public Workspace newWorkspace(Project project) {
         Workspace workspace = project.getLookup().lookup(WorkspaceProviderImpl.class).newWorkspace();
 
         //Event
-        //fireWorkspaceEvent(EventType.INITIALIZE, workspace);
+        fireWorkspaceEvent(EventType.INITIALIZE, workspace);
         return workspace;
     }
-    /*
+
     public void deleteWorkspace(Workspace workspace) {
         WorkspaceInformation wi = workspace.getLookup().lookup(WorkspaceInformation.class);
         WorkspaceProviderImpl workspaceProvider = wi.getProject().getLookup().lookup(WorkspaceProviderImpl.class);
@@ -189,21 +195,19 @@ public class ProjectControllerImpl implements ProjectController {
         workspaceProvider.removeWorkspace(workspace);
 
         //Event
-        //fireWorkspaceEvent(EventType.CLOSE, workspace);
+        fireWorkspaceEvent(EventType.CLOSE, workspace);
 
         if (getCurrentWorkspace() == workspace) {
             //Select the one before, or after
             if (toSelectWorkspace == null) {
-                //closeCurrentProject();
+                closeCurrentProject();
             } else {
                 openWorkspace(toSelectWorkspace);
             }
         }
 
     }
-    */
-    
-    
+
     public void openProject(Project project) {
         final ProjectImpl projectImpl = (ProjectImpl) project;
         final ProjectInformationImpl projectInformationImpl = projectImpl.getLookup().lookup(ProjectInformationImpl.class);
@@ -225,11 +229,10 @@ public class ProjectControllerImpl implements ProjectController {
                 openWorkspace(workspace);
             }
         } else {
-            //fireWorkspaceEvent(EventType.SELECT, workspaceProviderImpl.getCurrentWorkspace());
+            fireWorkspaceEvent(EventType.SELECT, workspaceProviderImpl.getCurrentWorkspace());
         }
     }
-	
-    
+
     public ProjectImpl getCurrentProject() {
         return projects.getCurrentProject();
     }
@@ -244,42 +247,28 @@ public class ProjectControllerImpl implements ProjectController {
         return null;
     }
 
-    
     public void closeCurrentWorkspace() {
         WorkspaceImpl workspace = getCurrentWorkspace();
         if (workspace != null) {
             workspace.getLookup().lookup(WorkspaceInformationImpl.class).close();
 
             //Event
-            //fireWorkspaceEvent(EventType.UNSELECT, workspace);
+            fireWorkspaceEvent(EventType.UNSELECT, workspace);
         }
     }
-	
-    
+
     public void openWorkspace(Workspace workspace) {
-    	if (workspace==null)
-    		throw new RuntimeException("ProjectControllerImpl.openWorkspace: workspace is null...");
         closeCurrentWorkspace();
         getCurrentProject().getLookup().lookup(WorkspaceProviderImpl.class).setCurrentWorkspace(workspace);
-        Lookup lu=workspace.getLookup();
-        if (lu==null)
-        	throw new RuntimeException("ProjectControllerImpl.openWorkspace: lookup is null...");
-        
-        WorkspaceInformationImpl wii=lu.lookup(WorkspaceInformationImpl.class);
-        if (wii==null)
-        	throw new RuntimeException("ProjectControllerImpl.openWorkspace: wii is null...");
-        wii.open();
+        workspace.getLookup().lookup(WorkspaceInformationImpl.class).open();
 
         //Event
-        //fireWorkspaceEvent(EventType.SELECT, workspace);
+        fireWorkspaceEvent(EventType.SELECT, workspace);
     }
-	
-    
+
     public void cleanWorkspace(Workspace workspace) {
     }
-    
-    
-    /*
+
     public Workspace duplicateWorkspace(Workspace workspace) {
         if (projects.hasCurrentProject()) {
             Workspace duplicate = newWorkspace(projects.getCurrentProject());
@@ -291,7 +280,6 @@ public class ProjectControllerImpl implements ProjectController {
         }
         return null;
     }
-    */
 
     public void renameProject(Project project, final String name) {
         project.getLookup().lookup(ProjectInformationImpl.class).setName(name);
@@ -309,7 +297,6 @@ public class ProjectControllerImpl implements ProjectController {
      * Hack to have a current workpace when opening workspace
      * @param temporaryOpeningWorkspace the opening workspace or null
      */
-    /*
     public void setTemporaryOpeningWorkspace(WorkspaceImpl temporaryOpeningWorkspace) {
         this.temporaryOpeningWorkspace = temporaryOpeningWorkspace;
         if (temporaryOpeningWorkspace != null) {
@@ -317,8 +304,7 @@ public class ProjectControllerImpl implements ProjectController {
             fireWorkspaceEvent(EventType.INITIALIZE, temporaryOpeningWorkspace);
         }
     }
-    */
-    /*
+
     public void addWorkspaceListener(WorkspaceListener workspaceListener) {
         synchronized (listeners) {
             listeners.add(workspaceListener);
@@ -356,5 +342,4 @@ public class ProjectControllerImpl implements ProjectController {
             }
         }
     }
-    */
-}///
+}

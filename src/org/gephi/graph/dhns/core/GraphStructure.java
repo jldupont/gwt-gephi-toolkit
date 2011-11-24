@@ -5,38 +5,55 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
  */
 package org.gephi.graph.dhns.core;
 
-//import gnu.trove.TIntObjectHashMap;
-//import gnu.trove.TObjectIntHashMap;
-//import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.PriorityQueue;
+import gnu.trove.TIntObjectHashMap;
+import gnu.trove.TObjectIntHashMap;
+import java.lang.ref.WeakReference;
 import java.util.Queue;
-//import java.util.concurrent.ConcurrentLinkedQueue;
-//import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.gephi.utils.collection.avl.ParamAVLIterator;
-//import org.gephi.graph.api.GraphEvent.EventType;
+import org.gephi.graph.api.GraphEvent.EventType;
 import org.gephi.graph.dhns.edge.AbstractEdge;
-//import org.gephi.graph.dhns.event.ViewEvent;
+import org.gephi.graph.dhns.event.ViewEvent;
 import org.gephi.graph.dhns.node.AbstractNode;
 import org.gephi.graph.dhns.node.NodeDataImpl;
 import org.gephi.graph.dhns.node.iterators.TreeListIterator;
-
-import _org.gephi.gwt.AtomicInteger;
 
 /**
  *
@@ -51,13 +68,12 @@ public class GraphStructure {
     private final GraphDictionnary dictionnary;
     private GraphViewImpl visibleView;
     //Destroy
-    //private final Object lock = new Object();
-    private final PriorityQueue<GraphViewImpl> destroyQueue;
+    private final Object lock = new Object();
+    private final ConcurrentLinkedQueue<GraphViewImpl> destroyQueue;
 
     public GraphStructure(Dhns dhns) {
         this.dhns = dhns;
-        //views = new ConcurrentLinkedQueue<GraphViewImpl>();
-        views = new PriorityQueue<GraphViewImpl>();
+        views = new ConcurrentLinkedQueue<GraphViewImpl>();
         dictionnary = new GraphDictionnary();
 
         //Main view
@@ -66,9 +82,9 @@ public class GraphStructure {
         visibleView = mainView;
 
         //Destructor
-        destroyQueue = new PriorityQueue<GraphViewImpl>();
-        //ViewDestructorThread viewDestructorThread = new ViewDestructorThread(this);
-        //viewDestructorThread.start();
+        destroyQueue = new ConcurrentLinkedQueue<GraphViewImpl>();
+        ViewDestructorThread viewDestructorThread = new ViewDestructorThread(this);
+        viewDestructorThread.start();
     }
 
     public GraphViewImpl[] getViews() {
@@ -91,7 +107,7 @@ public class GraphStructure {
     public GraphViewImpl copyView(GraphViewImpl view) {
         GraphViewImpl viewCopy = new GraphViewImpl(dhns, viewId.getAndIncrement());
         TreeStructure newStructure = viewCopy.getStructure();
-        //dhns.writeLock();
+        dhns.writeLock();
 
         for (TreeListIterator itr = new TreeListIterator(view.getStructure().getTree(), 1); itr.hasNext();) {
             AbstractNode node = itr.next();
@@ -111,8 +127,8 @@ public class GraphStructure {
             if (!node.getEdgesOutTree().isEmpty()) {
                 for (edgeIterator.setNode(node.getEdgesOutTree()); edgeIterator.hasNext();) {
                     AbstractEdge edge = edgeIterator.next();
-                    AbstractNode sourceCopy = newStructure.getNodeAt(edge.getSource().getPre());
-                    AbstractNode targetCopy = newStructure.getNodeAt(edge.getTarget().getPre());
+                    AbstractNode sourceCopy = newStructure.getNodeAt(node.getPre());
+                    AbstractNode targetCopy = newStructure.getNodeAt(((AbstractNode) edge.getTarget().getNodeData().getNode(view.getViewId())).getPre());
                     sourceCopy.getEdgesOutTree().add(edge);
                     targetCopy.getEdgesInTree().add(edge);
                     addToDictionnary(edge);
@@ -129,17 +145,17 @@ public class GraphStructure {
         viewCopy.getStructureModifier().getEdgeProcessor().computeMetaEdges();
 
         views.add(viewCopy);
-        //dhns.writeUnlock();
-        //dhns.getEventManager().fireEvent(new ViewEvent(EventType.NEW_VIEW, viewCopy));
+        dhns.writeUnlock();
+        dhns.getEventManager().fireEvent(new ViewEvent(EventType.NEW_VIEW, viewCopy));
         return viewCopy;
     }
 
     public void destroyView(final GraphViewImpl view) {
         if (views.contains(view)) {
             destroyQueue.add(view);
-            //synchronized (this.lock) {
-            //    lock.notify();
-            //}
+            synchronized (this.lock) {
+                lock.notify();
+            }
         }
     }
 
@@ -198,9 +214,9 @@ public class GraphStructure {
         } else {
             this.visibleView = visibleView;
         }
-        //dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, this.visibleView));
+        dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, this.visibleView));
     }
-    /*
+
     private static class ViewDestructorThread extends Thread {
 
         private final WeakReference<GraphStructure> structureReference;
@@ -248,7 +264,7 @@ public class GraphStructure {
 
         private void destroyView(GraphStructure structure, GraphViewImpl view) {
             //Logger.getLogger("").log(Level.WARNING, "Destroy view {0}", view.getViewId());
-            //structure.dhns.writeLock();
+            structure.dhns.writeLock();
             ParamAVLIterator<AbstractEdge> edgeIterator = new ParamAVLIterator<AbstractEdge>();
             for (TreeListIterator itr = new TreeListIterator(structure.mainView.getStructure().getTree(), 1); itr.hasNext();) {
                 AbstractNode node = itr.next();
@@ -265,34 +281,27 @@ public class GraphStructure {
             }
             structure.views.remove(view);
             //System.out.println("Destroy view finished");           
-            //structure.dhns.writeUnlock();
-            //structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.DESTROY_VIEW, view));
+            structure.dhns.writeUnlock();
+            structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.DESTROY_VIEW, view));
             if (structure.visibleView == view) {
                 structure.visibleView = structure.mainView;
-                //structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, structure.mainView));
+                structure.dhns.getEventManager().fireEvent(new ViewEvent(EventType.VISIBLE_VIEW, structure.mainView));
             }
         }
     }
-	*/
-    
+
     private static class GraphDictionnary {
 
-        //private final TObjectIntHashMap<String> nodesMap;
-        //private final TIntObjectHashMap<NodeDataImpl> nodesIntMap;
-        //private final TIntObjectHashMap<EdgeCounter> edgesRefCount;
-        //private final TObjectIntHashMap<String> edgesMap;
+        private final TObjectIntHashMap<String> nodesMap;
+        private final TIntObjectHashMap<NodeDataImpl> nodesIntMap;
+        private final TIntObjectHashMap<EdgeCounter> edgesRefCount;
+        private final TObjectIntHashMap<String> edgesMap;
 
-
-        private final HashMap<String, Integer> nodesMap;
-        private final HashMap<Integer, NodeDataImpl> nodesIntMap;
-        private final HashMap<Integer, EdgeCounter> edgesRefCount;
-        private final HashMap<String, Integer> edgesMap;
-    	
         public GraphDictionnary() {
-        	nodesIntMap = new HashMap<Integer, NodeDataImpl>();
-            nodesMap = new HashMap<String, Integer>();
-            edgesRefCount = new HashMap<Integer, EdgeCounter>();
-            edgesMap = new HashMap<String, Integer>();
+            nodesMap = new TObjectIntHashMap<String>();
+            nodesIntMap = new TIntObjectHashMap<NodeDataImpl>();
+            edgesRefCount = new TIntObjectHashMap<EdgeCounter>();
+            edgesMap = new TObjectIntHashMap<String>();
         }
 
         public synchronized void addNode(AbstractNode node) {

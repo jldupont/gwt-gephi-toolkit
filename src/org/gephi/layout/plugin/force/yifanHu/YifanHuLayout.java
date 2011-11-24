@@ -5,23 +5,44 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
 */
 package org.gephi.layout.plugin.force.yifanHu;
 
-//import java.util.ArrayList;
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
@@ -35,9 +56,9 @@ import org.gephi.layout.plugin.force.ForceVector;
 import org.gephi.layout.plugin.force.quadtree.BarnesHut;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
+import org.gephi.layout.spi.LayoutProperty;
 import org.gephi.layout.plugin.force.quadtree.QuadTree;
-//import org.openide.util.NbBundle;
+import org.openide.util.NbBundle;
 
 /**
  * Hu's basic algorithm
@@ -119,7 +140,7 @@ public class YifanHuLayout extends AbstractLayout implements Layout {
         setAdaptiveCooling(true);
         setConvergenceThreshold(1e-4f);
     }
-    /*
+
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
         final String YIFANHU_CATEGORY = "Yifan Hu's properties";
@@ -130,12 +151,14 @@ public class YifanHuLayout extends AbstractLayout implements Layout {
                     this, Float.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.optimalDistance.name"),
                     YIFANHU_CATEGORY,
+                    "YifanHu.optimalDistance.name",
                     NbBundle.getMessage(getClass(), "YifanHu.optimalDistance.desc"),
                     "getOptimalDistance", "setOptimalDistance"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.relativeStrength.name"),
                     YIFANHU_CATEGORY,
+                    "YifanHu.relativeStrength.name",
                     NbBundle.getMessage(getClass(), "YifanHu.relativeStrength.desc"),
                     "getRelativeStrength", "setRelativeStrength"));
 
@@ -143,37 +166,42 @@ public class YifanHuLayout extends AbstractLayout implements Layout {
                     this, Float.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.initialStepSize.name"),
                     YIFANHU_CATEGORY,
+                    "YifanHu.initialStepSize.name",
                     NbBundle.getMessage(getClass(), "YifanHu.initialStepSize.desc"),
                     "getInitialStep", "setInitialStep"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.stepRatio.name"),
                     YIFANHU_CATEGORY,
+                    "YifanHu.stepRatio.name",
                     NbBundle.getMessage(getClass(), "YifanHu.stepRatio.desc"),
                     "getStepRatio", "setStepRatio"));
             properties.add(LayoutProperty.createProperty(
                     this, Boolean.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.adaptativeCooling.name"),
                     YIFANHU_CATEGORY,
+                    "YifanHu.adaptativeCooling.name",
                     NbBundle.getMessage(getClass(), "YifanHu.adaptativeCooling.desc"),
                     "isAdaptiveCooling", "setAdaptiveCooling"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.convergenceThreshold.name"),
                     YIFANHU_CATEGORY,
+                    "YifanHu.convergenceThreshold.name",
                     NbBundle.getMessage(getClass(), "YifanHu.convergenceThreshold.desc"),
                     "getConvergenceThreshold", "setConvergenceThreshold"));
-
             properties.add(LayoutProperty.createProperty(
                     this, Integer.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.quadTreeMaxLevel.name"),
                     BARNESHUT_CATEGORY,
+                    "YifanHu.quadTreeMaxLevel.name",
                     NbBundle.getMessage(getClass(), "YifanHu.quadTreeMaxLevel.desc"),
                     "getQuadTreeMaxLevel", "setQuadTreeMaxLevel"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class, 
                     NbBundle.getMessage(getClass(), "YifanHu.theta.name"),
                     BARNESHUT_CATEGORY,
+                    "YifanHu.theta.name",
                     NbBundle.getMessage(getClass(), "YifanHu.theta.desc"),
                     "getBarnesHutTheta", "setBarnesHutTheta"));
         } catch (Exception e) {
@@ -182,8 +210,7 @@ public class YifanHuLayout extends AbstractLayout implements Layout {
 
         return properties.toArray(new LayoutProperty[0]);
     }
-	*/
-    
+
     public void initAlgo() {
         if (graphModel == null) {
             return;
@@ -208,7 +235,7 @@ public class YifanHuLayout extends AbstractLayout implements Layout {
 
     public void goAlgo() {
         graph = graphModel.getHierarchicalGraphVisible();
-        //graph.readLock();
+        graph.readLock();
         Node[] nodes = graph.getNodes().toArray();
         for (Node n : nodes) {
             if (n.getNodeData().getLayoutData() == null || !(n.getNodeData().getLayoutData() instanceof ForceVector)) {
@@ -273,7 +300,7 @@ public class YifanHuLayout extends AbstractLayout implements Layout {
 //        springEnergy = energy - electricEnergy;
 //        System.out.println("electric: " + electricEnergy + "    spring: " + springEnergy);
 //        System.out.println("energy0 = " + energy0 + "   energy = " + energy);
-        //graph.readUnlock();
+        graph.readUnlock();
     }
 
 

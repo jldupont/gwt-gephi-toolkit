@@ -5,29 +5,50 @@ Website : http://www.gephi.org
 
 This file is part of Gephi.
 
-Gephi is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Gephi is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+Copyright 2011 Gephi Consortium. All rights reserved.
 
-You should have received a copy of the GNU Affero General Public License
-along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 3 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://gephi.org/about/legal/license-notice/
+or /cddl-1.0.txt and /gpl-3.0.txt. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License files at
+/cddl-1.0.txt and /gpl-3.0.txt. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 3, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 3] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 3 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 3 code and therefore, elected the GPL
+Version 3 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+
+Portions Copyrighted 2011 Gephi Consortium.
  */
 package org.gephi.graph.dhns.core;
 
-//import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.gephi.data.attributes.api.AttributeController;
 import org.gephi.data.attributes.api.AttributeModel;
 import org.gephi.data.attributes.api.AttributeRowFactory;
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.EdgeIterable;
 import org.gephi.graph.api.Graph;
-//import org.gephi.graph.api.GraphListener;
+import org.gephi.graph.api.GraphListener;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.GraphSettings;
 import org.gephi.graph.api.HierarchicalDirectedGraph;
@@ -52,8 +73,8 @@ import org.gephi.graph.dhns.node.iterators.AbstractNodeIterator;
 import org.gephi.graph.dhns.predicate.Predicate;
 import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
-//import org.w3c.dom.Document;
-//import org.w3c.dom.Element;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Main class of the DHNS (Durable Hierarchical Network Structure) graph structure..
@@ -63,37 +84,31 @@ import org.openide.util.Lookup;
 public class Dhns implements GraphModel {
 
     //Core
-    private  Workspace workspace=null;
-    private  DhnsGraphController controller=null;
-    private GraphStructure graphStructure=null;
-    private GraphVersion graphVersion=null;
-    //private final EventManager eventManager;
-    private  SettingsManager settingsManager=null;
-    private  GraphFactoryImpl factory=null;
-    private  DuplicateManager duplicateManager=null;
+    private final Workspace workspace;
+    private final DhnsGraphController controller;
+    private GraphStructure graphStructure;
+    private GraphVersion graphVersion;
+    private final EventManager eventManager;
+    private final SettingsManager settingsManager;
+    private final GraphFactoryImpl factory;
+    private final DuplicateManager duplicateManager;
     //Type
     private boolean directed = false;
     private boolean undirected = false;
     private boolean mixed = false;
     //Locking
-    //private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-    public Dhns() {
-    	//System.out.println("**Dhns: default constructor...");
-    }
-    
     public Dhns(DhnsGraphController controller, Workspace workspace) {
-    	//System.out.println("**Dhns: complete constructor...");
-    	
         this.controller = controller;
         this.workspace = workspace;
         graphVersion = new GraphVersion();
-        //eventManager = new EventManager(this);
+        eventManager = new EventManager(this);
         settingsManager = new SettingsManager(this);
         graphStructure = new GraphStructure(this);
         duplicateManager = new DuplicateManager(this);
 
-        //eventManager.start();
+        eventManager.start();
 
         //AttributeFactory
         AttributeRowFactory attributeRowFactory = null;
@@ -104,8 +119,7 @@ public class Dhns implements GraphModel {
             }
         }
         factory = new GraphFactoryImpl(controller.getIDGen(), attributeRowFactory);
-        //System.out.println("**Dhns: factory: "+factory);
-        
+
         init();
     }
 
@@ -124,9 +138,9 @@ public class Dhns implements GraphModel {
         return graphVersion;
     }
 
-    //public EventManager getEventManager() {
-    //    return eventManager;
-    //}
+    public EventManager getEventManager() {
+        return eventManager;
+    }
 
     public IDGen getIdGen() {
         return controller.getIDGen();
@@ -141,19 +155,19 @@ public class Dhns implements GraphModel {
     }
 
     public NodeIterable newNodeIterable(AbstractNodeIterator iterator) {
-        return new NodeIterableImpl(iterator);
+        return new NodeIterableImpl(iterator, readWriteLock.readLock());
     }
 
     public EdgeIterable newEdgeIterable(AbstractEdgeIterator iterator) {
-        return new EdgeIterableImpl(iterator);
+        return new EdgeIterableImpl(iterator, readWriteLock.readLock());
     }
 
     public NodeIterable newNodeIterable(AbstractNodeIterator iterator, Predicate<Node> predicate) {
-        return new NodeIterableImpl(iterator);
+        return new NodeIterableImpl(iterator, readWriteLock.readLock());
     }
 
     public EdgeIterable newEdgeIterable(AbstractEdgeIterator iterator, Predicate<AbstractEdge> predicate) {
-        return new EdgeIterableImpl(iterator, predicate);
+        return new EdgeIterableImpl(iterator, readWriteLock.readLock(), predicate);
     }
 
     //Locking
@@ -170,14 +184,13 @@ public class Dhns implements GraphModel {
         }*/
         //String t = Thread.currentThread().toString();
         //Logger.getLogger("").log(Level.WARNING, "{0} read lock", Thread.currentThread());
-        //readWriteLock.readLock().lock();
+        readWriteLock.readLock().lock();
     }
 
     public void readUnlock() {
-        //readWriteLock.readLock().unlock();
+        readWriteLock.readLock().unlock();
     }
 
-    /*
     public void readUnlockAll() {
         ReentrantReadWriteLock lock = readWriteLock;
         final int nReadLocks = lock.getReadHoldCount();
@@ -185,13 +198,29 @@ public class Dhns implements GraphModel {
             lock.readLock().unlock();
         }
     }
-*/
-    /*
+
+    public boolean conditionalWriteLock() {
+        if (readWriteLock.getReadHoldCount() > 0) {
+            throw new IllegalMonitorStateException("Impossible to acquire a write lock when currently holding a read lock. Use toArray() methods on NodeIterable and EdgeIterable to avoid holding a readLock.");
+        }
+        if (!readWriteLock.isWriteLockedByCurrentThread()) {
+            readWriteLock.writeLock().lock();
+            return true;
+        }
+        return false;
+    }
+    
+    public void conditionalWriteUnlock(boolean locked) {
+        if(locked) {
+            readWriteLock.writeLock().unlock();
+        }
+    }
+
     public void writeLock() {
         if (readWriteLock.getReadHoldCount() > 0) {
             throw new IllegalMonitorStateException("Impossible to acquire a write lock when currently holding a read lock. Use toArray() methods on NodeIterable and EdgeIterable to avoid holding a readLock.");
         }
-        *if (SwingUtilities.isEventDispatchThread()) {
+        /*if (SwingUtilities.isEventDispatchThread()) {
         Throwable r = new RuntimeException();
         int i = 0;
         for (i = 0; i < r.getStackTrace().length; i++) {
@@ -200,7 +229,7 @@ public class Dhns implements GraphModel {
         }
         }
         System.err.println("WARNING: writeLock() on the EDT - " + r.getStackTrace()[i].toString());
-        }*
+        }*/
         //Logger.getLogger("").log(Level.WARNING, "{0} write lock", Thread.currentThread());
         readWriteLock.writeLock().lock();
     }
@@ -213,7 +242,7 @@ public class Dhns implements GraphModel {
     public ReentrantReadWriteLock getReadWriteLock() {
         return readWriteLock;
     }
-*/
+
     //Type
     public void touchDirected() {
         if (undirected || mixed) {
@@ -239,7 +268,6 @@ public class Dhns implements GraphModel {
 
     //API
     public GraphFactoryImpl factory() {
-    	//System.out.println("**Dhns.factory: factory: "+factory);
         return factory;
     }
 
@@ -270,7 +298,7 @@ public class Dhns implements GraphModel {
     public boolean isHierarchical() {
         return graphStructure.getMainView().getStructure().getTreeHeight() - 1 > 0;       //height>0
     }
-    /*
+
     public void addGraphListener(GraphListener graphListener) {
         eventManager.addGraphListener(graphListener);
     }
@@ -278,7 +306,7 @@ public class Dhns implements GraphModel {
     public void removeGraphListener(GraphListener graphListener) {
         eventManager.removeGraphListener(graphListener);
     }
-	*/
+
     public Graph getGraph() {
         if (directed) {
             return getDirectedGraph();
@@ -458,15 +486,14 @@ public class Dhns implements GraphModel {
         graphVersion = new GraphVersion();
         graphStructure = new GraphStructure(this);
     }
-    /*
+
     public void readXML(Element element) {
     }
 
     public Element writeXML(Document document) {
         return null;
     }
-	*/
-    
+
     public GraphModel copy() {
         return null;
     }
