@@ -136,6 +136,10 @@ def copytree(src, dst, symlinks=False, ignore=None):
     if errors:
         raise shutil.Error(errors)    
 
+def expandenvvars(path):
+    p1=os.path.expanduser(path)
+    return os.path.expandvars(p1)
+
 def main():
     parser = argparse.ArgumentParser(description='Process gephi toolkit files')
     
@@ -150,8 +154,11 @@ def main():
     emsg="ON" if params.execute else "OFF"
     print "> Execute: %s" % emsg
         
+    source_path=expandenvvars(params.source_path)
+    dest_path=expandenvvars(params.dest_path)
+        
     ## all the files in path
-    source_files=glob.glob(os.path.join(params.source_path, "*"))
+    source_files=glob.glob(os.path.join(source_path, "*"))
     #map(pprint, source_files)
     
     ## but keep only the directories
@@ -179,10 +186,10 @@ def main():
 
     # create target directory only if asked and not already created    
     #dst_path=os.path.join(params.dest_path, "org", "gephi")
-    dst_path=params.dest_path
-    cexec(execon, lambda: mkdir_p(dst_path), "> Created dst directory: %s" % dst_path)
 
-    cexec(execon, lambda: copy_dirs(cdirs,dst_path), "> Done")
+    cexec(execon, lambda: mkdir_p(dest_path), "> Created dst directory: %s" % dest_path)
+
+    cexec(execon, lambda: copy_dirs(cdirs,dest_path), "> Done")
     
     ## assume success
     return 0

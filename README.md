@@ -2,6 +2,19 @@ This project consists in a port of the Gephi Toolkit to GWT (Google Web Toolkit)
 
 It is currently usable for graph manipulation & layout.
 
+Phase 2
+=======
+
+* Created "org.openide.util.NbBundle"
+* Created "org.openide.util.Exceptions"
+* Patched IntervalTree.copy
+* Added "org.openide.util.lookup.ServiceProvider"
+* Added "org.openide.util.lookup.ServiceProviders"
+* Added "org.openide.util.Cancellable"
+* Added "org.openide.util.lookup.AbstractLookup"
+* Added "org.gephi.timeline.api.TimelineController" dummy
+* Added "org.gephi.statistics.plugin.ConnectedComponents" dummy
+
 Major Changes
 =============
 
