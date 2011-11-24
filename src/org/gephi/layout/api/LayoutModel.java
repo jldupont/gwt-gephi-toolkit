@@ -21,7 +21,6 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.layout.api;
 
 import org.gephi.layout.spi.Layout;
-import org.gephi.project.api.Workspace;
 
 /**
  * Layout model contains data and flags relative to the layout execution and

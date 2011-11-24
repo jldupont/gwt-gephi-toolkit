@@ -20,14 +20,12 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.graph.dhns.core;
 
-//import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.gephi.data.attributes.api.AttributeController;
 import org.gephi.data.attributes.api.AttributeModel;
 import org.gephi.data.attributes.api.AttributeRowFactory;
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.EdgeIterable;
 import org.gephi.graph.api.Graph;
-//import org.gephi.graph.api.GraphListener;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.GraphSettings;
 import org.gephi.graph.api.HierarchicalDirectedGraph;
@@ -50,10 +48,8 @@ import org.gephi.graph.dhns.graph.iterators.EdgeIterableImpl;
 import org.gephi.graph.dhns.graph.iterators.NodeIterableImpl;
 import org.gephi.graph.dhns.node.iterators.AbstractNodeIterator;
 import org.gephi.graph.dhns.predicate.Predicate;
-import org.gephi.project.api.Workspace;
+
 import org.openide.util.Lookup;
-//import org.w3c.dom.Document;
-//import org.w3c.dom.Element;
 
 /**
  * Main class of the DHNS (Durable Hierarchical Network Structure) graph structure..
@@ -63,11 +59,9 @@ import org.openide.util.Lookup;
 public class Dhns implements GraphModel {
 
     //Core
-    private  Workspace workspace=null;
     private  DhnsGraphController controller=null;
     private GraphStructure graphStructure=null;
     private GraphVersion graphVersion=null;
-    //private final EventManager eventManager;
     private  SettingsManager settingsManager=null;
     private  GraphFactoryImpl factory=null;
     private  DuplicateManager duplicateManager=null;
@@ -75,18 +69,15 @@ public class Dhns implements GraphModel {
     private boolean directed = false;
     private boolean undirected = false;
     private boolean mixed = false;
-    //Locking
-    //private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     public Dhns() {
     	//System.out.println("**Dhns: default constructor...");
     }
     
-    public Dhns(DhnsGraphController controller, Workspace workspace) {
+    public Dhns(DhnsGraphController controller) {
     	//System.out.println("**Dhns: complete constructor...");
     	
         this.controller = controller;
-        this.workspace = workspace;
         graphVersion = new GraphVersion();
         //eventManager = new EventManager(this);
         settingsManager = new SettingsManager(this);
@@ -156,64 +147,6 @@ public class Dhns implements GraphModel {
         return new EdgeIterableImpl(iterator, predicate);
     }
 
-    //Locking
-    public void readLock() {
-        /*if (SwingUtilities.isEventDispatchThread()) {
-        Throwable r = new RuntimeException();
-        int i = 0;
-        for (i = 0; i < r.getStackTrace().length; i++) {
-        if (!r.getStackTrace()[i].toString().startsWith("org.gephi.graph.dhns")) {
-        break;
-        }
-        }
-        System.err.println("WARNING: readLock() on the EDT - " + r.getStackTrace()[i].toString());
-        }*/
-        //String t = Thread.currentThread().toString();
-        //Logger.getLogger("").log(Level.WARNING, "{0} read lock", Thread.currentThread());
-        //readWriteLock.readLock().lock();
-    }
-
-    public void readUnlock() {
-        //readWriteLock.readLock().unlock();
-    }
-
-    /*
-    public void readUnlockAll() {
-        ReentrantReadWriteLock lock = readWriteLock;
-        final int nReadLocks = lock.getReadHoldCount();
-        for (int n = 0; n < nReadLocks; n++) {
-            lock.readLock().unlock();
-        }
-    }
-*/
-    /*
-    public void writeLock() {
-        if (readWriteLock.getReadHoldCount() > 0) {
-            throw new IllegalMonitorStateException("Impossible to acquire a write lock when currently holding a read lock. Use toArray() methods on NodeIterable and EdgeIterable to avoid holding a readLock.");
-        }
-        *if (SwingUtilities.isEventDispatchThread()) {
-        Throwable r = new RuntimeException();
-        int i = 0;
-        for (i = 0; i < r.getStackTrace().length; i++) {
-        if (!r.getStackTrace()[i].toString().startsWith("org.gephi.graph.dhns")) {
-        break;
-        }
-        }
-        System.err.println("WARNING: writeLock() on the EDT - " + r.getStackTrace()[i].toString());
-        }*
-        //Logger.getLogger("").log(Level.WARNING, "{0} write lock", Thread.currentThread());
-        readWriteLock.writeLock().lock();
-    }
-
-    public void writeUnlock() {
-        //Logger.getLogger("").log(Level.WARNING, "{0} write unlock", Thread.currentThread());
-        readWriteLock.writeLock().unlock();
-    }
-
-    public ReentrantReadWriteLock getReadWriteLock() {
-        return readWriteLock;
-    }
-*/
     //Type
     public void touchDirected() {
         if (undirected || mixed) {
@@ -270,15 +203,6 @@ public class Dhns implements GraphModel {
     public boolean isHierarchical() {
         return graphStructure.getMainView().getStructure().getTreeHeight() - 1 > 0;       //height>0
     }
-    /*
-    public void addGraphListener(GraphListener graphListener) {
-        eventManager.addGraphListener(graphListener);
-    }
-
-    public void removeGraphListener(GraphListener graphListener) {
-        eventManager.removeGraphListener(graphListener);
-    }
-	*/
     public Graph getGraph() {
         if (directed) {
             return getDirectedGraph();
@@ -491,7 +415,4 @@ public class Dhns implements GraphModel {
         return graphStructure.getVisibleView();
     }
 
-    public Workspace getWorkspace() {
-        return workspace;
-    }
 }

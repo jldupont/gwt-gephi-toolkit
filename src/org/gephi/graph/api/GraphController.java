@@ -20,8 +20,6 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.graph.api;
 
-import org.gephi.project.api.Workspace;
-
 /**
  * Controller that maintain the graph models, one per Workspace.
  * <p>
@@ -39,10 +37,4 @@ public interface GraphController {
      */
     public GraphModel getModel();
 
-    /**
-     * Returns the graph model for the given <code>workspace</code>.
-     * @param workspace the workspace that graph modl is to be returned
-     * @return          the <code>workspace</code>'s graph model
-     */
-    public GraphModel getModel(Workspace workspace);
 }
