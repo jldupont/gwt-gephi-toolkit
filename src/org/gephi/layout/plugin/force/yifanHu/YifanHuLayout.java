@@ -20,8 +20,6 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.force.yifanHu;
 
-//import java.util.ArrayList;
-//import java.util.List;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
@@ -34,10 +32,7 @@ import org.gephi.layout.plugin.force.Displacement;
 import org.gephi.layout.plugin.force.ForceVector;
 import org.gephi.layout.plugin.force.quadtree.BarnesHut;
 import org.gephi.layout.spi.Layout;
-import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
 import org.gephi.layout.plugin.force.quadtree.QuadTree;
-//import org.openide.util.NbBundle;
 
 /**
  * Hu's basic algorithm
@@ -60,8 +55,8 @@ public class YifanHuLayout extends AbstractLayout implements Layout {
     private double energy;
     private HierarchicalGraph graph;
 
-    public YifanHuLayout(LayoutBuilder layoutBuilder, Displacement displacement) {
-        super(layoutBuilder);
+    public YifanHuLayout(Displacement displacement) {
+        super();
         this.displacement = displacement;
     }
 

@@ -22,56 +22,18 @@ package org.gephi.layout.plugin.random;
 
 //import javax.swing.Icon;
 //import javax.swing.JPanel;
-import org.gephi.layout.spi.Layout;
-import org.gephi.layout.spi.LayoutBuilder;
-import org.gephi.layout.spi.LayoutUI;
-//import org.openide.util.NbBundle;
-//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author Helder Suzuki <heldersuzuki@gephi.org>
  */
 //@ServiceProvider(service=LayoutBuilder.class)
-public class Random implements LayoutBuilder {
+public class Random { 
 
-    private RandomLayoutUI ui = new RandomLayoutUI();
 
     public String getName() {
         //return NbBundle.getMessage(Random.class, "Random.name");
     	return "random";
     }
 
-    public Layout buildLayout() {
-        return new RandomLayout(this, 50);
-    }
-
-    public LayoutUI getUI() {
-        return ui;
-    }
-
-    private static class RandomLayoutUI implements LayoutUI {
-
-        public String getDescription() {
-            //return NbBundle.getMessage(Random.class, "Random.description");
-        	return null;
-        }
-        /*
-        public Icon getIcon() {
-            return null;
-        }
-
-        public JPanel getSimplePanel(Layout layout) {
-            return null;
-        }
-		*/
-        
-        public int getQualityRank() {
-            return -1;
-        }
-
-        public int getSpeedRank() {
-            return -1;
-        }
-    }
 }

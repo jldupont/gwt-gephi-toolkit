@@ -20,17 +20,12 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.multilevel;
 
-//import java.util.ArrayList;
-//import java.util.List;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
-import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
 import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
 import org.gephi.layout.plugin.force.yifanHu.YifanHuProportional;
 import org.gephi.layout.plugin.random.RandomLayout;
-//import org.openide.util.NbBundle;
 
 /**
  *
@@ -53,9 +48,8 @@ public class MultiLevelLayout extends AbstractLayout implements Layout {
     //Security
     private int initedView;
 
-    public MultiLevelLayout(LayoutBuilder layoutBuilder,
-            CoarseningStrategy coarseningStrategy) {
-        super(layoutBuilder);
+    public MultiLevelLayout(CoarseningStrategy coarseningStrategy) {
+        super();
         this.coarseningStrategy = coarseningStrategy;
         //     this.yifanHu = new YifanHu();
         this.yifanHu = new YifanHuProportional();
@@ -77,7 +71,7 @@ public class MultiLevelLayout extends AbstractLayout implements Layout {
             }
         }
 
-        Layout random = new RandomLayout(null, 1000);
+        Layout random = new RandomLayout(1000);
         random.setGraphModel(graphModel);
         random.initAlgo();
         random.goAlgo();
@@ -137,58 +131,6 @@ public class MultiLevelLayout extends AbstractLayout implements Layout {
         setQuadTreeMaxLevel(10);
         setBarnesHutTheta(1.2f);
     }
-    /*
-    public LayoutProperty[] getProperties() {
-        List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
-        final String MULTILEVEL_CATEGORY = "Multi-level";
-        final String YIFANHU_CATEGORY = "Yifan Hu's properties";
-        final String BARNESHUT_CATEGORY = "Barnes-Hut's properties";
-
-        try {
-            properties.add(LayoutProperty.createProperty(
-                    this, Integer.class, 
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.minimumLevelSize.name"),
-                    MULTILEVEL_CATEGORY,
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.minimumLevelSize.desc"),
-                    "getMinSize", "setMinSize"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class, 
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.minimumCoarseningRate.name"),
-                    MULTILEVEL_CATEGORY,
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.minimumCoarseningRate.desc"),
-                    "getMinCoarseningRate", "setMinCoarseningRate"));
-
-            properties.add(LayoutProperty.createProperty(
-                    this, Float.class, 
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.stepRatio.name"),
-                    YIFANHU_CATEGORY,
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.stepRatio.desc"),
-                    "getStepRatio", "setStepRatio"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Float.class, 
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.optimalDistance.name"),
-                    YIFANHU_CATEGORY,
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.optimalDistance.desc"),
-                    "getOptimalDistance", "setOptimalDistance"));
-
-            properties.add(LayoutProperty.createProperty(
-                    this, Integer.class, 
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.quadtreeMaxLevel.name"),
-                    BARNESHUT_CATEGORY,
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.quadtreeMaxLevel.desc"),
-                    "getQuadTreeMaxLevel", "setQuadTreeMaxLevel"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Float.class, 
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.theta.name"),
-                    BARNESHUT_CATEGORY,
-                    NbBundle.getMessage(getClass(), "YifanHuMultiLevel.theta.desc"),
-                    "getBarnesHutTheta", "setBarnesHutTheta"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return properties.toArray(new LayoutProperty[0]);
-    }
-	*/
     
     /**
      * @return the minSize

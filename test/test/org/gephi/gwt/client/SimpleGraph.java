@@ -64,7 +64,7 @@ public class SimpleGraph implements EntryPoint {
 	}
 	
 	public void doLayout() {
-		layout=new ForceAtlasLayout(null);
+		layout=new ForceAtlasLayout();
 		layout.setGraphModel(gm);
 		layout.setAttractionStrength(2.0);
 		layout.setGravity(0.5);

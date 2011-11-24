@@ -27,9 +27,6 @@ import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.Node;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
-import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
-//import org.openide.util.NbBundle;
 
 /**
  *
@@ -42,8 +39,8 @@ public class RandomLayout extends AbstractLayout implements Layout {
     private boolean converged;
     private double size;
 
-    public RandomLayout(LayoutBuilder layoutBuilder, double size) {
-        super(layoutBuilder);
+    public RandomLayout(double size) {
+        super();
         this.size = size;
         random = new Random();
     }
@@ -69,23 +66,6 @@ public class RandomLayout extends AbstractLayout implements Layout {
 
     public void endAlgo() {
     }
-    /*
-    public LayoutProperty[] getProperties() {
-        List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
-        try {
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class, 
-                    NbBundle.getMessage(getClass(), "Random.spaceSize.name"),
-                    null,
-                    NbBundle.getMessage(getClass(), "Random.spaceSize.desc"),
-                    "getSize", "setSize"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return properties.toArray(new LayoutProperty[0]);
-    }
-	*/
-    
     public void resetPropertiesValues() {
     }
 

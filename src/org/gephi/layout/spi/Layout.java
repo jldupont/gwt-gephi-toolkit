@@ -26,15 +26,13 @@ import org.gephi.graph.api.GraphModel;
  * A Layout algorithm should implement the <code>Layout</code> interface to allow the
  * <code>LayoutController</code> to run it properly.
  * <p>
- * See the <code>LayoutBuilder</code> documentation to know how layout should
- * be instanciated.
  * <p>
  * To have fully integrated properties that can be changed in real-time by users,
  * properly define the various <code>LayoutProperty</code> returned by the
  * {@link #getProperties()} method and provide getter and setter for each.
  *
  * @author Helder Suzuki <heldersuzuki@gephi.org>
- * @see LayoutBuilder
+ * @see 
  */
 public interface Layout {
 
@@ -81,9 +79,4 @@ public interface Layout {
      */
     public void resetPropertiesValues();
 
-    /**
-     * The reference to the LayoutBuilder that instanciated this Layout.
-     * @return              the reference to the builder that builts this instance
-     */
-    public LayoutBuilder getBuilder();
 }

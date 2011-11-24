@@ -26,9 +26,6 @@ import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.Node;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
-import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
-//import org.openide.util.NbBundle;
 
 /**
  *
@@ -48,8 +45,8 @@ public class LabelAdjust extends AbstractLayout implements Layout {
     private float ymin;
     private float ymax;
 
-    public LabelAdjust(LayoutBuilder layoutBuilder) {
-        super(layoutBuilder);
+    public LabelAdjust() {
+        super();
     }
 
     public void resetPropertiesValues() {

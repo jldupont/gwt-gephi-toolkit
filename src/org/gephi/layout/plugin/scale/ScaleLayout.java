@@ -20,16 +20,10 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.scale;
 
-//import java.util.ArrayList;
-//import java.util.List;
 import org.gephi.graph.api.Graph;
-//import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.Node;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.spi.Layout;
-import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
-//import org.openide.util.NbBundle;
 
 /**
  * Sample layout that scales the graph.
@@ -40,8 +34,8 @@ public class ScaleLayout extends AbstractLayout implements Layout {
     private double scale;
     private Graph graph;
 
-    public ScaleLayout(LayoutBuilder layoutBuilder, double scale) {
-        super(layoutBuilder);
+    public ScaleLayout(double scale) {
+        super();
         this.scale = scale;
     }
 

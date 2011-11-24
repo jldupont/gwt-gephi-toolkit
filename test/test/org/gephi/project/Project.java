@@ -79,7 +79,7 @@ public class Project extends GWTTestCase {
 		dg.addEdge(e1);
 		dg.addEdge(e2);
 		
-		layout=new ForceAtlasLayout(null);
+		layout=new ForceAtlasLayout();
 		layout.setGraphModel(gm);
 		layout.setAttractionStrength(2.0);
 		layout.setGravity(0.5);

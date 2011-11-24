@@ -20,10 +20,6 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 package org.gephi.layout.plugin.forceAtlas;
 
-//import java.util.ArrayList;
-//import java.util.List;
-import org.gephi.data.attributes.type.TimeInterval;
-//import org.gephi.dynamic.DynamicUtilities;
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
@@ -33,9 +29,6 @@ import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.plugin.ForceVectorUtils;
 import org.gephi.layout.plugin.ForceVectorNodeLayoutData;
 import org.gephi.layout.spi.Layout;
-import org.gephi.layout.spi.LayoutBuilder;
-//import org.gephi.layout.spi.LayoutProperty;
-//import org.openide.util.NbBundle;
 
 /**
  *
@@ -58,11 +51,9 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
     private double cooling;
     private boolean outboundAttractionDistribution;
     private boolean adjustSizes;
-    //Dynamic Weight
-    private TimeInterval timeInterval=null;
 
-    public ForceAtlasLayout(LayoutBuilder layoutBuilder) {
-        super(layoutBuilder);
+    public ForceAtlasLayout() {
+    	
     }
 
     public void resetPropertiesValues() {
@@ -86,8 +77,7 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
 
     public void goAlgo() {
         this.graph = graphModel.getHierarchicalGraphVisible();
-        //this.timeInterval = DynamicUtilities.getVisibleInterval(dynamicModel);
-        //graph.readLock();
+        
         Node[] nodes = graph.getNodes().toArray();
         Edge[] edges = graph.getEdgesAndMetaEdges().toArray();
 
@@ -207,7 +197,6 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
                 nData.setY(y);
             }
         }
-        //graph.readUnlock();
     }
 
     public void endAlgo() {
@@ -222,92 +211,9 @@ public class ForceAtlasLayout extends AbstractLayout implements Layout {
     }
 
     private float getWeight(Edge edge) {
-        if(timeInterval!=null) {
-            return edge.getWeight(timeInterval.getLow(), timeInterval.getHigh());
-        } else {
             return edge.getWeight();
-        }
     }
-    /*
-    public LayoutProperty[] getProperties() {
-        List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
-        final String FORCE_ATLAS = "Force Atlas";
-
-        try {
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.inertia.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.inertia.desc"),
-                    "getInertia", "setInertia"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.repulsionStrength.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.repulsionStrength.desc"),
-                    "getRepulsionStrength", "setRepulsionStrength"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.attractionStrength.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.attractionStrength.desc"),
-                    "getAttractionStrength", "setAttractionStrength"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.maxDisplacement.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.maxDisplacement.desc"),
-                    "getMaxDisplacement", "setMaxDisplacement"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Boolean.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeBalance.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeBalance.desc"),
-                    "isFreezeBalance", "setFreezeBalance"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeStrength.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeStrength.desc"),
-                    "getFreezeStrength", "setFreezeStrength"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeInertia.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.freezeInertia.desc"),
-                    "getFreezeInertia", "setFreezeInertia"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.gravity.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.gravity.desc"),
-                    "getGravity", "setGravity"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Boolean.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.outboundAttractionDistribution.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.outboundAttractionDistribution.desc"),
-                    "isOutboundAttractionDistribution", "setOutboundAttractionDistribution"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Boolean.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.adjustSizes.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.adjustSizes.desc"),
-                    "isAdjustSizes", "setAdjustSizes"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.speed.name"),
-                    FORCE_ATLAS,
-                    NbBundle.getMessage(ForceAtlasLayout.class, "forceAtlas.speed.desc"),
-                    "getSpeed", "setSpeed"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return properties.toArray(new LayoutProperty[0]);
-    }
-	*/
-    
+   
     public void setInertia(Double inertia) {
         this.inertia = inertia;
     }
