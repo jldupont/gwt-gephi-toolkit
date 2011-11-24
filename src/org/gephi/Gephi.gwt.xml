@@ -8,8 +8,10 @@
 	<inherits name="org.gephi.layout.Layout" />
 	<inherits name="org.gephi.utils.Utils" />
 	
+	<inherits name="_org.gephi.gwt.Gwt" />
+	
 	<inherits name="org.openide.Openide" />
-
+	
 	<super-source path="_emu" />	
 	
 	<source path="" />

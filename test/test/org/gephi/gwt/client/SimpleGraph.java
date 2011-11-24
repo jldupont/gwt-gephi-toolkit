@@ -2,19 +2,13 @@ package test.org.gephi.gwt.client;
 
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.Edge;
-import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphFactory;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
+import org.gephi.graph.dhns.core.Dhns;
 import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
-import org.gephi.project.api.ProjectController;
-import org.openide.util.Lookup;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -36,13 +30,8 @@ public class SimpleGraph implements EntryPoint {
 	}
 	
 	public void createGraph() {
-		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
-		pc.newProject();
 		
-		GraphController gc=null;
-		
-		gc = Lookup.getDefault().lookup(GraphController.class);
-		gm = gc.getModel();
+		gm = new Dhns();		
 		dg = gm.getDirectedGraph();
 
 		gf=gm.factory();
