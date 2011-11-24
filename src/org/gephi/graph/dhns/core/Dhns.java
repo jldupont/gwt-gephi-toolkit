@@ -23,6 +23,7 @@ package org.gephi.graph.dhns.core;
 import org.gephi.data.attributes.api.AttributeController;
 import org.gephi.data.attributes.api.AttributeModel;
 import org.gephi.data.attributes.api.AttributeRowFactory;
+import org.gephi.data.attributes.model.IndexedAttributeModel;
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.EdgeIterable;
 import org.gephi.graph.api.Graph;
@@ -37,7 +38,6 @@ import org.gephi.graph.api.Node;
 import org.gephi.graph.api.NodeIterable;
 import org.gephi.graph.api.UndirectedGraph;
 import org.gephi.graph.api.GraphView;
-import org.gephi.graph.dhns.DhnsGraphController;
 import org.gephi.graph.dhns.edge.AbstractEdge;
 import org.gephi.graph.dhns.edge.iterators.AbstractEdgeIterator;
 import org.gephi.graph.dhns.graph.HierarchicalDirectedGraphImpl;
@@ -49,8 +49,6 @@ import org.gephi.graph.dhns.graph.iterators.NodeIterableImpl;
 import org.gephi.graph.dhns.node.iterators.AbstractNodeIterator;
 import org.gephi.graph.dhns.predicate.Predicate;
 
-import org.openide.util.Lookup;
-
 /**
  * Main class of the DHNS (Durable Hierarchical Network Structure) graph structure..
  *
@@ -59,7 +57,6 @@ import org.openide.util.Lookup;
 public class Dhns implements GraphModel {
 
     //Core
-    private  DhnsGraphController controller=null;
     private GraphStructure graphStructure=null;
     private GraphVersion graphVersion=null;
     private  SettingsManager settingsManager=null;
@@ -71,13 +68,8 @@ public class Dhns implements GraphModel {
     private boolean mixed = false;
 
     public Dhns() {
-    	//System.out.println("**Dhns: default constructor...");
-    }
-    
-    public Dhns(DhnsGraphController controller) {
     	//System.out.println("**Dhns: complete constructor...");
     	
-        this.controller = controller;
         graphVersion = new GraphVersion();
         //eventManager = new EventManager(this);
         settingsManager = new SettingsManager(this);
@@ -88,13 +80,10 @@ public class Dhns implements GraphModel {
 
         //AttributeFactory
         AttributeRowFactory attributeRowFactory = null;
-        if (workspace != null) {
-            AttributeModel attributeModel = Lookup.getDefault().lookup(AttributeController.class).getModel(workspace);
-            if (attributeModel != null) {
-                attributeRowFactory = attributeModel.rowFactory();
-            }
-        }
-        factory = new GraphFactoryImpl(controller.getIDGen(), attributeRowFactory);
+        AttributeModel attributeModel = new IndexedAttributeModel();
+        attributeRowFactory = attributeModel.rowFactory();
+        
+        factory = new GraphFactoryImpl(new IDGen(), attributeRowFactory);
         //System.out.println("**Dhns: factory: "+factory);
         
         init();
@@ -103,24 +92,12 @@ public class Dhns implements GraphModel {
     public void init() {
     }
 
-    public DhnsGraphController getController() {
-        return controller;
-    }
-
     public GraphStructure getGraphStructure() {
         return graphStructure;
     }
 
     public GraphVersion getGraphVersion() {
         return graphVersion;
-    }
-
-    //public EventManager getEventManager() {
-    //    return eventManager;
-    //}
-
-    public IDGen getIdGen() {
-        return controller.getIDGen();
     }
 
     public SettingsManager getSettingsManager() {
@@ -382,14 +359,6 @@ public class Dhns implements GraphModel {
         graphVersion = new GraphVersion();
         graphStructure = new GraphStructure(this);
     }
-    /*
-    public void readXML(Element element) {
-    }
-
-    public Element writeXML(Document document) {
-        return null;
-    }
-	*/
     
     public GraphModel copy() {
         return null;

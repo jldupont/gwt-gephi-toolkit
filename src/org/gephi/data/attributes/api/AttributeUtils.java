@@ -20,11 +20,7 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.gephi.data.attributes.api;
 
-//import java.util.GregorianCalendar;
-//import javax.xml.datatype.DatatypeConfigurationException;
-//import javax.xml.datatype.DatatypeFactory;
-//import org.openide.util.Exceptions;
-import org.openide.util.Lookup;
+import org.gephi.data.attributes.AttributeUtilsImpl;
 
 /**
  *
@@ -75,7 +71,8 @@ public abstract class AttributeUtils {
     public abstract Comparable getMax(AttributeColumn column, Comparable[] values);
 
     public static synchronized AttributeUtils getDefault() {
-        return Lookup.getDefault().lookup(AttributeUtils.class);
+        //return Lookup.getDefault().lookup(AttributeUtils.class);
+    	return new AttributeUtilsImpl();
     }
 
     /**
