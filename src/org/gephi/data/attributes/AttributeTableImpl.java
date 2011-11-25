@@ -244,7 +244,7 @@ public class AttributeTableImpl implements AttributeTable {
     public AbstractAttributeModel getModel() {
         return model;
     }
-
+/*
     public synchronized void mergeTable(AttributeTable table) {
         for (AttributeColumn column : table.getColumns()) {
             AttributeColumn existingCol = getColumn(column);
@@ -261,4 +261,5 @@ public class AttributeTableImpl implements AttributeTable {
             }
         }
     }
+*/
 }

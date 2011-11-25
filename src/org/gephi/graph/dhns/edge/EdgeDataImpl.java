@@ -22,8 +22,8 @@ package org.gephi.graph.dhns.edge;
 
 import org.gephi.data.attributes.api.AttributeRow;
 import org.gephi.data.attributes.api.AttributeType;
-import org.gephi.data.attributes.api.Estimator;
-import org.gephi.data.attributes.type.DynamicFloat;
+//import org.gephi.data.attributes.api.Estimator;
+//import org.gephi.data.attributes.type.DynamicFloat;
 import org.gephi.data.properties.PropertiesColumn;
 import org.gephi.graph.api.Attributes;
 import org.gephi.graph.api.EdgeData;
@@ -210,9 +210,9 @@ public class EdgeDataImpl implements EdgeData {
             return 1f;
         }
         Object weight = attributes.getValue(PropertiesColumn.EDGE_WEIGHT.getIndex());
-        if (weight instanceof DynamicFloat) {
-            weight = ((DynamicFloat) weight).getValue(Estimator.AVERAGE);
-        }
+        //if (weight instanceof DynamicFloat) {
+        //    weight = ((DynamicFloat) weight).getValue(Estimator.AVERAGE);
+        //}
         if (weight == null) {
             return 1f;
         }
@@ -224,9 +224,9 @@ public class EdgeDataImpl implements EdgeData {
             return 1f;
         }
         Object weight = attributes.getValue(PropertiesColumn.EDGE_WEIGHT.getIndex());
-        if (weight instanceof DynamicFloat) {
-            weight = ((DynamicFloat) weight).getValue(low, high, Estimator.AVERAGE);
-        }
+        //if (weight instanceof DynamicFloat) {
+        //    weight = ((DynamicFloat) weight).getValue(low, high, Estimator.AVERAGE);
+        //}
         if (weight == null) {
             return 1f;
         }
@@ -235,9 +235,9 @@ public class EdgeDataImpl implements EdgeData {
 
     public void setWeight(float weight) {
         if (attributes != null) {
-            if (!((AttributeRow) attributes).getColumnAt(PropertiesColumn.EDGE_WEIGHT.getIndex()).getType().equals(AttributeType.DYNAMIC_FLOAT)) {
+            //if (!((AttributeRow) attributes).getColumnAt(PropertiesColumn.EDGE_WEIGHT.getIndex()).getType().equals(AttributeType.DYNAMIC_FLOAT)) {
                 attributes.setValue(PropertiesColumn.EDGE_WEIGHT.getIndex(), weight);
-            }
+            //}
         }
     }
 

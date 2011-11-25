@@ -215,7 +215,9 @@ public final class TypeConvertor {
      * @return the underlying static type
      * @throws IllegalArgumentException if <code>dynamicType</code> is not dynamic
      */
+    /*
     public static AttributeType getStaticType(AttributeType dynamicType) {
+    	
         if (!dynamicType.isDynamicType()) {
             throw new IllegalArgumentException("Given type '" + dynamicType + "' is not dynamic.");
         }
@@ -245,8 +247,9 @@ public final class TypeConvertor {
             default:
                 return null;
         }
+        
     }
-
+*/
     /**
      * Returns the corresponding dynamic type from <code>staticType</code> For example
      * returns <code>DYNAMIC_FLOAT</code> if given type is <code>FLOAT</code>.
@@ -254,6 +257,7 @@ public final class TypeConvertor {
      * @return the corresponding dynamic type
      * @throws IllegalArgumentException if <code>staticType</code> is not static
      */
+/*
     public static AttributeType getDynamicType(AttributeType staticType) {
         if (staticType.isDynamicType()) {
             throw new IllegalArgumentException("Given type '" + staticType + "' is not static.");
@@ -285,4 +289,5 @@ public final class TypeConvertor {
                 return null;
         }
     }
+*/
 }

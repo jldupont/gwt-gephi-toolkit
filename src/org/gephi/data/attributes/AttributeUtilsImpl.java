@@ -130,7 +130,7 @@ public class AttributeUtilsImpl extends AttributeUtils {
         }
         return true;
     }
-
+/*
     public boolean isDynamicNumberColumn(AttributeColumn column) {
         switch (column.getType()) {
             case DYNAMIC_BIGDECIMAL:
@@ -146,7 +146,8 @@ public class AttributeUtilsImpl extends AttributeUtils {
                 return false;
         }
     }
-
+*/
+    /*
     public boolean areAllDynamicNumberColumns(AttributeColumn[] columns) {
         for (AttributeColumn column : columns) {
             if (!isDynamicNumberColumn(column)) {
@@ -155,7 +156,8 @@ public class AttributeUtilsImpl extends AttributeUtils {
         }
         return true;
     }
-
+*/
+/*
     public Comparable getMin(AttributeColumn column, Comparable[] values) {
         if (!isNumberColumn(column) && !isDynamicNumberColumn(column)) {
             throw new IllegalArgumentException("Colun must be a number column");
@@ -180,7 +182,8 @@ public class AttributeUtilsImpl extends AttributeUtils {
                 return min;
         }
     }
-
+*/
+    /*
     public Comparable getMax(AttributeColumn column, Comparable[] values) {
         if (!isNumberColumn(column) && !isDynamicNumberColumn(column)) {
             throw new IllegalArgumentException("Colun must be a number column");
@@ -205,7 +208,7 @@ public class AttributeUtilsImpl extends AttributeUtils {
                 return max;
         }
     }
-
+*/
     @Override
     public boolean isNodeColumn(AttributeColumn column) {
         if (column == null) {

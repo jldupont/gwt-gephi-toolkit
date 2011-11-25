@@ -56,9 +56,9 @@ public abstract class AttributeUtils {
 
     public abstract boolean areAllNumberOrNumberListColumns(AttributeColumn[] columns);
 
-    public abstract boolean isDynamicNumberColumn(AttributeColumn column);
+    //public abstract boolean isDynamicNumberColumn(AttributeColumn column);
 
-    public abstract boolean areAllDynamicNumberColumns(AttributeColumn[] columns);
+    //public abstract boolean areAllDynamicNumberColumns(AttributeColumn[] columns);
 
     public abstract AttributeColumn[] getNumberColumns(AttributeTable table);
 
@@ -66,9 +66,9 @@ public abstract class AttributeUtils {
 
     public abstract AttributeColumn[] getAllCollums(AttributeModel model);
 
-    public abstract Comparable getMin(AttributeColumn column, Comparable[] values);
+    //public abstract Comparable getMin(AttributeColumn column, Comparable[] values);
 
-    public abstract Comparable getMax(AttributeColumn column, Comparable[] values);
+    //public abstract Comparable getMax(AttributeColumn column, Comparable[] values);
 
     public static synchronized AttributeUtils getDefault() {
         //return Lookup.getDefault().lookup(AttributeUtils.class);

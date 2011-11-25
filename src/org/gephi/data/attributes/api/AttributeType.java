@@ -22,21 +22,21 @@ package org.gephi.data.attributes.api;
 
 import java.math.BigInteger;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 //import java.util.regex.Pattern;
-import org.gephi.data.attributes.type.DynamicByte;
-import org.gephi.data.attributes.type.DynamicShort;
-import org.gephi.data.attributes.type.DynamicInteger;
-import org.gephi.data.attributes.type.DynamicLong;
-import org.gephi.data.attributes.type.DynamicFloat;
-import org.gephi.data.attributes.type.DynamicDouble;
-import org.gephi.data.attributes.type.DynamicBoolean;
-import org.gephi.data.attributes.type.DynamicCharacter;
-import org.gephi.data.attributes.type.DynamicString;
-import org.gephi.data.attributes.type.DynamicBigInteger;
-import org.gephi.data.attributes.type.DynamicBigDecimal;
-import org.gephi.data.attributes.type.TimeInterval;
+//import org.gephi.data.attributes.type.DynamicByte;
+//import org.gephi.data.attributes.type.DynamicShort;
+//import org.gephi.data.attributes.type.DynamicInteger;
+//import org.gephi.data.attributes.type.DynamicLong;
+//import org.gephi.data.attributes.type.DynamicFloat;
+//import org.gephi.data.attributes.type.DynamicDouble;
+//import org.gephi.data.attributes.type.DynamicBoolean;
+//import org.gephi.data.attributes.type.DynamicCharacter;
+//import org.gephi.data.attributes.type.DynamicString;
+//import org.gephi.data.attributes.type.DynamicBigInteger;
+//import org.gephi.data.attributes.type.DynamicBigDecimal;
+//import org.gephi.data.attributes.type.TimeInterval;
 import org.gephi.data.attributes.type.ByteList;
 import org.gephi.data.attributes.type.ShortList;
 import org.gephi.data.attributes.type.IntegerList;
@@ -48,8 +48,8 @@ import org.gephi.data.attributes.type.CharacterList;
 import org.gephi.data.attributes.type.StringList;
 import org.gephi.data.attributes.type.BigIntegerList;
 import org.gephi.data.attributes.type.BigDecimalList;
-import org.gephi.data.attributes.type.DynamicType;
-import org.gephi.data.attributes.type.Interval;
+//import org.gephi.data.attributes.type.DynamicType;
+//import org.gephi.data.attributes.type.Interval;
 
 /**
  * The different type an {@link AttributeColumn} can have.
@@ -72,18 +72,18 @@ public enum AttributeType {
     STRING(String.class),
     BIGINTEGER(BigInteger.class),
     BIGDECIMAL(BigDecimal.class),
-    DYNAMIC_BYTE(DynamicByte.class),
-    DYNAMIC_SHORT(DynamicShort.class),
-    DYNAMIC_INT(DynamicInteger.class),
-    DYNAMIC_LONG(DynamicLong.class),
-    DYNAMIC_FLOAT(DynamicFloat.class),
-    DYNAMIC_DOUBLE(DynamicDouble.class),
-    DYNAMIC_BOOLEAN(DynamicBoolean.class),
-    DYNAMIC_CHAR(DynamicCharacter.class),
-    DYNAMIC_STRING(DynamicString.class),
-    DYNAMIC_BIGINTEGER(DynamicBigInteger.class),
-    DYNAMIC_BIGDECIMAL(DynamicBigDecimal.class),
-    TIME_INTERVAL(TimeInterval.class),
+    //DYNAMIC_BYTE(DynamicByte.class),
+    //DYNAMIC_SHORT(DynamicShort.class),
+    //DYNAMIC_INT(DynamicInteger.class),
+    //DYNAMIC_LONG(DynamicLong.class),
+    //DYNAMIC_FLOAT(DynamicFloat.class),
+    //DYNAMIC_DOUBLE(DynamicDouble.class),
+    //DYNAMIC_BOOLEAN(DynamicBoolean.class),
+    //DYNAMIC_CHAR(DynamicCharacter.class),
+    //DYNAMIC_STRING(DynamicString.class),
+    //DYNAMIC_BIGINTEGER(DynamicBigInteger.class),
+    //DYNAMIC_BIGDECIMAL(DynamicBigDecimal.class),
+    //TIME_INTERVAL(TimeInterval.class),
     LIST_BYTE(ByteList.class),
     LIST_SHORT(ShortList.class),
     LIST_INTEGER(IntegerList.class),
@@ -159,6 +159,7 @@ public enum AttributeType {
                 return new BigInteger(removeDecimalDigitsFromString(str));
             case BIGDECIMAL:
                 return new BigDecimal(str);
+/*                
             case DYNAMIC_BYTE:
             case DYNAMIC_SHORT:
             case DYNAMIC_INT:
@@ -172,6 +173,7 @@ public enum AttributeType {
             case DYNAMIC_BIGDECIMAL:
             case TIME_INTERVAL:
                 return parseDynamic(str);
+*/
             case LIST_BYTE:
                 return new ByteList(removeDecimalDigitsFromString(str));
             case LIST_SHORT:
@@ -197,7 +199,7 @@ public enum AttributeType {
         }
         return str;
     }
-
+/*
 	private Object parseDynamic(String str) {
 		if (str.equals("<empty>"))
 			return createDynamicObject(null);
@@ -267,7 +269,8 @@ public enum AttributeType {
 
 		return createDynamicObject(in);
 	}
-
+*/
+/*    
 	private DynamicType createDynamicObject(List<Interval> in) {
 		if (!this.isDynamicType())
 			return null;
@@ -397,7 +400,7 @@ public enum AttributeType {
 				return null;
 		}
 	}
-
+*/
     /**
      * Build an <code>AttributeType</code> from the given <code>obj</code> type.
      * If the given <code>obj</code> class match with an
@@ -439,6 +442,7 @@ public enum AttributeType {
      * @param obj   the object that is to be parsed
      * @return      the compatible <code>AttributeType</code>, or <code>null</code>
      */
+/*
     public static AttributeType parseDynamic(Object obj) {
         if (obj == null) {
             return null;
@@ -482,13 +486,14 @@ public enum AttributeType {
 
         return null;
     }
-
+*/
     /**
      * Indicates if this type is a {@code DynamicType}.
      *
      * @return {@code true} if this is a {@code DynamicType}, {@code false}
      * otherwise 
      */
+/*
     public boolean isDynamicType() {
         switch (this) {
             case DYNAMIC_BYTE:
@@ -508,7 +513,7 @@ public enum AttributeType {
                 return false;
         }
     }    
-	
+*/	
 	public boolean isListType() {
         if (this.equals(LIST_BIGDECIMAL)
                 || this.equals(LIST_BIGINTEGER)

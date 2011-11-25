@@ -129,7 +129,7 @@ public abstract class AbstractAttributeModel implements AttributeModel {
         eventManager.fireEvent(event);
     }
 	*/
-    
+    /*
     public void mergeModel(AttributeModel model) {
         if (model.getNodeTable() != null) {
             nodeTable.mergeTable(model.getNodeTable());
@@ -151,4 +151,5 @@ public abstract class AbstractAttributeModel implements AttributeModel {
             }
         }
     }
+    */
 }

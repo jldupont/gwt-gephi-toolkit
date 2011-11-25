@@ -179,5 +179,5 @@ public interface AttributeTable {
      * 
      * @param table         the table that is to be merged with this table
      */
-    public void mergeTable(AttributeTable table);
+    //public void mergeTable(AttributeTable table);
 }

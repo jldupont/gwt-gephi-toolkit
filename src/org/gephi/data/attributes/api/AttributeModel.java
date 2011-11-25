@@ -114,5 +114,5 @@ public interface AttributeModel {
      *
      * @param model the model that is to be merged in this model
      */
-    public void mergeModel(AttributeModel model);
+    //public void mergeModel(AttributeModel model);
 }
